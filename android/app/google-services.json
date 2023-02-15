@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1060847809619",
+    "project_id": "chat-for-peace",
+    "storage_bucket": "chat-for-peace.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060847809619:android:24d512a3a19494682f42a6",
+        "android_client_info": {
+          "package_name": "com.example.chat_for_peace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060847809619-5bd512j48618d2ne6ng5fet1hpg9g054.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3Coj0xC372ysBUVCF96bEyf1PRces28E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060847809619-5bd512j48618d2ne6ng5fet1hpg9g054.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
