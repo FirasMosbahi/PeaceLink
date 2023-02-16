@@ -39,7 +39,7 @@ class UserProvider{
       throw Exception(e.toString());
     }
   }
-  void UpdateUser(Map<String,Object> changes)async{
+  void updateUser(Map<String,Object> changes)async{
     try{
       if(changes.containsKey("email")){
         FirebaseAuth.instance.currentUser?.updateEmail(changes["email"].toString());
