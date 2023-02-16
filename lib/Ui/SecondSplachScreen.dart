@@ -9,53 +9,52 @@ class secondSplach extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SafeArea(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: SplashScreen.navigate(
-                  fit: BoxFit.fill,
-                  name: 'assets/mixing_animations.riv',
-                  next: (context) => thirdSplach(),
-                  until: () => Future.delayed(
-                    Duration(seconds: 5),
-                  ),
-                  loopAnimation: "Intermediate",
-                  backgroundColor: Color(0xFF390A3B),
-                ),
+    return Scaffold(
+        body: SafeArea(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: SplashScreen.navigate(
+              fit: BoxFit.fill,
+              name: 'assets/mixing_animations.riv',
+              next: (context) => thirdSplach(),
+              until: () => Future.delayed(
+                Duration(seconds: 5),
               ),
-              Positioned(
-                bottom: 50,
-                left: 10,
-                height: 120,
-                width: 400,
-                child: AnimatedTextKit(
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      "Welcome to our app",
-                      speed: Duration(milliseconds: 50),
-                      textStyle: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.none,
-                          fontSize: 22),
-                      textAlign: TextAlign.center,
-                    ),
-                    TypewriterAnimatedText(
-                      "aaaaaa",
-                      speed: Duration(milliseconds: 50),
-                      textStyle: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.none,
-                          fontSize: 22),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              loopAnimation: "Intermediate",
+              backgroundColor: Color(0xFF390A3B),
+            ),
           ),
-        ));
+          Positioned(
+            bottom: 50,
+            left: 10,
+            height: 120,
+            width: 400,
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  "Welcome to our app",
+                  speed: Duration(milliseconds: 50),
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                      fontSize: 22),
+                  textAlign: TextAlign.center,
+                ),
+                TypewriterAnimatedText(
+                  "aaaaaa",
+                  speed: Duration(milliseconds: 50),
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                      fontSize: 22),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

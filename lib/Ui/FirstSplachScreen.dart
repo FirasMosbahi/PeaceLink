@@ -2,10 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
-import 'LogIn.dart';
+import 'SecondSplachScreen.dart';
 
-class thirdSplach extends StatelessWidget {
-  const thirdSplach({Key? key}) : super(key: key);
+class FirstSplach extends StatelessWidget {
+  const FirstSplach({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,11 @@ class thirdSplach extends StatelessWidget {
             child: SplashScreen.navigate(
               fit: BoxFit.fill,
               name: 'assets/mixing_animations.riv',
-              next: (context) => logIn(),
+              next: (context) => secondSplach(),
               until: () => Future.delayed(
-                Duration(seconds: 5),
+                Duration(seconds: 4),
               ),
-              loopAnimation: "Expert",
+              loopAnimation: "Beginner",
               backgroundColor: Color(0xFF390A3B),
             ),
           ),
