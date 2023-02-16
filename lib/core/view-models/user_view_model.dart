@@ -26,13 +26,8 @@ class UserProvider{
   Future<UserModel> getUser(String id)async{
     try{
       DocumentSnapshot s = await FirebaseFirestore.instance.collection('user').doc(id).get();
-      Map<String,Object> json = {};
-      json["name"] = s.get("name");
-      json["email"] = s.get("eamil");
-      json["photoURL"] = s.get("photoURL");
-      json["isConnected"] = s.get("isConnected");
-      json["isSpecialist"] = s.get("isSpecialist");
-      return UserModel.fromJson(json);
+      Map<String,dynamic> data = s.data() as Map<String,dynamic>;
+      return UserModel.fromJson(data);
     }catch(e){
       throw Exception(e.toString());
     }
