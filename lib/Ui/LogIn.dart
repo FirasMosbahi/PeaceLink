@@ -157,6 +157,7 @@ class _logInState extends State<logIn> {
                             Container(
                               padding: EdgeInsets.all(8),
                               child: TextField(
+                                obscureText: true,
                                 onChanged: (value) {
                                   pass = value;
                                 },
@@ -173,18 +174,27 @@ class _logInState extends State<logIn> {
                               height: 30,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                try {
-                                  userProvider.authentificateUser(
-                                      email: email, password: pass);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MyApp(2, appBar)));
-                                } catch (e) {
-                                  debugPrint(e.toString());
-                                }
+                              onTap: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyApp(2, appBar)));
+                                // try {
+                                //   bool isconnected =
+                                //       await userProvider.authentificateUser(
+                                //           email: email, password: pass);
+                                //
+                                //   //if (isconnected) {
+                                //   Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: (context) =>
+                                //               MyApp(2, appBar)));
+                                //   // }
+                                // } catch (e) {
+                                //   debugPrint(e.toString());
+                                // }
                               },
                               child: Container(
                                 height: 50,

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 AppBar appBar = AppBar(
-  backgroundColor: Color(0xFF26042A),
+  backgroundColor: Color(0xFFe0dce7),
   elevation: 0,
+  automaticallyImplyLeading: false,
   flexibleSpace: Container(
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
