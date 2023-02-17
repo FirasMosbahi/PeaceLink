@@ -55,11 +55,11 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Text(
-                                "We make a living by what we\n get . We make a life by what we \ngive 🥰",
+                                "We make a living by what we get . We make a life by what we give 🥰",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Kranky',
+                                    fontSize: 18,
+                                    fontFamily: 'Courgette',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[500],
                                     letterSpacing: 0.2),
@@ -120,7 +120,7 @@ class Home extends StatelessWidget {
                 Expanded(
                     child: Text(
                   "Urgent Donation",
-                  style: TextStyle(fontSize: 18, color: Colors.grey[800]),
+                  style: TextStyle(fontSize: 18, color: Colors.pinkAccent),
                 )),
                 Expanded(
                   child: Row(

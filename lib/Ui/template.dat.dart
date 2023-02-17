@@ -1,8 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 AppBar appBar = AppBar(
-  backgroundColor: Color(0xFFe0dce7),
+  backgroundColor: Color(0xFF1f005c),
   elevation: 0,
   automaticallyImplyLeading: false,
   flexibleSpace: Container(
@@ -25,9 +26,14 @@ AppBar appBar = AppBar(
         Expanded(
           flex: 3,
           child: Center(
-            child: Text(
-              "Hello amine , Welcome 😊",
-              style: TextStyle(fontSize: 18, color: Colors.white70),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TyperAnimatedText(
+                  "Hello amine , Welcome 😊",
+                  speed: Duration(milliseconds: 130),
+                  textStyle: TextStyle(fontSize: 18, color: Colors.white70),
+                ),
+              ],
             ),
           ),
         ),

@@ -30,7 +30,7 @@ class _quotePageState extends State<quotePage> {
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 22,
-              fontFamily: 'Kranky',
+              fontFamily: 'Courgette',
             ),
           ),
         ),
@@ -49,14 +49,15 @@ class _quotePageState extends State<quotePage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF000000),
-                                Color(0xFF860462),
-                                Color(0xFF2F0923),
-                              ],
-                              end: Alignment.bottomCenter,
-                              begin: Alignment.topCenter,
-                              stops: [0, 50, 100]),
+                            colors: [
+                              Color(0xFF1e0059),
+                              Color(0xFf3b246a),
+                              Color(0xFF926b9f),
+                            ],
+                            end: Alignment.bottomCenter,
+                            begin: Alignment.topCenter,
+                            stops: [0, 0.7, 1],
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -69,7 +70,8 @@ class _quotePageState extends State<quotePage> {
                                     e["author"].toString(),
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'Cormoran',
+                                        fontFamily: 'Courgette',
+                                        fontWeight: FontWeight.w900,
                                         fontSize: 18),
                                   ),
                                 ),
@@ -81,7 +83,8 @@ class _quotePageState extends State<quotePage> {
                                     e["quote"].toString(),
                                     style: TextStyle(
                                         color: Colors.white70,
-                                        fontFamily: 'Dancing',
+                                        fontWeight: FontWeight.w100,
+                                        fontFamily: 'Courgette',
                                         fontSize: 18),
                                   ),
                                 ),
