@@ -62,7 +62,9 @@ class _LogInState extends State<LogIn> {
                         curve: Curves.easeOutSine,
                         child: AnimatedSlide(
                           duration: const Duration(milliseconds: 1000),
-                          offset: animate ? const Offset(0, 0.01) : const Offset(0, -1),
+                          offset: animate
+                              ? const Offset(0, 0.01)
+                              : const Offset(0, -1),
                           child: Container(
                             child: Image.asset(
                               "assets/light-1.png",
@@ -82,7 +84,9 @@ class _LogInState extends State<LogIn> {
                         curve: Curves.easeOutSine,
                         child: AnimatedSlide(
                           duration: const Duration(milliseconds: 1000),
-                          offset: animate ? const Offset(0, 0.01) : const Offset(0, -1),
+                          offset: animate
+                              ? const Offset(0, 0.01)
+                              : const Offset(0, -1),
                           child: Container(
                             decoration: const BoxDecoration(
                               image: DecorationImage(
@@ -176,26 +180,21 @@ class _LogInState extends State<LogIn> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyApp(index: 2,appBar:  appBar)));
-                                // try {
-                                //   bool isconnected =
-                                //       await userProvider.authentificateUser(
-                                //           email: email, password: pass);
-                                //
-                                //   //if (isconnected) {
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (context) =>
-                                //               MyApp(2, appBar)));
-                                //   // }
-                                // } catch (e) {
-                                //   debugPrint(e.toString());
-                                // }
+                                try {
+                                  bool isconnected =
+                                      await userProvider.authentificateUser(
+                                          email: email, password: pass);
+
+                                  if (isconnected) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MyApp(
+                                                index: 2, appBar: appBar)));
+                                  }
+                                } catch (e) {
+                                  debugPrint(e.toString());
+                                }
                               },
                               child: Container(
                                 height: 50,

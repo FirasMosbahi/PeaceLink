@@ -226,6 +226,7 @@ class _LogInState extends State<SignUp> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                //TODO: add the age field
                                 UserModel userModel = UserModel(
                                     name: name,
                                     email: email,
@@ -237,7 +238,7 @@ class _LogInState extends State<SignUp> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => LogIn()));
+                                          builder: (context) => const LogIn()));
                                 } catch (e) {}
                               },
                               child: Container(
