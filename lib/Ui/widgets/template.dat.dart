@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 AppBar appBar = AppBar(
-  backgroundColor: Color(0xFF1f005c),
+  backgroundColor: const Color(0xFF1f005c),
   elevation: 0,
   automaticallyImplyLeading: false,
   flexibleSpace: Container(
@@ -11,10 +11,10 @@ AppBar appBar = AppBar(
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.ideographic,
       children: [
-        Expanded(
+        const Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.only(left: 5, top: 15),
+            padding: EdgeInsets.only(left: 5, top: 15),
             child: CircleAvatar(
               radius: 30.0,
               backgroundImage: AssetImage(
@@ -30,8 +30,8 @@ AppBar appBar = AppBar(
               animatedTexts: [
                 TyperAnimatedText(
                   "Hello amine , Welcome 😊",
-                  speed: Duration(milliseconds: 130),
-                  textStyle: TextStyle(fontSize: 18, color: Colors.white70),
+                  speed: const Duration(milliseconds: 130),
+                  textStyle: const TextStyle(fontSize: 18, color: Colors.white70),
                 ),
               ],
             ),
@@ -43,7 +43,7 @@ AppBar appBar = AppBar(
               padding: const EdgeInsets.only(right: 5, top: 17),
               child: GestureDetector(
                 onTap: () {},
-                child: Icon(
+                child: const Icon(
                   FontAwesomeIcons.comments,
                   size: 35,
                   color: Colors.purple,

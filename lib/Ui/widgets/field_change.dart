@@ -7,7 +7,7 @@ class Field extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Spacer(),
+        const Spacer(),
         GestureDetector(
           onTap: () {},
           child: Container(
@@ -15,7 +15,7 @@ class Field extends StatelessWidget {
             width: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [
                   Color.fromRGBO(143, 148, 251, 0.4),
                   Color.fromRGBO(143, 148, 251, 1),
@@ -24,7 +24,7 @@ class Field extends StatelessWidget {
                 ],
               ),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 "Change",
                 style: TextStyle(

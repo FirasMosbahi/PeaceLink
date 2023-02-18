@@ -1,32 +1,32 @@
 import 'dart:async';
 
-import 'package:chat_for_peace/core/models/user-model.dart';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
-import 'LogIn.dart';
+import 'main_screen.dart';
+import 'sign_up_screen.dart';
+import '../widgets/template.dat.dart';
 
-class signUp extends StatefulWidget {
-  const signUp({Key? key}) : super(key: key);
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key}) : super(key: key);
 
   @override
-  State<signUp> createState() => _logInState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _logInState extends State<signUp> {
-  String email = "";
-  String name = "";
-  String pass = "";
-  bool isSpec = false;
+class _LogInState extends State<LogIn> {
   bool animate = false;
+  String email = "";
+  String pass = "";
   UserProvider userProvider = UserProvider();
   @override
   void initState() {
+    super.initState();
     setState(() {
       animate = false;
     });
     Timer(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
         () => setState(() {
               animate = true;
             }));
@@ -43,9 +43,9 @@ class _logInState extends State<signUp> {
           child: Column(
             children: [
               Container(
-                height: 330,
+                height: 400,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/background.png"),
                       fit: BoxFit.fill),
@@ -57,12 +57,12 @@ class _logInState extends State<signUp> {
                       width: deviceWidth * 0.2,
                       height: deviceHeight * 0.25,
                       child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 2200),
+                        duration: const Duration(milliseconds: 2200),
                         opacity: animate ? 1 : 0,
                         curve: Curves.easeOutSine,
                         child: AnimatedSlide(
-                          duration: Duration(milliseconds: 1000),
-                          offset: animate ? Offset(0, 0.01) : Offset(0, -1),
+                          duration: const Duration(milliseconds: 1000),
+                          offset: animate ? const Offset(0, 0.01) : const Offset(0, -1),
                           child: Container(
                             child: Image.asset(
                               "assets/light-1.png",
@@ -77,14 +77,14 @@ class _logInState extends State<signUp> {
                       width: 80,
                       height: deviceHeight * 0.17,
                       child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 2200),
+                        duration: const Duration(milliseconds: 2200),
                         opacity: animate ? 1 : 0,
                         curve: Curves.easeOutSine,
                         child: AnimatedSlide(
-                          duration: Duration(milliseconds: 1000),
-                          offset: animate ? Offset(0, 0.01) : Offset(0, -1),
+                          duration: const Duration(milliseconds: 1000),
+                          offset: animate ? const Offset(0, 0.01) : const Offset(0, -1),
                           child: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage("assets/light-2.png"),
                               ),
@@ -95,10 +95,10 @@ class _logInState extends State<signUp> {
                     ),
                     Positioned(
                       child: Container(
-                        margin: EdgeInsets.only(top: 60),
-                        child: Center(
+                        margin: const EdgeInsets.only(top: 50),
+                        child: const Center(
                           child: Text(
-                            "SignUp",
+                            "LogIn",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 40,
@@ -112,19 +112,19 @@ class _logInState extends State<signUp> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 30, right: 30),
+                padding: const EdgeInsets.all(30),
                 child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 2200),
+                  duration: const Duration(milliseconds: 2200),
                   opacity: animate ? 1 : 0,
                   curve: Curves.easeOutSine,
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Color.fromRGBO(143, 148, 251, 2),
                                 blurRadius: 20.0,
@@ -134,8 +134,8 @@ class _logInState extends State<signUp> {
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(8),
+                              decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
                                     color: Color(0xFFF5F5F5),
@@ -143,20 +143,9 @@ class _logInState extends State<signUp> {
                                 ),
                               ),
                               child: TextField(
-                                onChanged: (value) => name = value,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Name",
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey[400],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              child: TextField(
-                                onChanged: (value) => email = value,
+                                onChanged: (value) {
+                                  email = value;
+                                },
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Email",
@@ -168,16 +157,11 @@ class _logInState extends State<signUp> {
                             ),
                             Container(
                               padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Color(0xFFF5F5F5),
-                                  ),
-                                ),
-                              ),
                               child: TextField(
                                 obscureText: true,
-                                onChanged: (value) => pass = value,
+                                onChanged: (value) {
+                                  pass = value;
+                                },
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
@@ -187,64 +171,38 @@ class _logInState extends State<signUp> {
                                 ),
                               ),
                             ),
-                            Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Color(0xFFF5F5F5),
-                                    ),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "are you specialiste",
-                                      style: TextStyle(
-                                        color: Colors.grey[400],
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Checkbox(
-                                      activeColor:
-                                          Color.fromRGBO(143, 148, 251, 1),
-                                      value: this.isSpec,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          this.isSpec = value ?? false;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(
-                                      width: 100,
-                                    ),
-                                  ],
-                                )),
-                            SizedBox(
-                              height: 10,
+                            const SizedBox(
+                              height: 30,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                UserModel userModel = UserModel(
-                                    name: name,
-                                    email: email,
-                                    isConnected: false,
-                                    isSpecialist: isSpec);
-                                try {
-                                  userProvider.registerUser(
-                                      user: userModel, password: pass);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => logIn()));
-                                } catch (e) {}
+                              onTap: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyApp(index: 2,appBar:  appBar)));
+                                // try {
+                                //   bool isconnected =
+                                //       await userProvider.authentificateUser(
+                                //           email: email, password: pass);
+                                //
+                                //   //if (isconnected) {
+                                //   Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: (context) =>
+                                //               MyApp(2, appBar)));
+                                //   // }
+                                // } catch (e) {
+                                //   debugPrint(e.toString());
+                                // }
                               },
                               child: Container(
                                 height: 50,
                                 width: 220,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                     colors: [
                                       Color.fromRGBO(143, 148, 251, 1),
                                       Color.fromRGBO(143, 148, 251, 0.9),
@@ -252,9 +210,9 @@ class _logInState extends State<signUp> {
                                     ],
                                   ),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
-                                    "SignUp",
+                                    "Login",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -262,7 +220,7 @@ class _logInState extends State<signUp> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             GestureDetector(
@@ -270,24 +228,24 @@ class _logInState extends State<signUp> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => logIn()));
+                                        builder: (context) => const SignUp()));
                               },
                               child: Container(
                                 height: 50,
                                 width: 220,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                     colors: [
-                                      Color.fromRGBO(143, 148, 251, 1),
-                                      Color.fromRGBO(143, 148, 251, 0.9),
                                       Color.fromRGBO(143, 148, 251, 0.2),
+                                      Color.fromRGBO(143, 148, 251, 0.75),
+                                      Color.fromRGBO(143, 148, 251, 1),
                                     ],
                                   ),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
-                                    "LogIn",
+                                    "Sign Up",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -295,8 +253,14 @@ class _logInState extends State<signUp> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 15,
+                            const SizedBox(
+                              height: 70,
+                            ),
+                            const Text(
+                              "Forget Password ?",
+                              style: TextStyle(
+                                color: Color.fromRGBO(143, 148, 251, 1),
+                              ),
                             ),
                           ],
                         ),

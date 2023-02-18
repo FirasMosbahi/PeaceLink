@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'MainScreen.dart';
-import 'template.dat.dart';
+import 'main_screen.dart';
+import '../widgets/template.dat.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,14 +18,14 @@ class Home extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromRGBO(143, 148, 251, 2),
                         blurRadius: 20.0,
                         offset: Offset(0, 10),
                       )
                     ]),
-                margin: EdgeInsets.only(top: 35, left: 40, right: 40),
+                margin: const EdgeInsets.only(top: 35, left: 40, right: 40),
                 child: Row(
                   children: [
                     Expanded(
@@ -35,14 +35,14 @@ class Home extends StatelessWidget {
                         child: Container(
                           height: 60,
                           width: 70,
-                          child: Icon(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromRGBO(143, 148, 251, 0.2),
+                          ),
+                          child: const Icon(
                             FontAwesomeIcons.wallet,
                             size: 35,
                             color: Color.fromRGBO(143, 148, 251, 1),
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Color.fromRGBO(143, 148, 251, 0.2),
                           ),
                         ),
                       ),
@@ -65,21 +65,21 @@ class Home extends StatelessWidget {
                                     letterSpacing: 0.2),
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            MyApp(1, appBar)));
+                                            MyApp(index: 1,appBar: appBar)));
                               },
                               child: Container(
                                 height: 50,
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                     colors: [
                                       Color.fromRGBO(143, 148, 251, 0.4),
                                       Color.fromRGBO(143, 148, 251, 1),
@@ -88,7 +88,7 @@ class Home extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Donate",
                                     style: TextStyle(
@@ -98,7 +98,7 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                           ],
@@ -107,17 +107,17 @@ class Home extends StatelessWidget {
                     )
                   ],
                 ))),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Expanded(
           flex: 2,
           child: Container(
-            margin: EdgeInsets.only(top: 35, left: 40, right: 40),
+            margin: const EdgeInsets.only(top: 35, left: 40, right: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                const Expanded(
                     child: Text(
                   "Urgent Donation",
                   style: TextStyle(fontSize: 18, color: Colors.pinkAccent),
@@ -131,7 +131,7 @@ class Home extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color.fromRGBO(190, 120, 251, 0.6),
                                   Color.fromRGBO(190, 120, 251, 0.4),
@@ -139,7 +139,7 @@ class Home extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Disaster",
                                 style: TextStyle(
@@ -150,7 +150,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
                       Expanded(
@@ -159,7 +159,7 @@ class Home extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color.fromRGBO(190, 120, 251, 0.6),
                                   Color.fromRGBO(190, 120, 251, 0.4),
@@ -167,7 +167,7 @@ class Home extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Wars",
                                 style: TextStyle(
@@ -178,7 +178,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
                       Expanded(
@@ -187,7 +187,7 @@ class Home extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color.fromRGBO(190, 120, 251, 0.6),
                                   Color.fromRGBO(190, 120, 251, 0.4),
@@ -195,7 +195,7 @@ class Home extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Poverty",
                                 style: TextStyle(
@@ -206,7 +206,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Expanded(
@@ -215,7 +215,7 @@ class Home extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color.fromRGBO(190, 120, 251, 0.6),
                                   Color.fromRGBO(190, 120, 251, 0.4),
@@ -223,7 +223,7 @@ class Home extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Hunger",
                                 style: TextStyle(
@@ -237,7 +237,7 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: double.infinity,
                   height: 30,
                 ),
@@ -247,7 +247,7 @@ class Home extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color.fromRGBO(143, 148, 251, 2),
                             blurRadius: 20.0,
@@ -260,7 +260,7 @@ class Home extends StatelessWidget {
                           Expanded(
                             flex: 6,
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)),
@@ -275,21 +275,21 @@ class Home extends StatelessWidget {
                             child: Container(
                               child: Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "description of urgent situation ",
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     "1200£ fund was raised ",
                                     style: TextStyle(
                                       color: Colors.black54,
                                     ),
                                   ),
                                   Row(
-                                    children: [
+                                    children: const [
                                       Expanded(
                                         child: Center(child: Text("0£")),
                                         flex: 1,
@@ -309,12 +309,12 @@ class Home extends StatelessWidget {
                                         width: 10,
                                       ),
                                       Expanded(
-                                        child: Center(child: Text("1600£")),
                                         flex: 1,
+                                        child: Center(child: Text("1600£")),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 6,
                                   ),
                                   Text("1250 person donate"),
@@ -322,7 +322,7 @@ class Home extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Expanded(
@@ -335,7 +335,7 @@ class Home extends StatelessWidget {
                                     child: Container(
                                       height: 50,
                                       width: 220,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(10),
                                             topRight: Radius.circular(10)),
@@ -347,7 +347,7 @@ class Home extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           "Donate",
                                           style: TextStyle(
@@ -358,7 +358,7 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
@@ -367,7 +367,7 @@ class Home extends StatelessWidget {
                                     child: Container(
                                       height: 50,
                                       width: 220,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                             bottomRight: Radius.circular(10),
                                             topLeft: Radius.circular(10)),
@@ -379,7 +379,7 @@ class Home extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           "Create ",
                                           style: TextStyle(
@@ -400,7 +400,7 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
       ],

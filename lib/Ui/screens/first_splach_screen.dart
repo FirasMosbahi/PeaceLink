@@ -2,10 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
-import 'ThirdSplachScreen.dart';
+import 'second_splachScreen.dart';
 
-class secondSplach extends StatelessWidget {
-  const secondSplach({Key? key}) : super(key: key);
+class FirstSplach extends StatelessWidget {
+  const FirstSplach({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class secondSplach extends StatelessWidget {
             child: SplashScreen.navigate(
               fit: BoxFit.fill,
               name: 'assets/mixing_animations.riv',
-              next: (context) => thirdSplach(),
+              next: (context) => const SecondSplach(),
               until: () => Future.delayed(
-                Duration(seconds: 5),
+                const Duration(seconds: 4),
               ),
-              loopAnimation: "Intermediate",
-              backgroundColor: Color(0xFF390A3B),
+              loopAnimation: "Beginner",
+              backgroundColor: const Color(0xFF390A3B),
             ),
           ),
           Positioned(
@@ -34,8 +34,8 @@ class secondSplach extends StatelessWidget {
               animatedTexts: [
                 TypewriterAnimatedText(
                   "Welcome to our app",
-                  speed: Duration(milliseconds: 50),
-                  textStyle: TextStyle(
+                  speed: const Duration(milliseconds: 50),
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
                       fontSize: 22),
@@ -43,8 +43,8 @@ class secondSplach extends StatelessWidget {
                 ),
                 TypewriterAnimatedText(
                   "aaaaaa",
-                  speed: Duration(milliseconds: 50),
-                  textStyle: TextStyle(
+                  speed: const Duration(milliseconds: 50),
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
                       fontSize: 22),

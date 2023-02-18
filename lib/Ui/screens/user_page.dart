@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class userPage extends StatefulWidget {
-  const userPage({Key? key}) : super(key: key);
+class UserPage extends StatefulWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
-  State<userPage> createState() => _userPageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _userPageState extends State<userPage> {
+class _UserPageState extends State<UserPage> {
   double height = 300;
   bool emailPress = false;
   bool namePress = false;
   bool passPress = false;
   bool agePress = false;
-  Widget changeWidget = SizedBox();
+  Widget changeWidget = const SizedBox();
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -21,12 +21,12 @@ class _userPageState extends State<userPage> {
 
     return Center(
       child: Container(
-        height: this.height,
+        height: height,
         width: deviceWidth * 0.85,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(143, 148, 251, 2),
               blurRadius: 20.0,
@@ -36,7 +36,7 @@ class _userPageState extends State<userPage> {
         ),
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: Center(
                 child: Text(
                   "Mohamed Amine Gasmi",
@@ -48,7 +48,7 @@ class _userPageState extends State<userPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Expanded(
@@ -60,7 +60,7 @@ class _userPageState extends State<userPage> {
                     children: [
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Name :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -69,7 +69,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -80,20 +80,20 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.namePress = !this.namePress;
+                                namePress = !namePress;
                               });
                             },
                             child: namePress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -101,12 +101,12 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "email :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -115,7 +115,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -126,23 +126,23 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.emailPress = !this.emailPress;
+                                emailPress = !emailPress;
                                 emailPress
-                                    ? this.height += 80
-                                    : this.height -= 80;
+                                    ? height += 80
+                                    : height -= 80;
                               });
                             },
                             child: emailPress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -150,7 +150,7 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      if (this.emailPress)
+                      if (emailPress)
                         GestureDetector(
                           onTap: () {},
                           child: Container(
@@ -158,7 +158,7 @@ class _userPageState extends State<userPage> {
                             width: 70,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color.fromRGBO(143, 148, 251, 0.4),
                                   Color.fromRGBO(143, 148, 251, 1),
@@ -167,7 +167,7 @@ class _userPageState extends State<userPage> {
                                 ],
                               ),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Change",
                                 style: TextStyle(
@@ -178,12 +178,12 @@ class _userPageState extends State<userPage> {
                             ),
                           ),
                         ),
-                      Divider(
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Password :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -192,7 +192,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -203,20 +203,20 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.passPress = !this.passPress;
+                                passPress = !passPress;
                               });
                             },
                             child: passPress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -224,12 +224,12 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Age :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -238,7 +238,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -249,20 +249,20 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.agePress = !this.agePress;
+                                agePress = !agePress;
                               });
                             },
                             child: agePress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,

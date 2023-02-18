@@ -2,10 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
-import 'LogIn.dart';
+import 'third_splach_screen.dart';
 
-class thirdSplach extends StatelessWidget {
-  const thirdSplach({Key? key}) : super(key: key);
+class SecondSplach extends StatelessWidget {
+  const SecondSplach({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class thirdSplach extends StatelessWidget {
             child: SplashScreen.navigate(
               fit: BoxFit.fill,
               name: 'assets/mixing_animations.riv',
-              next: (context) => logIn(),
+              next: (context) => const ThirdSplach(),
               until: () => Future.delayed(
-                Duration(seconds: 5),
+                const Duration(seconds: 5),
               ),
-              loopAnimation: "Expert",
-              backgroundColor: Color(0xFF390A3B),
+              loopAnimation: "Intermediate",
+              backgroundColor: const Color(0xFF390A3B),
             ),
           ),
           Positioned(
@@ -34,8 +34,8 @@ class thirdSplach extends StatelessWidget {
               animatedTexts: [
                 TypewriterAnimatedText(
                   "Welcome to our app",
-                  speed: Duration(milliseconds: 50),
-                  textStyle: TextStyle(
+                  speed: const Duration(milliseconds: 50),
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
                       fontSize: 22),
@@ -43,8 +43,8 @@ class thirdSplach extends StatelessWidget {
                 ),
                 TypewriterAnimatedText(
                   "aaaaaa",
-                  speed: Duration(milliseconds: 50),
-                  textStyle: TextStyle(
+                  speed: const Duration(milliseconds: 50),
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
                       fontSize: 22),

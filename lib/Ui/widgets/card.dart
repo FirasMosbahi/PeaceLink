@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Card_Re extends StatelessWidget {
+class CardRe extends StatelessWidget {
   final img;
   final text;
   final price;
-  Card_Re(this.img, this.text, this.price) {}
+  const CardRe({super.key, required this.img,required this.text,required this.price});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,15 +14,15 @@ class Card_Re extends StatelessWidget {
           flex: 6,
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)),
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage("assets/" + this.img),
+                  image: AssetImage("assets/$img"),
                 )),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     colors: [Colors.transparent, Colors.black],
                     begin: Alignment.topCenter,
@@ -31,12 +31,12 @@ class Card_Re extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      this.text,
-                      style: TextStyle(
+                      text,
+                      style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Courgette',
@@ -44,7 +44,7 @@ class Card_Re extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -59,7 +59,7 @@ class Card_Re extends StatelessWidget {
             child: Container(
               height: 50,
               width: 120,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
@@ -76,26 +76,26 @@ class Card_Re extends StatelessWidget {
               child: Center(
                 child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 145,
                     ),
-                    Text(
+                    const Text(
                       "Donate",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      this.price,
+                      price,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
                         color: Colors.grey[800],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                   ],
@@ -104,7 +104,7 @@ class Card_Re extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         )
       ],
