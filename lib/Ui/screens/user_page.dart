@@ -20,7 +20,7 @@ class _UserPageState extends State<UserPage> {
   bool passPress = false;
   bool agePress = false;
   bool obsc = true;
-  String newName = "";
+  String newUserName = "";
   String newEmail = "";
   String newPassword = "";
   int newAge = 0;
@@ -132,7 +132,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
-                                    onChanged: (value)=> newName = value,
+                                    onChanged: (value)=> newUserName = value,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "name",
@@ -144,7 +144,7 @@ class _UserPageState extends State<UserPage> {
                             if (namePress) Expanded(
                                 child: Field(
                                   onClick: (){
-                                    userProvider.updateUserInfos({"name" : newName});
+                                    userProvider.updateUserInfos({"name" : newUserName});
                                   },
                                 ),
                             ),
