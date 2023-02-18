@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Field extends StatelessWidget {
-  const Field({Key? key}) : super(key: key);
+  final void Function() onClick;
+  const Field({Key? key, required this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onClick,
       child: Container(
         height: 40,
         width: 60,

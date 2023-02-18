@@ -1,3 +1,7 @@
+import 'dart:ffi';
+
+import 'package:chat_for_peace/core/models/user-model.dart';
+import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/field_change.dart';
@@ -16,7 +20,23 @@ class _UserPageState extends State<UserPage> {
   bool passPress = false;
   bool agePress = false;
   bool obsc = true;
-  Widget changeWidget = const SizedBox();
+  String newName = "";
+  String newEmail = "";
+  String newPassword = "";
+  int newAge = 0;
+  UserProvider userProvider = UserProvider();
+  UserModel? user;
+
+   Widget changeWidget = const SizedBox();
+  @override
+  void initState() async {
+    super.initState();
+    UserModel userModel = await userProvider.getCurrentUser();
+    setState(() {
+      user = userModel;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -40,11 +60,11 @@ class _UserPageState extends State<UserPage> {
           ),
           child: Column(
             children: [
-              const Expanded(
+              Expanded(
                 child: Center(
                   child: Text(
-                    "Mohamed Amine Gasmi",
-                    style: TextStyle(
+                    user==null ? "Loading..." : user?.name ?? "",
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Courgette',
@@ -77,7 +97,7 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              "Mohamed Amine Gasmi",
+                              user==null ? "Loading..." : user?.name ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -112,6 +132,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
+                                    onChanged: (value)=> newName = value,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "name",
@@ -120,7 +141,13 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (namePress) Expanded(child: Field()),
+                            if (namePress) Expanded(
+                                child: Field(
+                                  onClick: (){
+                                    userProvider.updateUserInfos({"name" : newName});
+                                  },
+                                ),
+                            ),
                           ],
                         ),
                         const Divider(
@@ -141,7 +168,7 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              "Semah.mechi@gmail.com",
+                              user==null ? "Loading..." : user?.email ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -176,6 +203,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
+                                    onChanged: (value)=>newEmail = value,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "email",
@@ -184,7 +212,9 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (emailPress) Expanded(child: Field()),
+                            if (emailPress) Expanded(child: Field(
+                              onClick: ()=>userProvider.updateUserInfos({"email" : newEmail}),
+                            )),
                           ],
                         ),
                         const Divider(
@@ -240,6 +270,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 3,
                                   child: TextField(
+                                    onChanged: (value)=>newPassword,
                                     obscureText: obsc,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
@@ -272,7 +303,9 @@ class _UserPageState extends State<UserPage> {
                                         ),
                                 ),
                               ),
-                            if (passPress) Expanded(flex: 2, child: Field()),
+                            if (passPress) Expanded(flex: 2, child: Field(
+                              onClick: ()=>userProvider.updateUserPassword(newPassword: newPassword),
+                            )),
                           ],
                         ),
                         const Divider(
@@ -293,7 +326,7 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              "21",
+                              user==null ? "Loading..." : user?.age.toString() ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -328,6 +361,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
+                                    onChanged: (value)=> newAge = value as int,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "age",
@@ -336,7 +370,9 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (agePress) Expanded(child: Field()),
+                            if (agePress) Expanded(child: Field(
+                              onClick: ()=>userProvider.updateUserInfos({"age" : newAge}),
+                            )),
                           ],
                         ),
                       ],

@@ -41,15 +41,18 @@ class UserProvider{
       throw Exception(e.toString());
     }
   }
-  void updateUser(Map<String,Object> changes)async{
+  void updateUserInfos(Map<String,Object> changes)async{
     try{
       if(changes.containsKey("email")){
-        FirebaseAuth.instance.currentUser?.updateEmail(changes["email"].toString());
+        await FirebaseAuth.instance.currentUser?.updateEmail(changes["email"].toString());
       }
       await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).update(changes);
     }catch(e){
       throw Exception(e.toString());
     }
+  }
+  void updateUserPassword({required String newPassword})async{
+    await FirebaseAuth.instance.currentUser?.updatePassword(newPassword);
   }
   void logOut()async{
     try{
