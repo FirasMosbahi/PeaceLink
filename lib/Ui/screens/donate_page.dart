@@ -2,10 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
-import 'card.dart';
+import '../widgets/card.dart';
 
-class dontePage extends StatelessWidget {
-  const dontePage({Key? key}) : super(key: key);
+class DontePage extends StatelessWidget {
+  const DontePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,14 @@ class dontePage extends StatelessWidget {
     ];
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         AnimatedTextKit(animatedTexts: [
           TyperAnimatedText(
             "Our Packs , please select one to donate",
-            speed: Duration(milliseconds: 100),
-            textStyle: TextStyle(
+            speed: const Duration(milliseconds: 100),
+            textStyle: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 22,
@@ -53,7 +53,7 @@ class dontePage extends StatelessWidget {
             ),
           ),
         ]),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Center(
@@ -61,12 +61,15 @@ class dontePage extends StatelessWidget {
             width: 350,
             height: 630,
             child: CarouselSlider(
-              children:
-                  Images.map((e) => Container(child: Card_Re(e[0], e[1], e[2])))
-                      .toList(),
-              slideTransform: CubeTransform(),
+              slideTransform: const CubeTransform(),
               unlimitedMode: true,
               slideIndicator: CircularSlideIndicator(),
+              children: Images.map((e) => Container(
+                      child: CardRe(
+                    img: e[0],
+                    text: e[1],
+                    price: e[2],
+                  ))).toList(),
             ),
           ),
         ),

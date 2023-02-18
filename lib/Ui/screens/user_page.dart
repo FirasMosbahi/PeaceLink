@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-class userPage extends StatefulWidget {
-  const userPage({Key? key}) : super(key: key);
+import '../widgets/field_change.dart';
+
+class UserPage extends StatefulWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
-  State<userPage> createState() => _userPageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _userPageState extends State<userPage> {
+class _UserPageState extends State<UserPage> {
   double height = 300;
   bool emailPress = false;
   bool namePress = false;
   bool passPress = false;
   bool agePress = false;
-  Widget changeWidget = SizedBox();
+  bool obsc = true;
+  Widget changeWidget = const SizedBox();
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -21,12 +24,12 @@ class _userPageState extends State<userPage> {
 
     return Center(
       child: Container(
-        height: this.height,
+        height: height,
         width: deviceWidth * 0.85,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(143, 148, 251, 2),
               blurRadius: 20.0,
@@ -36,7 +39,7 @@ class _userPageState extends State<userPage> {
         ),
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: Center(
                 child: Text(
                   "Mohamed Amine Gasmi",
@@ -48,7 +51,7 @@ class _userPageState extends State<userPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Expanded(
@@ -60,7 +63,7 @@ class _userPageState extends State<userPage> {
                     children: [
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Name :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -69,7 +72,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -80,20 +83,21 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.namePress = !this.namePress;
+                                namePress = !namePress;
+                                namePress ? height += 80 : height -= 80;
                               });
                             },
                             child: namePress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -101,12 +105,29 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      Row(
+                        children: [
+                          if (namePress)
+                            Expanded(
+                                flex: 2,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "name",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                )),
+                          if (namePress) Expanded(child: Field()),
+                        ],
+                      ),
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "email :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -115,7 +136,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -126,23 +147,21 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.emailPress = !this.emailPress;
-                                emailPress
-                                    ? this.height += 80
-                                    : this.height -= 80;
+                                emailPress = !emailPress;
+                                emailPress ? height += 80 : height -= 80;
                               });
                             },
                             child: emailPress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -150,40 +169,29 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      if (this.emailPress)
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: 40,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromRGBO(143, 148, 251, 0.4),
-                                  Color.fromRGBO(143, 148, 251, 1),
-                                  Color.fromRGBO(143, 148, 251, 1),
-                                  Color.fromRGBO(143, 148, 251, 0.4),
-                                ],
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Change",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
-                      Divider(
+                      Row(
+                        children: [
+                          if (emailPress)
+                            Expanded(
+                                flex: 2,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "email",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                )),
+                          if (emailPress) Expanded(child: Field()),
+                        ],
+                      ),
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Password :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -192,7 +200,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -203,20 +211,21 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.passPress = !this.passPress;
+                                passPress = !passPress;
+                                passPress ? height += 80 : height -= 80;
                               });
                             },
                             child: passPress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
@@ -224,12 +233,51 @@ class _userPageState extends State<userPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      Row(
+                        children: [
+                          if (passPress)
+                            Expanded(
+                                flex: 3,
+                                child: TextField(
+                                  obscureText: obsc,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "password",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                )),
+                          if (passPress)
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    obsc = !obsc;
+                                  });
+                                },
+                                child: obsc
+                                    ? Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Color.fromRGBO(143, 148, 251, 1),
+                                        size: 20,
+                                      )
+                                    : Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Color.fromRGBO(143, 148, 251, 1),
+                                        size: 20,
+                                      ),
+                              ),
+                            ),
+                          if (passPress) Expanded(flex: 2, child: Field()),
+                        ],
+                      ),
+                      const Divider(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Age :",
                             style: TextStyle(
                               fontFamily: "Courgette",
@@ -238,7 +286,7 @@ class _userPageState extends State<userPage> {
                               color: Colors.purple,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -249,25 +297,43 @@ class _userPageState extends State<userPage> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                this.agePress = !this.agePress;
+                                agePress = !agePress;
+                                agePress ? height += 80 : height -= 80;
                               });
                             },
                             child: agePress
-                                ? Icon(
+                                ? const Icon(
                                     Icons.arrow_circle_down_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.arrow_circle_right_sharp,
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     size: 30,
                                   ),
                           ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          if (agePress)
+                            Expanded(
+                                flex: 2,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "age",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                )),
+                          if (agePress) Expanded(child: Field()),
                         ],
                       ),
                     ],

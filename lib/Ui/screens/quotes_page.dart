@@ -3,26 +3,26 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 
-import 'quotes.dart';
+import '../utilities/quotes.dart';
 
-class quotePage extends StatefulWidget {
-  const quotePage({Key? key}) : super(key: key);
+class QuotePage extends StatefulWidget {
+  const QuotePage({Key? key}) : super(key: key);
 
   @override
-  State<quotePage> createState() => _quotePageState();
+  State<QuotePage> createState() => _QuotePageState();
 }
 
 String stringRep = "";
 
-class _quotePageState extends State<quotePage> {
+class _QuotePageState extends State<QuotePage> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        Expanded(
+        const Expanded(
           child: Text(
             "Discover the wisdom of the ages with these timeless quotes",
             textAlign: TextAlign.center,
@@ -34,7 +34,7 @@ class _quotePageState extends State<quotePage> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Expanded(
@@ -48,7 +48,7 @@ class _quotePageState extends State<quotePage> {
                   .map((e) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xFF1e0059),
                               Color(0xFf3b246a),
@@ -68,7 +68,7 @@ class _quotePageState extends State<quotePage> {
                                 child: Center(
                                   child: Text(
                                     e["author"].toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Courgette',
                                         fontWeight: FontWeight.w900,
@@ -81,7 +81,7 @@ class _quotePageState extends State<quotePage> {
                                 child: Center(
                                   child: Text(
                                     e["quote"].toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white70,
                                         fontWeight: FontWeight.w100,
                                         fontFamily: 'Courgette',
