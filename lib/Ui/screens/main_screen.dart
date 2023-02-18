@@ -12,7 +12,7 @@ import 'user_page.dart';
 class MyApp extends StatefulWidget {
   int index;
   AppBar appBar;
-  MyApp({required this.index,required this.appBar});
+  MyApp({required this.index, required this.appBar});
   @override
   State<MyApp> createState() => _MyAppState();
 }

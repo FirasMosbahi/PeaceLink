@@ -154,22 +154,20 @@ class _CardPaiementState extends State<CardPaiement> {
                     if (widget.amount == "")
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 15),
-                        child: Expanded(
-                          child: TextField(
-                            onChanged: (value) {},
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Amount",
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.sackDollar,
-                                color: Colors.purple,
-                              ),
-                              hintStyle: TextStyle(
-                                color: Colors.grey[400],
-                              ),
+                        child: TextField(
+                          onChanged: (value) {},
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Amount",
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.sackDollar,
+                              color: Colors.purple,
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.grey[400],
                             ),
                           ),
                         ),
