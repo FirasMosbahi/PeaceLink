@@ -10,7 +10,6 @@ class DonationForm extends StatefulWidget {
 
 class _CardPaiementState extends State<DonationForm> {
   String category = "disaster";
-  String test = "";
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;

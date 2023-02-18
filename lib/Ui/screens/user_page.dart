@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:chat_for_peace/core/models/user-model.dart';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +25,19 @@ class _UserPageState extends State<UserPage> {
   UserProvider userProvider = UserProvider();
   UserModel? user;
 
-   Widget changeWidget = const SizedBox();
-  @override
-  void initState() async {
-    super.initState();
+  Widget changeWidget = const SizedBox();
+  void getUser() async {
     UserModel userModel = await userProvider.getCurrentUser();
     setState(() {
       user = userModel;
+      print(user);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
   }
 
   @override
@@ -63,7 +66,7 @@ class _UserPageState extends State<UserPage> {
               Expanded(
                 child: Center(
                   child: Text(
-                    user==null ? "Loading..." : user?.name ?? "",
+                    user == null ? "Loading..." : user?.name ?? "",
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -97,7 +100,7 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              user==null ? "Loading..." : user?.name ?? "",
+                              user == null ? "Loading..." : user?.name ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -132,7 +135,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
-                                    onChanged: (value)=> newUserName = value,
+                                    onChanged: (value) => newUserName = value,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "name",
@@ -141,13 +144,15 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (namePress) Expanded(
+                            if (namePress)
+                              Expanded(
                                 child: Field(
-                                  onClick: (){
-                                    userProvider.updateUserInfos({"name" : newUserName});
+                                  onClick: () {
+                                    userProvider
+                                        .updateUserInfos({"name": newUserName});
                                   },
                                 ),
-                            ),
+                              ),
                           ],
                         ),
                         const Divider(
@@ -168,7 +173,7 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              user==null ? "Loading..." : user?.email ?? "",
+                              user == null ? "Loading..." : user?.email ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -203,7 +208,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
-                                    onChanged: (value)=>newEmail = value,
+                                    onChanged: (value) => newEmail = value,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "email",
@@ -212,9 +217,12 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (emailPress) Expanded(child: Field(
-                              onClick: ()=>userProvider.updateUserInfos({"email" : newEmail}),
-                            )),
+                            if (emailPress)
+                              Expanded(
+                                  child: Field(
+                                onClick: () => userProvider
+                                    .updateUserInfos({"email": newEmail}),
+                              )),
                           ],
                         ),
                         const Divider(
@@ -270,7 +278,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 3,
                                   child: TextField(
-                                    onChanged: (value)=>newPassword,
+                                    onChanged: (value) => newPassword,
                                     obscureText: obsc,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
@@ -303,9 +311,14 @@ class _UserPageState extends State<UserPage> {
                                         ),
                                 ),
                               ),
-                            if (passPress) Expanded(flex: 2, child: Field(
-                              onClick: ()=>userProvider.updateUserPassword(newPassword: newPassword),
-                            )),
+                            if (passPress)
+                              Expanded(
+                                  flex: 2,
+                                  child: Field(
+                                    onClick: () =>
+                                        userProvider.updateUserPassword(
+                                            newPassword: newPassword),
+                                  )),
                           ],
                         ),
                         const Divider(
@@ -326,7 +339,9 @@ class _UserPageState extends State<UserPage> {
                               width: 10,
                             ),
                             Text(
-                              user==null ? "Loading..." : user?.age.toString() ?? "",
+                              user == null
+                                  ? "Loading..."
+                                  : user?.age.toString() ?? "",
                               style: TextStyle(
                                 fontFamily: 'Courgette',
                                 fontWeight: FontWeight.w300,
@@ -361,7 +376,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
-                                    onChanged: (value)=> newAge = value as int,
+                                    onChanged: (value) => newAge = value as int,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "age",
@@ -370,9 +385,12 @@ class _UserPageState extends State<UserPage> {
                                       ),
                                     ),
                                   )),
-                            if (agePress) Expanded(child: Field(
-                              onClick: ()=>userProvider.updateUserInfos({"age" : newAge}),
-                            )),
+                            if (agePress)
+                              Expanded(
+                                  child: Field(
+                                onClick: () => userProvider
+                                    .updateUserInfos({"age": newAge}),
+                              )),
                           ],
                         ),
                       ],
