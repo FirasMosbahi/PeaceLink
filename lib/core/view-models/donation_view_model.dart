@@ -6,7 +6,7 @@ class DonationProvider extends ChangeNotifier {
   List<Donation> donations = [];
   void getDonations() async {
     final snapshotsReference =
-        FirebaseFirestore.instance.collection('donation');
+        FirebaseFirestore.instance.collection('donations');
     final snapshot = await snapshotsReference.get();
     snapshot.docs.forEach((element) {
       donations.add(Donation.fromJson(element.data()));
@@ -26,7 +26,7 @@ class DonationProvider extends ChangeNotifier {
   void donate({required double value, required int index}) async {
     double currentDonations = donations[index].currentValue;
     DocumentReference doc =
-        FirebaseFirestore.instance.collection('donation').doc(index.toString());
+        FirebaseFirestore.instance.collection('donations').doc(index.toString());
     await doc.update({"currentValue": currentDonations + value});
     if (currentDonations + value >= donations[index].finalValue) {
       doc.delete();
@@ -35,7 +35,7 @@ class DonationProvider extends ChangeNotifier {
 
   void addDonation({required Donation newDonation}) {
     FirebaseFirestore.instance
-        .collection('donation')
+        .collection('donations')
         .doc(donations.length.toString())
         .set(newDonation.toJson());
   }

@@ -6,7 +6,9 @@ class UserProvider{
   void registerUser({required UserModel user, required String password})async{
     try{
       final userCredentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: user.email, password: password);
-      await FirebaseFirestore.instance.collection('user').doc(userCredentials.user?.uid).set(user.toJson());
+      print(userCredentials.user?.uid);
+      await FirebaseFirestore.instance.collection('users').doc(userCredentials.user?.uid).set(user.toJson());
+      print("added successfuly");
     }catch(e){
       throw Exception(e.toString());
     }
@@ -18,14 +20,13 @@ class UserProvider{
         await FirebaseAuth.instance.signOut();
         throw Exception("email not verified");
       }
-      await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).update({"isConnected" : true});
     }catch(e){
       throw Exception(e.toString());
     }
   }
   Future<UserModel> getUser(String id)async{
     try{
-      DocumentSnapshot s = await FirebaseFirestore.instance.collection('user').doc(id).get();
+      DocumentSnapshot s = await FirebaseFirestore.instance.collection('users').doc(id).get();
       Map<String,dynamic> data = s.data() as Map<String,dynamic>;
       return UserModel.fromJson(data);
     }catch(e){
@@ -44,14 +45,13 @@ class UserProvider{
       if(changes.containsKey("email")){
         FirebaseAuth.instance.currentUser?.updateEmail(changes["email"].toString());
       }
-      await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).update(changes);
+      await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).update(changes);
     }catch(e){
       throw Exception(e.toString());
     }
   }
   void logOut()async{
     try{
-      await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).update({"isConnected" : false});
       await FirebaseAuth.instance.signOut();
     }catch(e){
       throw Exception(e.toString());

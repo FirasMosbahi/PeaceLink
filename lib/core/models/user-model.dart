@@ -1,32 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  final String name;
-  final String email;
-  final bool isConnected;
+  String name;
+  String email;
+  final int age;
   final bool isSpecialist;
-  const UserModel({
+  bool respectCriteria(String criteria){
+    if(criteria == "specialist" && isSpecialist){
+        return true;
+    }
+    if(criteria == "child" && 0>age && age<13){
+        return true;
+    }
+    if(criteria == 'adolescent' && 13<=age && age<=18){
+      return true;
+    }
+    if(criteria == 'old' && age>=18){
+      return true;
+    }
+    if(criteria == 'random'){
+      return true;
+    }
+    return false;
+  }
+  UserModel({
     required this.name,
     required this.email,
-    required this.isConnected,
     required this.isSpecialist,
+    required this.age,
   });
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json['email'],
         name: json['name'],
-        isConnected: json['isConnected'],
         isSpecialist: json['isSpecialist'],
-      );
-  factory UserModel.fromDataSnapshot(DocumentSnapshot data) => UserModel(
-        name: data.get('name'),
-        email: data.get('email'),
-        isConnected: data.get('isConnected'),
-        isSpecialist: data.get('isSpecialist'),
+        age: json['age'],
       );
   Map<String, dynamic> toJson() => {
         'email': email,
         'name': name,
-        'isConnected': isConnected,
         'isSpecialist': isSpecialist,
+        'age': age,
       };
 }
