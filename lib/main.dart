@@ -1,7 +1,7 @@
-import 'package:chat_for_peace/Ui/FirstSplachScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'Ui/screens/first_splach_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -11,7 +11,7 @@ void main() async {
   );
 
   runApp(
-     const MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: FirstSplach(),
     ),

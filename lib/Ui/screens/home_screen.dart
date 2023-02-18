@@ -73,7 +73,7 @@ class Home extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            MyApp(index: 1, appBar: appBar)));
+                                            MyApp(index: 0, appBar: appBar)));
                               },
                               child: Container(
                                 height: 50,

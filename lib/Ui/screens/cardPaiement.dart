@@ -155,7 +155,6 @@ class _CardPaiementState extends State<CardPaiement> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 15),
                         child: Expanded(
-                          flex: 4,
                           child: TextField(
                             onChanged: (value) {},
                             inputFormatters: [
