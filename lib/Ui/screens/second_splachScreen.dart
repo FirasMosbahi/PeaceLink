@@ -33,7 +33,7 @@ class SecondSplach extends StatelessWidget {
             child: AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  "Welcome to our app",
+                  " You can make donations",
                   speed: const Duration(milliseconds: 50),
                   textStyle: const TextStyle(
                       color: Colors.white,
@@ -42,7 +42,7 @@ class SecondSplach extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 TypewriterAnimatedText(
-                  "aaaaaa",
+                  "You can shares your ideas",
                   speed: const Duration(milliseconds: 50),
                   textStyle: const TextStyle(
                       color: Colors.white,

@@ -33,7 +33,7 @@ class ThirdSplach extends StatelessWidget {
             child: AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  "Welcome to our app",
+                  "You can chat with specialist ",
                   speed: const Duration(milliseconds: 50),
                   textStyle: const TextStyle(
                       color: Colors.white,
@@ -42,7 +42,7 @@ class ThirdSplach extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 TypewriterAnimatedText(
-                  "aaaaaa",
+                  "You can join anonymous chat",
                   speed: const Duration(milliseconds: 50),
                   textStyle: const TextStyle(
                       color: Colors.white,
