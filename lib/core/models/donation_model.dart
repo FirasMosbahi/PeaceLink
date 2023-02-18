@@ -1,24 +1,24 @@
 class Donation {
-  final String name;
+  final String category;
   final String description;
    double currentValue;
    final double finalValue;
 
   Donation({
-    required this.name,
+    required this.category,
     required this.description,
     this.currentValue = 0,
     required this.finalValue,
   });
   factory Donation.fromJson(Map<String, dynamic> json) => Donation(
     description: json['description'],
-    name: json['name'],
+    category: json['category'],
     currentValue: json['currentValue'],
     finalValue: json['finalValue'],
   );
   Map<String, dynamic> toJson() => {
     'description': description,
-    'name': name,
+    'category': category,
     'currentValue': currentValue,
     'finalValue': finalValue,
   };

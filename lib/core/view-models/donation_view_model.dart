@@ -5,6 +5,7 @@ import 'package:chat_for_peace/core/models/donation_model.dart';
 class DonationProvider extends ChangeNotifier {
   List<Donation> donations = [];
   void getDonations() async {
+    donations = [];
     final snapshotsReference =
         FirebaseFirestore.instance.collection('donations');
     final snapshot = await snapshotsReference.get();
@@ -22,7 +23,24 @@ class DonationProvider extends ChangeNotifier {
       });
     });
   }
-
+  void getDonationsByCategory(String category) async {
+    final snapshotsReference =
+    FirebaseFirestore.instance.collection('donations');
+    final snapshot = await snapshotsReference.where("category",isEqualTo: category).get();
+    snapshot.docs.forEach((element) {
+      donations.add(Donation.fromJson(element.data()));
+    });
+    notifyListeners();
+    FirebaseFirestore.instance.runTransaction((Transaction tx) async {
+      snapshotsReference.snapshots().listen((querySnapshot) {
+        donations = [];
+        snapshot.docs.forEach((element) {
+          donations.add(Donation.fromJson(element.data()));
+        });
+        notifyListeners();
+      });
+    });
+  }
   void donate({required double value, required int index}) async {
     double currentDonations = donations[index].currentValue;
     DocumentReference doc =
