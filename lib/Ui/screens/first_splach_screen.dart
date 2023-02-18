@@ -19,7 +19,7 @@ class FirstSplach extends StatelessWidget {
               name: 'assets/mixing_animations.riv',
               next: (context) => const SecondSplach(),
               until: () => Future.delayed(
-                const Duration(milliseconds: 4700),
+                const Duration(milliseconds: 4500),
               ),
               loopAnimation: "Beginner",
               backgroundColor: const Color(0xFF390A3B),

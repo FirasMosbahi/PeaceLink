@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/template.dat.dart';
+import 'donationForm.dart';
 import 'main_screen.dart';
 
 class Home extends StatelessWidget {
@@ -370,7 +371,13 @@ class Home extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DonationForm()));
+                                    },
                                     child: Container(
                                       height: 50,
                                       width: 220,
