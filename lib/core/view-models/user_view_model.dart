@@ -13,13 +13,14 @@ class UserProvider{
       throw Exception(e.toString());
     }
   }
-  void authentificateUser({required String email , required String password})async{
+  Future<bool> authentificateUser({required String email , required String password})async{
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       if(FirebaseAuth.instance.currentUser?.emailVerified == false){
         await FirebaseAuth.instance.signOut();
         throw Exception("email not verified");
       }
+      return true;
     }catch(e){
       throw Exception(e.toString());
     }
