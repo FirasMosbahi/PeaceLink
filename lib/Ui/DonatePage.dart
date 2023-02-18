@@ -1,7 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
-import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 
 import 'card.dart';
 
@@ -42,15 +41,18 @@ class dontePage extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Text(
-          "Our Packs , please select one to donate ",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-            fontFamily: 'Kranky',
+        AnimatedTextKit(animatedTexts: [
+          TyperAnimatedText(
+            "Our Packs , please select one to donate",
+            speed: Duration(milliseconds: 100),
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              fontFamily: 'Courgette',
+            ),
           ),
-        ),
+        ]),
         SizedBox(
           height: 10,
         ),

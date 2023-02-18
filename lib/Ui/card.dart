@@ -54,37 +54,53 @@ class Card_Re extends StatelessWidget {
         ),
         Expanded(
           flex: 1,
-          child: TextButton(
-            onPressed: () {},
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 133,
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 50,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
                 ),
-                Text(
-                  "Donate",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromRGBO(143, 148, 251, 0.4),
+                    Color.fromRGBO(143, 148, 251, 1),
+                    Color.fromRGBO(143, 148, 251, 1),
+                    Color.fromRGBO(143, 148, 251, 0.4),
+                  ],
                 ),
-                Spacer(),
-                Text(
-                  this.price,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 145,
+                    ),
+                    Text(
+                      "Donate",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    Text(
+                      this.price,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.grey[800],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            style: TextButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10))),
-              backgroundColor: Color(0xFFEFD54C),
-              primary: Colors.black,
-              fixedSize: Size(149, 22),
+              ),
             ),
           ),
         ),

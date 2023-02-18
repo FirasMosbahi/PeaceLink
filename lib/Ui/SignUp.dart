@@ -4,7 +4,7 @@ import 'package:chat_for_peace/core/models/user-model.dart';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
-import 'LogInlate.dat.dart';
+import 'LogIn.dart';
 
 class signUp extends StatefulWidget {
   const signUp({Key? key}) : super(key: key);
@@ -176,6 +176,7 @@ class _logInState extends State<signUp> {
                                 ),
                               ),
                               child: TextField(
+                                obscureText: true,
                                 onChanged: (value) => pass = value,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
