@@ -5,20 +5,32 @@ class UserModel {
   String email;
   final int age;
   final bool isSpecialist;
-  bool respectCriteria(String criteria){
-    if(criteria == "specialist" && isSpecialist){
+  String showcriteria({required bool asSpecialist}){
+    if(isSpecialist && asSpecialist){
+      return "specialist";
+  }
+    if(0>age && age<13){
+      return "child";
+    }
+    if(13<=age && age<=18){
+      return "adolescent";
+    }
+    return "old";
+}
+  bool respectCriteria(String searchedCriteria){
+    if(searchedCriteria == "specialist" && isSpecialist){
         return true;
     }
-    if(criteria == "child" && 0>age && age<13){
+    if(searchedCriteria == "child" && 0>age && age<13){
         return true;
     }
-    if(criteria == 'adolescent' && 13<=age && age<=18){
+    if(searchedCriteria == 'adolescent' && 13<=age && age<=18){
       return true;
     }
-    if(criteria == 'old' && age>=18){
+    if(searchedCriteria == 'old' && age>=18){
       return true;
     }
-    if(criteria == 'random'){
+    if(searchedCriteria == 'random'){
       return true;
     }
     return false;
