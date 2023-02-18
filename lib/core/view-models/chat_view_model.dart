@@ -30,6 +30,7 @@ class ChatProvider extends ChangeNotifier {
           .doc(desiredChatId)
           .update({"secondUserId": FirebaseAuth.instance.currentUser?.uid});
       chatId = desiredChatId;
+      notifyListeners();
       return;
     }
     FirebaseFirestore.instance
@@ -42,6 +43,7 @@ class ChatProvider extends ChangeNotifier {
                 secondUserCriteria: criteria)
             .toJson());
     chatId = chatsReference.docs.length.toString();
+    notifyListeners();
   }
 
   void sendMessage(String message) async {
