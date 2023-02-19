@@ -1,60 +1,81 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:chat_for_peace/core/models/donation_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class DonationProvider extends ChangeNotifier {
   List<Donation> donations = [];
-  void getDonations() async {
-    donations = [];
+  bool hasLoaded = true;
+  Future<bool> getDonations() async {
     final snapshotsReference =
         FirebaseFirestore.instance.collection('donations');
     final snapshot = await snapshotsReference.get();
+    print(1);
     snapshot.docs.forEach((element) {
-      donations.add(Donation.fromJson(element.data()));
-    });
-    notifyListeners();
-    FirebaseFirestore.instance.runTransaction((Transaction tx) async {
-      snapshotsReference.snapshots().listen((querySnapshot) {
-        donations = [];
-        snapshot.docs.forEach((element) {
-          donations.add(Donation.fromJson(element.data()));
-        });
+      print(2);
+      print(element.data());
+      if (donations.where((e) => e.id == element.id).isEmpty) {
+        donations.add(Donation.fromJson(element.data()));
+        hasLoaded = false;
+      }
+      if (!hasLoaded) {
+        hasLoaded = true;
         notifyListeners();
-      });
+      }
     });
-  }
-  void getDonationsByCategory(String category) async {
-    final snapshotsReference =
-    FirebaseFirestore.instance.collection('donations');
-    final snapshot = await snapshotsReference.where("category",isEqualTo: category).get();
-    snapshot.docs.forEach((element) {
-      donations.add(Donation.fromJson(element.data()));
-    });
-    notifyListeners();
-    FirebaseFirestore.instance.runTransaction((Transaction tx) async {
-      snapshotsReference.snapshots().listen((querySnapshot) {
-        donations = [];
-        snapshot.docs.forEach((element) {
-          donations.add(Donation.fromJson(element.data()));
-        });
-        notifyListeners();
-      });
-    });
-  }
-  void donate({required double value, required int index}) async {
-    double currentDonations = donations[index].currentValue;
-    DocumentReference doc =
-        FirebaseFirestore.instance.collection('donations').doc(index.toString());
-    await doc.update({"currentValue": currentDonations + value});
-    if (currentDonations + value >= donations[index].finalValue) {
-      doc.delete();
-    }
+    return true;
   }
 
-  void addDonation({required Donation newDonation}) {
-    FirebaseFirestore.instance
+  Future<bool> getDonationsByCategory(String category) async {
+    final snapshotsReference = FirebaseFirestore.instance
         .collection('donations')
-        .doc(donations.length.toString())
+        .where({"category": category});
+    final snapshot = await snapshotsReference.get();
+    print(1);
+    snapshot.docs.forEach((element) {
+      print(2);
+      print(element.data());
+      if (donations.where((e) => e.id == element.id).isEmpty) {
+        donations.add(Donation.fromJson(element.data()));
+        hasLoaded = false;
+      }
+      if (!hasLoaded) {
+        hasLoaded = true;
+        notifyListeners();
+      }
+    });
+    return true;
+  }
+
+  Future<bool> donate(
+      {required double value, required Donation donation}) async {
+    double currentDonations = donation.currentValue;
+    DocumentReference doc =
+        FirebaseFirestore.instance.collection('donations').doc(donation.id);
+    print("getting doc");
+    currentDonations += value;
+    await doc.update({"currentValue": currentDonations});
+
+    print("loaded");
+    print("updating doc");
+    if (currentDonations >= donation.finalValue) {
+      await doc.delete();
+      print("deleting doc");
+    }
+    donations = [];
+    hasLoaded = false;
+    await getDonations();
+    return true;
+  }
+
+  Future<bool> addDonation({required Donation newDonation}) async {
+    newDonation.id = DateTime.now().toString() +
+        (FirebaseAuth.instance.currentUser?.uid ?? "");
+    newDonation.creator = FirebaseAuth.instance.currentUser?.uid ?? "";
+    await FirebaseFirestore.instance
+        .collection('donations')
+        .doc(newDonation.id)
         .set(newDonation.toJson());
+    return true;
   }
 }

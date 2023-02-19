@@ -150,6 +150,10 @@ class _UserPageState extends State<UserPage> {
                                   onClick: () {
                                     userProvider
                                         .updateUserInfos({"name": newUserName});
+                                    setState(() {
+                                      namePress = false;
+                                      user?.name = newUserName;
+                                    });
                                   },
                                 ),
                               ),
@@ -218,11 +222,14 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                   )),
                             if (emailPress)
-                              Expanded(
-                                  child: Field(
-                                onClick: () => userProvider
-                                    .updateUserInfos({"email": newEmail}),
-                              )),
+                              Expanded(child: Field(onClick: () {
+                                userProvider
+                                    .updateUserInfos({"email": newEmail});
+                                setState(() {
+                                  emailPress = false;
+                                  user?.email = newEmail;
+                                });
+                              })),
                           ],
                         ),
                         const Divider(
@@ -314,11 +321,13 @@ class _UserPageState extends State<UserPage> {
                             if (passPress)
                               Expanded(
                                   flex: 2,
-                                  child: Field(
-                                    onClick: () =>
-                                        userProvider.updateUserPassword(
-                                            newPassword: newPassword),
-                                  )),
+                                  child: Field(onClick: () {
+                                    userProvider.updateUserPassword(
+                                        newPassword: newPassword);
+                                    setState(() {
+                                      passPress = false;
+                                    });
+                                  })),
                           ],
                         ),
                         const Divider(
@@ -376,7 +385,8 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: TextField(
-                                    onChanged: (value) => newAge = value as int,
+                                    onChanged: (value) =>
+                                        newAge = int.parse(value),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "age",
@@ -386,11 +396,13 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                   )),
                             if (agePress)
-                              Expanded(
-                                  child: Field(
-                                onClick: () => userProvider
-                                    .updateUserInfos({"age": newAge}),
-                              )),
+                              Expanded(child: Field(onClick: () {
+                                userProvider.updateUserInfos({"age": newAge});
+                                setState(() {
+                                  agePress = false;
+                                  user?.age = newAge;
+                                });
+                              })),
                           ],
                         ),
                       ],

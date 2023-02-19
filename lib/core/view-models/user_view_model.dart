@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProvider {
-  void registerUser({required UserModel user, required String password}) async {
+  Future<bool> registerUser(
+      {required UserModel user, required String password}) async {
     try {
       final userCredentials = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -17,6 +18,7 @@ class UserProvider {
     } catch (e) {
       throw Exception(e.toString());
     }
+    return true;
   }
 
   Future<bool> authentificateUser(

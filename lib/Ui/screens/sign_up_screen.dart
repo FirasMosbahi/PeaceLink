@@ -20,6 +20,7 @@ class _LogInState extends State<SignUp> {
   bool isSpec = false;
   bool animate = false;
   bool obsc = true;
+  String error = "";
   UserProvider userProvider = UserProvider();
   @override
   void initState() {
@@ -125,6 +126,7 @@ class _LogInState extends State<SignUp> {
                   curve: Curves.easeOutSine,
                   child: Column(
                     children: [
+                      Text(error),
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -259,20 +261,25 @@ class _LogInState extends State<SignUp> {
                               height: 10,
                             ),
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 UserModel userModel = UserModel(
                                     name: name,
                                     email: email,
                                     age: 21,
                                     isSpecialist: isSpec);
                                 try {
-                                  userProvider.registerUser(
+                                  await userProvider.registerUser(
                                       user: userModel, password: pass);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => LogIn()));
-                                } catch (e) {}
+                                } catch (e) {
+                                  setState(() {
+                                    error = e.toString();
+                                  });
+                                  print(e.toString());
+                                }
                               },
                               child: Container(
                                 height: 50,

@@ -1,40 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   String name;
   String email;
-  final int age;
+  int age;
   final bool isSpecialist;
-  String showcriteria({required bool asSpecialist}){
-    if(isSpecialist && asSpecialist){
+  String showcriteria({required bool asSpecialist}) {
+    if (isSpecialist && asSpecialist) {
       return "specialist";
-  }
-    if(0>age && age<13){
+    }
+    if (0 > age && age < 13) {
       return "child";
     }
-    if(13<=age && age<=18){
+    if (13 <= age && age <= 18) {
       return "adolescent";
     }
     return "old";
-}
-  bool respectCriteria(String searchedCriteria){
-    if(searchedCriteria == "specialist" && isSpecialist){
-        return true;
-    }
-    if(searchedCriteria == "child" && 0>age && age<13){
-        return true;
-    }
-    if(searchedCriteria == 'adolescent' && 13<=age && age<=18){
+  }
+
+  bool respectCriteria(String searchedCriteria) {
+    if (searchedCriteria == "specialist" && isSpecialist) {
       return true;
     }
-    if(searchedCriteria == 'old' && age>=18){
+    if (searchedCriteria == "child" && 0 > age && age < 13) {
       return true;
     }
-    if(searchedCriteria == 'random'){
+    if (searchedCriteria == 'adolescent' && 13 <= age && age <= 18) {
+      return true;
+    }
+    if (searchedCriteria == 'old' && age >= 18) {
+      return true;
+    }
+    if (searchedCriteria == 'random') {
       return true;
     }
     return false;
   }
+
   UserModel({
     required this.name,
     required this.email,

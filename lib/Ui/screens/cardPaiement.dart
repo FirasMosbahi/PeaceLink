@@ -1,17 +1,26 @@
+import 'package:chat_for_peace/Ui/screens/main_screen.dart';
+import 'package:chat_for_peace/core/models/donation_model.dart';
+import 'package:chat_for_peace/core/view-models/donation_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
+
+import '../widgets/template.dat.dart';
 
 class CardPaiement extends StatefulWidget {
   String amount;
-  CardPaiement(this.amount) {}
+  Donation donation;
+  CardPaiement({required this.amount, required this.donation});
 
   @override
   State<CardPaiement> createState() => _CardPaiementState();
 }
 
 class _CardPaiementState extends State<CardPaiement> {
+  String donationValue = "";
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -155,7 +164,7 @@ class _CardPaiementState extends State<CardPaiement> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 15),
                         child: TextField(
-                          onChanged: (value) {},
+                          onChanged: (value) => donationValue = value,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                           ],
@@ -185,7 +194,26 @@ class _CardPaiementState extends State<CardPaiement> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15, top: 35),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () async {
+                          if (widget.amount == "") {
+                            Provider.of<DonationProvider>(context,
+                                    listen: false)
+                                .donate(
+                                    value: double.parse(donationValue),
+                                    donation: widget.donation);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MyApp(index: 2, appBar: appBar)));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MyApp(index: 0, appBar: appBar)));
+                          }
+                        },
                         child: Container(
                           height: 50,
                           width: 300,

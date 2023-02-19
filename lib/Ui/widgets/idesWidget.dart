@@ -1,94 +1,157 @@
+import 'package:chat_for_peace/core/models/idea_model.dart';
+import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
-class IdeaWidget extends StatelessWidget {
-  const IdeaWidget({Key? key}) : super(key: key);
+class IdeaWidget extends StatefulWidget {
+  final Idea idea;
+  final bool ButtonType;
+  const IdeaWidget({Key? key, required this.idea, required this.ButtonType})
+      : super(key: key);
 
+  @override
+  State<IdeaWidget> createState() => _IdeaWidgetState();
+}
+
+class _IdeaWidgetState extends State<IdeaWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Container(
-        height: 200,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromRGBO(143, 148, 251, 2),
-                blurRadius: 20.0,
-                offset: Offset(0, 10),
+      child: Slidable(
+        startActionPane: widget.ButtonType
+            ? ActionPane(
+                motion: const StretchMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) async {
+                      try {
+                        print(widget.idea.likes);
+                        await Provider.of<IdeaProvider>(context, listen: false)
+                            .likeIdea(title: widget.idea.title);
+                      } catch (e) {
+                        print(e.toString());
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+                    icon: FontAwesomeIcons.thumbsUp,
+                    foregroundColor: Colors.purple,
+                    label: "Support this Idea",
+                  )
+                ],
               )
-            ]),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Center(
-                  child: Text(
-                    "Mohamed amine guesmi",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 18,
-                        fontFamily: 'Courgette'),
+            : ActionPane(
+                motion: const StretchMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) async {
+                      try {
+                        print(widget.idea.likes);
+                        await Provider.of<IdeaProvider>(context, listen: false)
+                            .deleteIdea(title: widget.idea.title);
+                      } catch (e) {
+                        print(e.toString());
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    backgroundColor: Colors.red,
+                    icon: FontAwesomeIcons.trash,
+                    foregroundColor: Colors.purple,
+                    label: "Delete this Idea",
+                  )
+                ],
+              ),
+        child: Container(
+          height: 200,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromRGBO(143, 148, 251, 2),
+                  blurRadius: 20.0,
+                  offset: Offset(0, 10),
+                )
+              ]),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: Text(
+                      widget.idea.owner,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18,
+                          fontFamily: 'Courgette'),
+                    ),
                   ),
                 ),
-              ),
-              Divider(),
-              Expanded(
+                Divider(),
+                Expanded(
+                    child: Align(
+                  child: Row(
+                    children: [
+                      Text(
+                        "Idea Title :",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                            fontFamily: 'Courgette'),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(widget.idea.title),
+                    ],
+                  ),
+                  alignment: Alignment.centerLeft,
+                )),
+                Divider(),
+                Expanded(
                   child: Align(
-                child: Row(
-                  children: [
-                    Text(
-                      "Idea Title :",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13,
-                          fontFamily: 'Courgette'),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Idea description",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              fontFamily: 'Courgette'),
+                        ),
+                        Text(widget.idea.description),
+                      ],
                     ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text("---------"),
-                  ],
-                ),
-                alignment: Alignment.centerLeft,
-              )),
-              Divider(),
-              Expanded(
-                child: Align(
-                  child: Text(
-                    "Idea description :",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 13,
-                        fontFamily: 'Courgette'),
+                    alignment: Alignment.topLeft,
                   ),
-                  alignment: Alignment.topLeft,
+                  flex: 6,
                 ),
-                flex: 6,
-              ),
-              Divider(),
-              Expanded(
-                  child: Container(
-                child: Row(
-                  children: [
-                    Text(
-                      "supports",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13,
-                          fontFamily: 'Courgette'),
-                    ),
-                    SizedBox(
-                      width: 110,
-                    ),
-                    Text("152"),
-                  ],
-                ),
-              ))
-            ],
+                Divider(),
+                Expanded(
+                    child: Container(
+                  child: Row(
+                    children: [
+                      Text(
+                        "supports",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                            fontFamily: 'Courgette'),
+                      ),
+                      SizedBox(
+                        width: 110,
+                      ),
+                      Text(widget.idea.likes.toString()),
+                    ],
+                  ),
+                ))
+              ],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:chat_for_peace/Ui/screens/shared_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,7 +7,6 @@ import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 import 'donate_page.dart';
 import 'home_screen.dart';
 import 'quotes_page.dart';
-import 'shared_page.dart';
 import 'user_page.dart';
 
 class MyApp extends StatefulWidget {

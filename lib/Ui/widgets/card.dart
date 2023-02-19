@@ -1,4 +1,5 @@
 import 'package:chat_for_peace/Ui/screens/cardPaiement.dart';
+import 'package:chat_for_peace/core/models/donation_model.dart';
 import 'package:flutter/material.dart';
 
 class CardRe extends StatelessWidget {
@@ -58,8 +59,17 @@ class CardRe extends StatelessWidget {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CardPaiement(price)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CardPaiement(
+                            amount: price,
+                            donation: Donation(
+                                currentValue: 0,
+                                finalValue: 0,
+                                description: "",
+                                category: ""),
+                          )));
             },
             child: Container(
               height: 50,

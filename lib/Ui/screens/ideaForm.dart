@@ -1,5 +1,7 @@
 import 'package:chat_for_peace/Ui/screens/main_screen.dart';
+import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../widgets/template.dat.dart';
@@ -10,7 +12,8 @@ class ideaForm extends StatefulWidget {
 }
 
 class _CardIdeaState extends State<ideaForm> {
-  String category = "disaster";
+  String title = "";
+  String description = "";
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -75,6 +78,7 @@ class _CardIdeaState extends State<ideaForm> {
                           child: TextField(
                             minLines: 1,
                             maxLines: 2,
+                            onChanged: (value) => title = value,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Title",
@@ -87,6 +91,7 @@ class _CardIdeaState extends State<ideaForm> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15, top: 15),
                           child: TextField(
+                            onChanged: (value) => description = value,
                             minLines: 1,
                             maxLines: 9,
                             decoration: InputDecoration(
@@ -102,7 +107,24 @@ class _CardIdeaState extends State<ideaForm> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10, top: 35),
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+                              try {
+                                print('hrello');
+                                final result = await Provider.of<IdeaProvider>(
+                                        context,
+                                        listen: false)
+                                    .addIdea(
+                                        title: title, description: description);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyApp(index: 1, appBar: appBar)));
+                              } catch (e) {
+                                print(e.toString());
+                                //TODO:handle try catch
+                              }
+                            },
                             child: Container(
                               height: 50,
                               width: 300,
