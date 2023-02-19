@@ -22,7 +22,6 @@ class IdeaProvider extends ChangeNotifier {
     final snapshotsReference = FirebaseFirestore.instance.collection('ideas');
     final snapshot = await snapshotsReference.get();
     snapshot.docs.forEach((element) {
-      print(element.data());
       if (ideas
           .where((data) => element.data()["title"] == data.title)
           .isEmpty) {
@@ -47,7 +46,7 @@ class IdeaProvider extends ChangeNotifier {
       if (myIdeas
               .where((data) => element.data()["title"] == data.title)
               .isEmpty &&
-          element.data()['owner'] == user.name) {
+          element.data()['id'] == FirebaseAuth.instance.currentUser?.uid) {
         myIdeas.add(Idea.fromJson(element.data()));
       }
     });
@@ -80,7 +79,8 @@ class IdeaProvider extends ChangeNotifier {
     ideas.where((element) => element.title == title).first.likes =
         ideasReference.docs.first.data()["likes"] + 1;
     ideas.sort(compare);
-    notifyListeners();
+    await getMyIdeas();
+    await getIdeas();
     return true;
   }
 
@@ -96,6 +96,7 @@ class IdeaProvider extends ChangeNotifier {
         .collection('ideas')
         .doc('${FirebaseAuth.instance.currentUser?.uid},$title')
         .set(Idea(
+                id: FirebaseAuth.instance.currentUser?.uid ?? "",
                 owner: user.name,
                 title: title,
                 description: description,

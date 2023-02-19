@@ -5,7 +5,6 @@ import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/template.dat.dart';
 import 'main_screen.dart';
 
 class Home extends StatefulWidget {
@@ -83,7 +82,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              MyApp(index: 0, appBar: appBar)));
+                                              MyApp(index: 0)));
                                 },
                                 child: Container(
                                   height: 50,
@@ -119,12 +118,12 @@ class _HomeState extends State<Home> {
                     ],
                   ))),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           Expanded(
             flex: 2,
             child: Container(
-              margin: const EdgeInsets.only(top: 35, left: 40, right: 40),
+              margin: const EdgeInsets.only(top: 15, left: 40, right: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -134,39 +133,165 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 18, color: Colors.pinkAccent),
                   )),
                   Expanded(
-                    child: Row(
+                    flex: 2,
+                    child: Column(
                       children: [
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(190, 120, 251, 0.6),
-                                    Color.fromRGBO(190, 120, 251, 0.4),
-                                    Color.fromRGBO(190, 120, 251, 0.8),
-                                  ],
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    try {
+                                      await donationProvider
+                                          .getDonationsByCategory("disaster");
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color.fromRGBO(190, 120, 251, 0.6),
+                                          Color.fromRGBO(190, 120, 251, 0.4),
+                                          Color.fromRGBO(190, 120, 251, 0.8),
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Disaster",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              child: const Center(
-                                child: Text(
-                                  "Disaster",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                              const SizedBox(
+                                width: 14,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    try {
+                                      await donationProvider
+                                          .getDonationsByCategory("war");
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color.fromRGBO(190, 120, 251, 0.6),
+                                          Color.fromRGBO(190, 120, 251, 0.4),
+                                          Color.fromRGBO(190, 120, 251, 0.8),
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Wars",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              const SizedBox(
+                                width: 14,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    try {
+                                      await donationProvider
+                                          .getDonationsByCategory("poverty");
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color.fromRGBO(190, 120, 251, 0.6),
+                                          Color.fromRGBO(190, 120, 251, 0.4),
+                                          Color.fromRGBO(190, 120, 251, 0.8),
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Poverty",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    try {
+                                      await donationProvider
+                                          .getDonationsByCategory("hunger");
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color.fromRGBO(190, 120, 251, 0.6),
+                                          Color.fromRGBO(190, 120, 251, 0.4),
+                                          Color.fromRGBO(190, 120, 251, 0.8),
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Hunger",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 14,
+                        SizedBox(
+                          height: 15,
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+                              try {
+                                donationProvider.init = true;
+                                await donationProvider.getDonations();
+                              } catch (e) {
+                                print(e.toString());
+                              }
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
@@ -180,63 +305,7 @@ class _HomeState extends State<Home> {
                               ),
                               child: const Center(
                                 child: Text(
-                                  "Wars",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 14,
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(190, 120, 251, 0.6),
-                                    Color.fromRGBO(190, 120, 251, 0.4),
-                                    Color.fromRGBO(190, 120, 251, 0.8),
-                                  ],
-                                ),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "Poverty",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(190, 120, 251, 0.6),
-                                    Color.fromRGBO(190, 120, 251, 0.4),
-                                    Color.fromRGBO(190, 120, 251, 0.8),
-                                  ],
-                                ),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "Hunger",
+                                  "ALL",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -250,7 +319,7 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(
                     width: double.infinity,
-                    height: 30,
+                    height: 20,
                   ),
                   Expanded(
                       flex: 7,

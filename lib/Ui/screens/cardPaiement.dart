@@ -7,8 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
-import '../widgets/template.dat.dart';
-
 class CardPaiement extends StatefulWidget {
   String amount;
   Donation donation;
@@ -195,6 +193,7 @@ class _CardPaiementState extends State<CardPaiement> {
                       padding: const EdgeInsets.only(bottom: 15, top: 35),
                       child: GestureDetector(
                         onTap: () async {
+                          FocusScope.of(context).unfocus();
                           if (widget.amount == "") {
                             Provider.of<DonationProvider>(context,
                                     listen: false)
@@ -204,14 +203,12 @@ class _CardPaiementState extends State<CardPaiement> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MyApp(index: 2, appBar: appBar)));
+                                    builder: (context) => MyApp(index: 2)));
                           } else {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MyApp(index: 0, appBar: appBar)));
+                                    builder: (context) => MyApp(index: 0)));
                           }
                         },
                         child: Container(

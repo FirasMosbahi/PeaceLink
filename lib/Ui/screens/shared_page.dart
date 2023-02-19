@@ -77,6 +77,8 @@ class _SharedPageState extends State<SharedPage> {
                 ),
                 SpeedDialChild(
                   onTap: () {
+                    print(ideaProvider.myIdeas);
+                    print(1);
                     setState(() {
                       isMine = true;
                     });

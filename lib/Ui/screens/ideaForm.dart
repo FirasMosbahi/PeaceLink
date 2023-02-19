@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
-import '../widgets/template.dat.dart';
-
 class ideaForm extends StatefulWidget {
   @override
   State<ideaForm> createState() => _CardIdeaState();
@@ -108,8 +106,8 @@ class _CardIdeaState extends State<ideaForm> {
                           padding: const EdgeInsets.only(bottom: 10, top: 35),
                           child: GestureDetector(
                             onTap: () async {
+                              FocusScope.of(context).unfocus();
                               try {
-                                print('hrello');
                                 final result = await Provider.of<IdeaProvider>(
                                         context,
                                         listen: false)
@@ -118,8 +116,7 @@ class _CardIdeaState extends State<ideaForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyApp(index: 1, appBar: appBar)));
+                                        builder: (context) => MyApp(index: 1)));
                               } catch (e) {
                                 print(e.toString());
                                 //TODO:handle try catch
@@ -161,8 +158,7 @@ class _CardIdeaState extends State<ideaForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyApp(index: 1, appBar: appBar)));
+                                        builder: (context) => MyApp(index: 1)));
                               },
                               child: const Text(
                                 "retour",

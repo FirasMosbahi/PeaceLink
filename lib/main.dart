@@ -1,3 +1,4 @@
+import 'package:chat_for_peace/core/view-models/chat_view_model.dart';
 import 'package:chat_for_peace/core/view-models/donation_view_model.dart';
 import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,13 +15,16 @@ void main() async {
   );
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => DonationProvider(),
-      child: ChangeNotifierProvider<IdeaProvider>(
-        create: (_) => IdeaProvider(),
-        child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: FirstSplach(),
+    ChangeNotifierProvider<ChatProvider>(
+      create: (_) => ChatProvider(),
+      child: ChangeNotifierProvider<DonationProvider>(
+        create: (_) => DonationProvider(),
+        child: ChangeNotifierProvider<IdeaProvider>(
+          create: (_) => IdeaProvider(),
+          child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: FirstSplach(),
+          ),
         ),
       ),
     ),

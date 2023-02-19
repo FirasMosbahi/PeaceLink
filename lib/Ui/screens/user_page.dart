@@ -148,6 +148,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                 child: Field(
                                   onClick: () {
+                                    FocusScope.of(context).unfocus();
                                     userProvider
                                         .updateUserInfos({"name": newUserName});
                                     setState(() {
@@ -187,6 +188,7 @@ class _UserPageState extends State<UserPage> {
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
+                                FocusScope.of(context).unfocus();
                                 setState(() {
                                   emailPress = !emailPress;
                                   emailPress ? height += 80 : height -= 80;
@@ -223,6 +225,7 @@ class _UserPageState extends State<UserPage> {
                                   )),
                             if (emailPress)
                               Expanded(child: Field(onClick: () {
+                                FocusScope.of(context).unfocus();
                                 userProvider
                                     .updateUserInfos({"email": newEmail});
                                 setState(() {
@@ -322,6 +325,7 @@ class _UserPageState extends State<UserPage> {
                               Expanded(
                                   flex: 2,
                                   child: Field(onClick: () {
+                                    FocusScope.of(context).unfocus();
                                     userProvider.updateUserPassword(
                                         newPassword: newPassword);
                                     setState(() {
@@ -397,6 +401,7 @@ class _UserPageState extends State<UserPage> {
                                   )),
                             if (agePress)
                               Expanded(child: Field(onClick: () {
+                                FocusScope.of(context).unfocus();
                                 userProvider.updateUserInfos({"age": newAge});
                                 setState(() {
                                   agePress = false;

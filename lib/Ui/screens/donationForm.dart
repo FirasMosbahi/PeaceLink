@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
-import '../widgets/template.dat.dart';
 import 'main_screen.dart';
 
 class DonationForm extends StatefulWidget {
@@ -147,6 +146,7 @@ class _CardPaiementState extends State<DonationForm> {
                           padding: const EdgeInsets.only(bottom: 15, top: 35),
                           child: GestureDetector(
                             onTap: () async {
+                              FocusScope.of(context).unfocus();
                               try {
                                 await Provider.of<DonationProvider>(context,
                                         listen: false)
@@ -159,8 +159,7 @@ class _CardPaiementState extends State<DonationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyApp(index: 2, appBar: appBar)));
+                                        builder: (context) => MyApp(index: 2)));
                               } catch (e) {
                                 print(e.toString());
                               }
@@ -201,8 +200,7 @@ class _CardPaiementState extends State<DonationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyApp(index: 2, appBar: appBar)));
+                                        builder: (context) => MyApp(index: 2)));
                               },
                               child: const Text(
                                 "retour",

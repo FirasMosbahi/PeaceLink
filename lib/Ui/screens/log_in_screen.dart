@@ -3,13 +3,11 @@ import 'dart:async';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/template.dat.dart';
 import 'main_screen.dart';
 import 'sign_up_screen.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
-
   @override
   State<LogIn> createState() => _LogInState();
 }
@@ -25,11 +23,17 @@ class _LogInState extends State<LogIn> {
     setState(() {
       animate = false;
     });
+
     Timer(
         const Duration(seconds: 1),
         () => setState(() {
               animate = true;
             }));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -180,11 +184,7 @@ class _LogInState extends State<LogIn> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             MyApp(index: 2,appBar:  appBar)));
+                                FocusScope.of(context).unfocus();
                                 try {
                                   bool isconnected =
                                       await userProvider.authentificateUser(
@@ -194,8 +194,8 @@ class _LogInState extends State<LogIn> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => MyApp(
-                                                index: 2, appBar: appBar)));
+                                            builder: (context) =>
+                                                MyApp(index: 2)));
                                   }
                                 } catch (e) {
                                   debugPrint(e.toString());

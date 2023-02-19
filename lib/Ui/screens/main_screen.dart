@@ -1,9 +1,11 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chat_for_peace/Ui/screens/shared_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
+import 'chat_Page.dart';
 import 'donate_page.dart';
 import 'home_screen.dart';
 import 'quotes_page.dart';
@@ -11,8 +13,7 @@ import 'user_page.dart';
 
 class MyApp extends StatefulWidget {
   int index;
-  AppBar appBar;
-  MyApp({required this.index, required this.appBar});
+  MyApp({required this.index});
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -67,7 +68,64 @@ class _MyAppState extends State<MyApp> {
               0.7,
               1
             ]),
-        appBar: widget.appBar,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF1f005c),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          flexibleSpace: Container(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.ideographic,
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5, top: 15),
+                    child: CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage: AssetImage(
+                        "assets/formation-android.jpg",
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TyperAnimatedText(
+                          "Hello amine , Welcome 😊",
+                          speed: const Duration(milliseconds: 130),
+                          textStyle: const TextStyle(
+                              fontSize: 18, color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5, top: 17),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatPage()));
+                        },
+                        child: const Icon(
+                          FontAwesomeIcons.comments,
+                          size: 35,
+                          color: Colors.purple,
+                        ),
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ),
         body: screens[widget.index],
         bottomNavigationBar: Theme(
           data: Theme.of(context)

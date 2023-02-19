@@ -262,6 +262,7 @@ class _LogInState extends State<SignUp> {
                             ),
                             GestureDetector(
                               onTap: () async {
+                                FocusScope.of(context).unfocus();
                                 UserModel userModel = UserModel(
                                     name: name,
                                     email: email,
