@@ -1,23 +1,20 @@
+import 'package:chat_for_peace/Ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../widgets/template.dat.dart';
-import 'main_screen.dart';
 
-class DonationForm extends StatefulWidget {
+class ideaForm extends StatefulWidget {
   @override
-  State<DonationForm> createState() => _CardPaiementState();
+  State<ideaForm> createState() => _CardIdeaState();
 }
 
-class _CardPaiementState extends State<DonationForm> {
+class _CardIdeaState extends State<ideaForm> {
   String category = "disaster";
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-    var items = ["disaster", "war", "hunger", "poverty"];
     return ScaffoldGradientBackground(
       gradient: const LinearGradient(
           begin: Alignment.topCenter,
@@ -43,7 +40,7 @@ class _CardPaiementState extends State<DonationForm> {
               ),
               Center(
                   child: Text(
-                "Create Urgent Donation",
+                "Create New Idea",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: "Courgette",
@@ -55,7 +52,7 @@ class _CardPaiementState extends State<DonationForm> {
                 height: 130,
               ),
               Container(
-                height: deviceHeight * 0.53,
+                height: deviceHeight * 0.40,
                 width: deviceWidth * 0.85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -77,6 +74,20 @@ class _CardPaiementState extends State<DonationForm> {
                           padding: const EdgeInsets.only(bottom: 15, top: 15),
                           child: TextField(
                             minLines: 1,
+                            maxLines: 2,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Title",
+                              hintStyle: TextStyle(
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          child: TextField(
+                            minLines: 1,
                             maxLines: 9,
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -87,56 +98,9 @@ class _CardPaiementState extends State<DonationForm> {
                             ),
                           ),
                         ),
+                        Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
-                          child: TextField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "amount needed",
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.sackDollar,
-                                color: Colors.purple,
-                              ),
-                              hintStyle: TextStyle(
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
-                          child: DropdownButton(
-                            iconEnabledColor: Colors.purple,
-                            iconDisabledColor: Colors.purple,
-                            iconSize: 30,
-                            isExpanded: true,
-                            value: category,
-                            underline: SizedBox(),
-                            hint: Text(
-                              "Donation Catigory",
-                              style: TextStyle(
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                            items: items.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                category = value ?? "";
-                                print(category);
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 35),
+                          padding: const EdgeInsets.only(bottom: 10, top: 35),
                           child: GestureDetector(
                             onTap: () {},
                             child: Container(
@@ -176,7 +140,7 @@ class _CardPaiementState extends State<DonationForm> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            MyApp(index: 2, appBar: appBar)));
+                                            MyApp(index: 1, appBar: appBar)));
                               },
                               child: const Text(
                                 "retour",

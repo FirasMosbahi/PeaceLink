@@ -51,6 +51,7 @@ dependencies:
   animated_text_kit: ^4.2.1
   flutter_animate: ^4.0.0
   firebase_database: ^10.0.13
+  flutter_speed_dial: ^6.2.0
 
 dev_dependencies:
   flutter_test:
