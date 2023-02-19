@@ -49,10 +49,10 @@ class ChatProvider extends ChangeNotifier {
   void sendMessage(String message) async {
     final chatReference =
         FirebaseFirestore.instance.collection('chats').doc(chatId);
-    final doc = await chatReference.get() as Map<String, dynamic>;
-    List<Message> messages = doc["messages"];
+    final doc = await chatReference.get();
+    List<Message> messages = doc.data()!["messages"];
     messages.add(Message(
-        id: FirebaseAuth.instance.currentUser?.uid == doc["firstUserId"]
+        id: FirebaseAuth.instance.currentUser?.uid == doc.data()!["firstUserId"]
             ? 1
             : 2,
         text: message));
@@ -61,18 +61,20 @@ class ChatProvider extends ChangeNotifier {
 
   void startGettingMessages() async {
     final chatReference =
-        FirebaseFirestore.instance.collection('chats/$chatId');
+        FirebaseFirestore.instance.collection('chats').doc(chatId);
+    final docData = await chatReference.get();
     bool isChatCreator =
-        ((chatReference.doc() as Map<String, dynamic>)["firstUserId"] ==
+        (docData.data()!["firstUserId"] ==
             FirebaseAuth.instance.currentUser?.uid);
-    final messages = (chatReference.doc() as Map<String, dynamic>)["messages"];
+    final messages = docData.data()!["messages"];
     for (Message message in messages) {
       chat.add({message.getMessageIndex(isChatCreator): message.text});
     }
     notifyListeners();
-    chatReference.snapshots().listen((event) {
+    chatReference.snapshots().listen((event) async {
+      final docData = await chatReference.get();
       final messages =
-          (chatReference.doc() as Map<String, dynamic>)["messages"];
+          docData.data()!["messages"];
       for (Message message in messages) {
         chat.add({message.getMessageIndex(isChatCreator): message.text});
       }
@@ -82,22 +84,23 @@ class ChatProvider extends ChangeNotifier {
 
   void startChat({required String criteria, required bool chatAsSpecialist}) async {
     searchByCriteria(criteria: criteria, chatAsSpecialist: chatAsSpecialist);
-    final chatReference =
-        FirebaseFirestore.instance.collection('chats/$chatId');
-    final chat = Chat.fromJson((chatReference.doc() as Map<String, dynamic>));
+    final chatReference = FirebaseFirestore.instance.collection('chats').doc(chatId);
+    final chatDoc = await chatReference.get();
+    final chat = Chat.fromJson(chatDoc.data() ?? {});
     if (chat.firstUserId != "" && chat.secondUserId != "") {
       chatIsStarted = true;
       notifyListeners();
     }
-    chatReference.snapshots().listen((event) {
-      final chat = Chat.fromJson((chatReference.doc() as Map<String, dynamic>));
+    chatReference.snapshots().listen((event) async {
+      final chatDoc = await chatReference.get();
+      final chat = Chat.fromJson(chatDoc.data() ?? {});
       if (chat.firstUserId != "" && chat.secondUserId != "") {
         chatIsStarted = true;
         notifyListeners();
       }
       if (chatIsStarted &&
           (chat.firstUserId == "" || chat.secondUserId == "")) {
-        chatReference.doc().delete();
+        chatReference.delete();
         throw Exception('the conversation has end');
       }
     });
