@@ -1,13 +1,13 @@
-import 'package:PeaceLink/Ui/screens/cardPaiement.dart';
+import 'package:PeaceLink/Ui/screens/card_payement.dart';
 import 'package:PeaceLink/core/models/donation_model.dart';
 import 'package:flutter/material.dart';
 
-import '../utilities/mediaQuery.dart';
+import 'package:PeaceLink/Ui/utilities/mediaQuery.dart';
 
 class CardRe extends StatelessWidget {
-  final img;
-  final text;
-  final price;
+  final String img;
+  final String text;
+  final String price;
   const CardRe(
       {super.key, required this.img, required this.text, required this.price});
   @override
@@ -24,8 +24,9 @@ class CardRe extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   image: AssetImage("assets/$img"),
@@ -33,16 +34,19 @@ class CardRe extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.transparent, Colors.black],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.6, 1]),
+                  colors: [Colors.transparent, Colors.black],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.6, 1],
+                ),
               ),
               child: Column(
                 children: [
                   const Spacer(),
                   Padding(
-                    padding: EdgeInsets.only(left: media.getwidht(10)),
+                    padding: EdgeInsets.only(
+                      left: media.getwidht(10),
+                    ),
                     child: Text(
                       text,
                       style: TextStyle(
@@ -65,17 +69,19 @@ class CardRe extends StatelessWidget {
           flex: 1,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CardPaiement(
-                            amount: price,
-                            donation: Donation(
-                                currentValue: 0,
-                                finalValue: 0,
-                                description: "",
-                                category: ""),
-                          )));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CardPayment(
+                    amount: price,
+                    donation: Donation(
+                        currentValue: 0,
+                        finalValue: 0,
+                        description: "",
+                        category: ""),
+                  ),
+                ),
+              );
             },
             child: Container(
               height: media.getHeight(50),
@@ -103,9 +109,10 @@ class CardRe extends StatelessWidget {
                     Text(
                       "Donate",
                       style: TextStyle(
-                          fontSize: media.getwidht(18),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                        fontSize: media.getwidht(18),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const Spacer(),
                     Text(
@@ -127,7 +134,7 @@ class CardRe extends StatelessWidget {
         ),
         SizedBox(
           height: media.getwidht(25),
-        )
+        ),
       ],
     );
   }

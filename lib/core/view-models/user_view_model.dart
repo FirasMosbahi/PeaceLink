@@ -1,20 +1,19 @@
-import 'package:PeaceLink/core/models/user-model.dart';
+import 'package:PeaceLink/core/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+//This class contains all the logic operations related to the users
 class UserProvider {
   Future<bool> registerUser(
       {required UserModel user, required String password}) async {
     try {
-      final userCredentials = await FirebaseAuth.instance
+      UserCredential userCredentials = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: user.email, password: password);
-      print(userCredentials.user?.uid);
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userCredentials.user?.uid)
           .set(user.toJson());
-      print("added successfuly");
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -38,10 +37,9 @@ class UserProvider {
 
   Future<UserModel> getUser(String id) async {
     try {
-      print(id);
-      final s =
+    DocumentSnapshot<Map<String,dynamic>> s =
           await FirebaseFirestore.instance.collection('users').doc(id).get();
-      final data = s.data() ?? {};
+    Map<String,dynamic> data = s.data() ?? {};
       return UserModel.fromJson(data);
     } catch (e) {
       throw Exception(e.toString());

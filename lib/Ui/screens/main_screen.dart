@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../utilities/mediaQuery.dart';
-import 'chat_Page.dart';
+import 'chat_page.dart';
 import 'donate_page.dart';
 import 'home_screen.dart';
 import 'quotes_page.dart';
@@ -14,7 +14,7 @@ import 'user_page.dart';
 
 class MyApp extends StatefulWidget {
   int index;
-  MyApp({required this.index});
+  MyApp({super.key, required this.index});
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
 
   final screens = [
-    const DontePage(),
+    const DonatePage(),
     const SharedPage(),
     const Home(),
     const QuotePage(),
@@ -87,16 +87,19 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: Padding(
-                      padding: EdgeInsets.only(
-                          left: media.getwidht(5), top: media.getHeight(15)),
-                      child: ClipOval(
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                          height: media.getHeight(65),
-                          width: media.getwidht(15),
-                        ),
-                      )),
+                    padding: EdgeInsets.only(
+                      left: media.getwidht(5),
+                      top: media.getHeight(15),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        "assets/logo.png",
+                        fit: BoxFit.contain,
+                        height: media.getHeight(65),
+                        width: media.getwidht(15),
+                      ),
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 3,
@@ -115,32 +118,38 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          right: media.getwidht(5), top: media.getHeight(17)),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChatPage()));
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.comments,
-                          size: media.getwidht(35),
-                          color: Colors.purple,
-                        ),
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: media.getwidht(5),
+                      top: media.getHeight(17),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChatPage(),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        FontAwesomeIcons.comments,
+                        size: media.getwidht(35),
+                        color: Colors.purple,
                       ),
-                    ))
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
         body: screens[widget.index],
         bottomNavigationBar: Theme(
-          data: Theme.of(context)
-              .copyWith(iconTheme: const IconThemeData(color: Colors.purple)),
+          data: Theme.of(context).copyWith(
+            iconTheme: const IconThemeData(color: Colors.purple),
+          ),
           child: CurvedNavigationBar(
             key: navigationKey,
             items: items,

@@ -22,15 +22,20 @@ class _LogInState extends State<LogIn> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      animate = false;
-    });
+    setState(
+      () {
+        animate = false;
+      },
+    );
 
     Timer(
-        const Duration(seconds: 1),
-        () => setState(() {
-              animate = true;
-            }));
+      const Duration(seconds: 1),
+      () => setState(
+        () {
+          animate = true;
+        },
+      ),
+    );
   }
 
   @override
@@ -106,7 +111,9 @@ class _LogInState extends State<LogIn> {
                     ),
                     Positioned(
                       child: Container(
-                        margin: EdgeInsets.only(top: media.getHeight(40)),
+                        margin: EdgeInsets.only(
+                          top: media.getHeight(40),
+                        ),
                         child: Center(
                           child: Text(
                             "LogIn",
@@ -123,7 +130,9 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(media.getwidht(30)),
+                padding: EdgeInsets.all(
+                  media.getwidht(30),
+                ),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 2200),
                   opacity: animate ? 1 : 0,
@@ -138,21 +147,26 @@ class _LogInState extends State<LogIn> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(media.getwidht(5)),
+                        padding: EdgeInsets.all(
+                          media.getwidht(5),
+                        ),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color.fromRGBO(143, 148, 251, 2),
-                                blurRadius: 20.0,
-                                offset: Offset(0, 10),
-                              )
-                            ]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromRGBO(143, 148, 251, 2),
+                              blurRadius: 20.0,
+                              offset: Offset(0, 10),
+                            )
+                          ],
+                        ),
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(media.getwidht(8)),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -174,7 +188,9 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(media.getwidht(8)),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
                               child: TextField(
                                 obscureText: true,
                                 onChanged: (value) {
@@ -196,19 +212,18 @@ class _LogInState extends State<LogIn> {
                               onTap: () async {
                                 FocusScope.of(context).unfocus();
                                 try {
-                                  bool isconnected =
+                                  bool isConnected =
                                       await userProvider.authentificateUser(
                                           email: email, password: pass);
-
-                                  if (isconnected) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MyApp(index: 2)));
+                                  if (isConnected) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyApp(index: 2),
+                                      ),
+                                    );
                                   }
                                 } catch (e) {
-                                  print(e.toString());
                                   if (e.toString() ==
                                       "Exception: [firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.") {
                                     setState(() {
@@ -265,10 +280,12 @@ class _LogInState extends State<LogIn> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SignUp()));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUp(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: media.getHeight(50),
@@ -304,7 +321,7 @@ class _LogInState extends State<LogIn> {
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

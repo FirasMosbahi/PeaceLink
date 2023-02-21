@@ -1,8 +1,8 @@
 import 'package:PeaceLink/core/models/donation_model.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/cardPaiement.dart';
-import '../screens/donationForm.dart';
+import '../screens/card_payement.dart';
+import '../screens/donation_form.dart';
 import '../utilities/mediaQuery.dart';
 
 class DonationWidget extends StatelessWidget {
@@ -24,7 +24,7 @@ class DonationWidget extends StatelessWidget {
             color: Color.fromRGBO(143, 148, 251, 2),
             blurRadius: 20.0,
             offset: Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -33,13 +33,15 @@ class DonationWidget extends StatelessWidget {
             flex: 6,
             child: Container(
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/img.jpg"),
-                  )),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/img.jpg"),
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -62,27 +64,31 @@ class DonationWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: Center(child: Text("0£")),
+                      const Expanded(
                         flex: 1,
+                        child: Center(
+                          child: Text("0£"),
+                        ),
                       ),
                       Expanded(
-                          flex: 4,
-                          child: Center(
-                            child: LinearProgressIndicator(
-                              value:
-                                  donation.currentValue / donation.finalValue,
-                              backgroundColor: Colors.black12,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.purple),
-                            ),
-                          )),
+                        flex: 4,
+                        child: Center(
+                          child: LinearProgressIndicator(
+                            value: donation.currentValue / donation.finalValue,
+                            backgroundColor: Colors.black12,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                                Colors.purple),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         width: media.getwidht(10),
                       ),
                       Expanded(
                         flex: 2,
-                        child: Center(child: Text("${donation.finalValue}£")),
+                        child: Center(
+                          child: Text("${donation.finalValue}£"),
+                        ),
                       ),
                     ],
                   ),
@@ -91,7 +97,7 @@ class DonationWidget extends StatelessWidget {
                   ),
                   Text(
                     "category:    ${donation.category}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'Courgette', fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -108,19 +114,22 @@ class DonationWidget extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CardPaiement(
-                                  amount: "", donation: donation)));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CardPayment(amount: "", donation: donation),
+                        ),
+                      );
                     },
                     child: Container(
                       height: media.getHeight(50),
                       width: media.getwidht(220),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
                         gradient: LinearGradient(
                           colors: [
                             Color.fromRGBO(143, 148, 251, 1),
@@ -145,10 +154,12 @@ class DonationWidget extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DonationForm()));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DonationForm(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: media.getHeight(50),

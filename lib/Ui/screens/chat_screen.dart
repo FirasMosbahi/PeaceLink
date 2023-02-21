@@ -1,11 +1,11 @@
-import 'package:PeaceLink/Ui/screens/chat_Page.dart';
+import 'package:PeaceLink/Ui/screens/chat_page.dart';
 import 'package:PeaceLink/core/view-models/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../utilities/mediaQuery.dart';
-import '../widgets/messageWidget.dart';
+import '../widgets/message_widget.dart';
 
 class ChatRoom extends StatefulWidget {
   ChatRoom({Key? key}) : super(key: key);
@@ -46,13 +46,17 @@ class _ChatState extends State<ChatRoom> {
                   onTap: () async {
                     FocusScope.of(context).unfocus();
                     await chatProvider.endChat();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ChatPage()));
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChatPage(),
+                      ),
+                    );
                   },
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
                           color: Color.fromRGBO(143, 148, 251, 2),
                           blurRadius: 20.0,
@@ -62,7 +66,7 @@ class _ChatState extends State<ChatRoom> {
                     ),
                     child: Center(
                         child: Text(
-                      "retour",
+                      "return",
                       style: TextStyle(
                         fontFamily: 'Courgette',
                         fontWeight: FontWeight.w700,
@@ -76,16 +80,18 @@ class _ChatState extends State<ChatRoom> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: chatProvider.chat
-                          .map((e) => message(
-                              text: e[e.keys.first] ?? "", id: e.keys.first))
+                          .map(
+                            (e) => Message(
+                                text: e[e.keys.first] ?? "", id: e.keys.first),
+                          )
                           .toList(),
                     ),
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         color: Color.fromRGBO(143, 148, 251, 2),
                         blurRadius: 20.0,
@@ -94,12 +100,16 @@ class _ChatState extends State<ChatRoom> {
                     ],
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(media.getwidht(8)),
+                    padding: EdgeInsets.all(
+                      media.getwidht(8),
+                    ),
                     child: Row(
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: media.getwidht(20)),
+                            padding: EdgeInsets.only(
+                              left: media.getwidht(20),
+                            ),
                             height: media.getwidht(45),
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -118,7 +128,9 @@ class _ChatState extends State<ChatRoom> {
                             ),
                           ),
                         ),
-                        SizedBox(width: media.getwidht(5)),
+                        SizedBox(
+                          width: media.getwidht(5),
+                        ),
                         GestureDetector(
                           onTap: () async {
                             try {

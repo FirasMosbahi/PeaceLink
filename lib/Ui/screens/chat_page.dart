@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../utilities/mediaQuery.dart';
-import 'chatScreen.dart';
+import 'chat_screen.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -81,7 +81,7 @@ class ChatPage extends StatelessWidget {
                                   fontSize: media.getwidht(20),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                 onTap: () async {
                                   chatProvider.needReload = true;
@@ -89,10 +89,12 @@ class ChatPage extends StatelessWidget {
                                       criteria: "specialist",
                                       chatAsSpecialist: true);
                                   await chatProvider.startGettingMessages();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ChatRoom()));
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatRoom(),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   height: media.getHeight(50),
@@ -138,7 +140,7 @@ class ChatPage extends StatelessWidget {
                                   fontSize: media.getwidht(20),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                 onTap: () async {
                                   try {
@@ -146,14 +148,14 @@ class ChatPage extends StatelessWidget {
                                     await chatProvider.searchByCriteria(
                                         criteria: "child",
                                         chatAsSpecialist: true);
-                                  } catch (e) {
-                                    print(e.toString());
-                                  }
+                                  } catch (e) {}
                                   await chatProvider.startGettingMessages();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ChatRoom()));
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatRoom(),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   height: media.getHeight(50),
@@ -199,7 +201,7 @@ class ChatPage extends StatelessWidget {
                                   fontSize: media.getwidht(20),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                 onTap: () async {
                                   chatProvider.needReload = true;
@@ -207,10 +209,12 @@ class ChatPage extends StatelessWidget {
                                       criteria: "adolescent",
                                       chatAsSpecialist: true);
                                   await chatProvider.startGettingMessages();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ChatRoom()));
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatRoom(),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   height: media.getHeight(50),
@@ -249,24 +253,26 @@ class ChatPage extends StatelessWidget {
                                 width: media.getwidht(10),
                               ),
                               Text(
-                                "Chat With Old Person ",
+                                "Chat With aged Person ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontFamily: 'Courgette',
                                   fontSize: media.getwidht(20),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                 onTap: () async {
                                   chatProvider.needReload = true;
                                   await chatProvider.searchByCriteria(
                                       criteria: "old", chatAsSpecialist: true);
                                   await chatProvider.startGettingMessages();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ChatRoom()));
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatRoom(),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   height: media.getHeight(50),
@@ -298,21 +304,23 @@ class ChatPage extends StatelessWidget {
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                bottom: media.getHeight(15),
-                                top: media.getHeight(10),
-                                right: media.getwidht(20)),
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(10),
+                              right: media.getwidht(20),
+                            ),
                             child: Align(
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MyApp(index: 2)));
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MyApp(index: 2),
+                                    ),
+                                  );
                                 },
                                 child: const Text(
-                                  "retour",
+                                  "return",
                                   style: TextStyle(
                                     color: Color.fromRGBO(143, 148, 251, 1),
                                     fontFamily: 'Courgette',

@@ -1,9 +1,11 @@
 import 'package:PeaceLink/core/models/idea_model.dart';
+import 'package:PeaceLink/core/models/user_model.dart';
 import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
+//This class contains all the logic operations related to the ideas
 class IdeaProvider extends ChangeNotifier {
   List<Idea> ideas = [];
   List<Idea> myIdeas = [];
@@ -19,25 +21,21 @@ class IdeaProvider extends ChangeNotifier {
   }
 
   Future<bool> getIdeas() async {
-    final snapshotsReference = FirebaseFirestore.instance.collection('ideas');
-    final snapshot = await snapshotsReference.get();
-    int i = 0;
+    CollectionReference<Map<String, dynamic>> snapshotsReference =
+        FirebaseFirestore.instance.collection('ideas');
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await snapshotsReference.get();
     snapshot.docs.forEach((element) {
       try {
-        print(i);
-        i++;
         if (ideas
-            .where((data) => element.data()!["title"] == data.title)
+            .where((data) => element.data()["title"] == data.title)
             .isEmpty) {
-          print(Idea.fromJson(element.data()));
           ideas.add(Idea.fromJson(element.data()));
         }
       } catch (e) {
-        print(e.toString());
       }
     });
     ideas.sort(compare);
-    print("ideas loaded");
     if (!hasLoaded) {
       hasLoaded = true;
       notifyListeners();
@@ -46,20 +44,23 @@ class IdeaProvider extends ChangeNotifier {
   }
 
   Future<bool> getMyIdeas() async {
-    UserProvider userProvider = UserProvider();
-    final user = await userProvider.getCurrentUser();
-    final snapshotsReference = FirebaseFirestore.instance.collection('ideas');
-    final snapshot = await snapshotsReference.get();
+    CollectionReference<Map<String, dynamic>> snapshotsReference =
+        FirebaseFirestore.instance.collection('ideas');
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await snapshotsReference.get();
     snapshot.docs.forEach((element) {
       if (myIdeas
               .where((data) => element.data()["title"] == data.title)
               .isEmpty &&
           element.data()['id'] == FirebaseAuth.instance.currentUser?.uid) {
-        myIdeas.add(Idea.fromJson(element.data()));
+        myIdeas.add(
+          Idea.fromJson(
+            element.data(),
+          ),
+        );
       }
     });
     myIdeas.sort(compare);
-    print("ideas loaded");
     if (!hasLoaded) {
       hasLoaded = true;
       notifyListeners();
@@ -74,8 +75,8 @@ class IdeaProvider extends ChangeNotifier {
 
   Future<bool> likeIdea({required String title}) async {
     hasLoaded = false;
-    print(0);
-    final ideasReference = await FirebaseFirestore.instance
+    QuerySnapshot<Map<String, dynamic>> ideasReference = await FirebaseFirestore
+        .instance
         .collection('ideas')
         .where("title", isEqualTo: title)
         .get();
@@ -94,7 +95,7 @@ class IdeaProvider extends ChangeNotifier {
 
   Future<bool> addIdea(
       {required String title, required String description}) async {
-    final user = await UserProvider()
+    UserModel user = await UserProvider()
         .getUser(FirebaseAuth.instance.currentUser?.uid ?? "");
     if (ideas.where((element) => element.title == title).isNotEmpty) {
       throw Exception("Each of your ideas should have an unique value");

@@ -1,9 +1,10 @@
+//This is the class of user which is used as a collection in firebase fireStore
 class UserModel {
   String name;
   String email;
   int age;
   final bool isSpecialist;
-  String showcriteria({required bool asSpecialist}) {
+  String showCriteria({required bool asSpecialist}) {
     if (isSpecialist && asSpecialist) {
       return "specialist";
     }
@@ -41,12 +42,16 @@ class UserModel {
     required this.isSpecialist,
     required this.age,
   });
+  //This factory method allows us to create an instance of user
+  // from json received from firestore
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json['email'],
         name: json['name'],
         isSpecialist: json['isSpecialist'],
         age: json['age'],
       );
+  //This method allows us to transfer an instance of user to a json
+  // that will be stored in firebase
   Map<String, dynamic> toJson() => {
         'email': email,
         'name': name,

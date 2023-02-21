@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:PeaceLink/core/models/user-model.dart';
+import 'package:PeaceLink/core/models/user_model.dart';
 import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,9 +28,11 @@ class _LogInState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      animate = false;
-    });
+    setState(
+      () {
+        animate = false;
+      },
+    );
     Timer(
         const Duration(seconds: 1),
         () => setState(() {
@@ -107,7 +109,9 @@ class _LogInState extends State<SignUp> {
                     ),
                     Positioned(
                       child: Container(
-                        margin: EdgeInsets.only(top: media.getwidht(60)),
+                        margin: EdgeInsets.only(
+                          top: media.getwidht(60),
+                        ),
                         child: Center(
                           child: Text(
                             "SignUp",
@@ -125,7 +129,9 @@ class _LogInState extends State<SignUp> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    left: media.getwidht(30), right: media.getwidht(30)),
+                  left: media.getwidht(30),
+                  right: media.getwidht(30),
+                ),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 2200),
                   opacity: animate ? 1 : 0,
@@ -140,7 +146,9 @@ class _LogInState extends State<SignUp> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(media.getwidht(5)),
+                        padding: EdgeInsets.all(
+                          media.getwidht(5),
+                        ),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -154,7 +162,9 @@ class _LogInState extends State<SignUp> {
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(media.getwidht(8)),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -174,7 +184,9 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(media.getwidht(8)),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
                               child: TextField(
                                 onChanged: (value) => email = value,
                                 decoration: InputDecoration(
@@ -187,7 +199,9 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(media.getwidht(8)),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -221,13 +235,13 @@ class _LogInState extends State<SignUp> {
                                       child: obsc
                                           ? Icon(
                                               Icons.remove_red_eye_sharp,
-                                              color: Color.fromRGBO(
+                                              color: const Color.fromRGBO(
                                                   143, 148, 251, 1),
                                               size: media.getwidht(20),
                                             )
                                           : Icon(
                                               Icons.remove_red_eye_outlined,
-                                              color: Color.fromRGBO(
+                                              color: const Color.fromRGBO(
                                                   143, 148, 251, 1),
                                               size: media.getwidht(20),
                                             ),
@@ -237,57 +251,59 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                                padding: EdgeInsets.all(media.getwidht(8)),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Color(0xFFF5F5F5),
-                                    ),
+                              padding: EdgeInsets.all(
+                                media.getwidht(8),
+                              ),
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Color(0xFFF5F5F5),
                                   ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "are you specialiste",
-                                      style: TextStyle(
-                                        color: Colors.grey[400],
-                                      ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "are you specialist",
+                                    style: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
-                                    Checkbox(
-                                      activeColor: const Color.fromRGBO(
-                                          143, 148, 251, 1),
-                                      value: isSpec,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isSpec = value ?? false;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(
-                                      width: media.getwidht(5),
-                                    ),
-                                    SizedBox(
-                                      width: media.getwidht(10),
-                                    ),
-                                    Container(
-                                      width: media.getwidht(100),
-                                      child: TextField(
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
-                                        ],
-                                        onChanged: (value) => age = value,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "Age",
-                                          hintStyle: TextStyle(
-                                            color: Colors.grey[400],
-                                          ),
+                                  ),
+                                  Checkbox(
+                                    activeColor:
+                                        const Color.fromRGBO(143, 148, 251, 1),
+                                    value: isSpec,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isSpec = value ?? false;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: media.getwidht(5),
+                                  ),
+                                  SizedBox(
+                                    width: media.getwidht(10),
+                                  ),
+                                  Container(
+                                    width: media.getwidht(100),
+                                    child: TextField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ],
+                                      onChanged: (value) => age = value,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "Age",
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey[400],
                                         ),
                                       ),
                                     ),
-                                  ],
-                                )),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(
                               height: media.getHeight(10),
                             ),
@@ -306,10 +322,12 @@ class _LogInState extends State<SignUp> {
                                   try {
                                     await userProvider.registerUser(
                                         user: userModel, password: pass);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LogIn()));
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const LogIn(),
+                                      ),
+                                    );
                                   } catch (e) {
                                     error = "";
                                     if (e.toString() ==
@@ -338,16 +356,15 @@ class _LogInState extends State<SignUp> {
                                       setState(() {
                                         error =
                                             "The email address is badly formatted";
-                                        print(error);
                                       });
                                     }
-
-                                    print(e.toString());
                                   }
                                 } else {
-                                  setState(() {
-                                    error = "empty field";
-                                  });
+                                  setState(
+                                    () {
+                                      error = "empty field";
+                                    },
+                                  );
                                 }
                               },
                               child: Container(
@@ -378,10 +395,12 @@ class _LogInState extends State<SignUp> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const LogIn()));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LogIn(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: media.getHeight(50),

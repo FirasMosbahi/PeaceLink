@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
 import '../utilities/mediaQuery.dart';
-import '../widgets/card.dart';
+import '../widgets/card_widget.dart';
 
-class DontePage extends StatelessWidget {
-  const DontePage({Key? key}) : super(key: key);
+class DonatePage extends StatelessWidget {
+  const DonatePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +47,20 @@ class DontePage extends StatelessWidget {
         SizedBox(
           height: media.getHeight(20),
         ),
-        AnimatedTextKit(animatedTexts: [
-          TyperAnimatedText(
-            "Our Packs , please select one to donate",
-            speed: const Duration(milliseconds: 100),
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: media.getwidht(22),
-              fontFamily: 'Courgette',
+        AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText(
+              "Our Packs , please select one to donate",
+              speed: const Duration(milliseconds: 100),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: media.getwidht(22),
+                fontFamily: 'Courgette',
+              ),
             ),
-          ),
-        ]),
+          ],
+        ),
         SizedBox(
           height: media.getHeight(10),
         ),
@@ -70,12 +72,15 @@ class DontePage extends StatelessWidget {
               slideTransform: const CubeTransform(),
               unlimitedMode: true,
               slideIndicator: CircularSlideIndicator(),
-              children: Images.map((e) => Container(
-                      child: CardRe(
+              children: Images.map(
+                (e) => Container(
+                  child: CardRe(
                     img: e[0],
                     text: e[1],
                     price: e[2],
-                  ))).toList(),
+                  ),
+                ),
+              ).toList(),
             ),
           ),
         ),

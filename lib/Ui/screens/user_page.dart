@@ -1,4 +1,4 @@
-import 'package:PeaceLink/core/models/user-model.dart';
+import 'package:PeaceLink/core/models/user_model.dart';
 import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -28,10 +28,11 @@ class _UserPageState extends State<UserPage> {
   Widget changeWidget = const SizedBox();
   void getUser() async {
     UserModel userModel = await userProvider.getCurrentUser();
-    setState(() {
-      user = userModel;
-      print(user);
-    });
+    setState(
+      () {
+        user = userModel;
+      },
+    );
   }
 
   @override
@@ -120,12 +121,14 @@ class _UserPageState extends State<UserPage> {
                               child: namePress
                                   ? Icon(
                                       Icons.arrow_circle_down_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     )
                                   : Icon(
                                       Icons.arrow_circle_right_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     ),
                             ),
@@ -199,12 +202,14 @@ class _UserPageState extends State<UserPage> {
                               child: emailPress
                                   ? Icon(
                                       Icons.arrow_circle_down_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     )
                                   : Icon(
                                       Icons.arrow_circle_right_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     ),
                             ),
@@ -273,12 +278,14 @@ class _UserPageState extends State<UserPage> {
                               child: passPress
                                   ? Icon(
                                       Icons.arrow_circle_down_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     )
                                   : Icon(
                                       Icons.arrow_circle_right_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     ),
                             ),
@@ -311,14 +318,14 @@ class _UserPageState extends State<UserPage> {
                                   child: obsc
                                       ? Icon(
                                           Icons.remove_red_eye_sharp,
-                                          color:
-                                              Color.fromRGBO(143, 148, 251, 1),
+                                          color: const Color.fromRGBO(
+                                              143, 148, 251, 1),
                                           size: media.getwidht(20),
                                         )
                                       : Icon(
                                           Icons.remove_red_eye_outlined,
-                                          color:
-                                              Color.fromRGBO(143, 148, 251, 1),
+                                          color: const Color.fromRGBO(
+                                              143, 148, 251, 1),
                                           size: media.getwidht(20),
                                         ),
                                 ),
@@ -374,12 +381,14 @@ class _UserPageState extends State<UserPage> {
                               child: agePress
                                   ? Icon(
                                       Icons.arrow_circle_down_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     )
                                   : Icon(
                                       Icons.arrow_circle_right_sharp,
-                                      color: Color.fromRGBO(143, 148, 251, 1),
+                                      color: const Color.fromRGBO(
+                                          143, 148, 251, 1),
                                       size: media.getwidht(30),
                                     ),
                             ),
@@ -389,27 +398,35 @@ class _UserPageState extends State<UserPage> {
                           children: [
                             if (agePress)
                               Expanded(
-                                  flex: 2,
-                                  child: TextField(
-                                    onChanged: (value) =>
-                                        newAge = int.parse(value),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "age",
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[400],
-                                      ),
+                                flex: 2,
+                                child: TextField(
+                                  onChanged: (value) =>
+                                      newAge = int.parse(value),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "age",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             if (agePress)
-                              Expanded(child: Field(onClick: () {
-                                FocusScope.of(context).unfocus();
-                                userProvider.updateUserInfos({"age": newAge});
-                                setState(() {
-                                  agePress = false;
-                                  user?.age = newAge;
-                                });
-                              })),
+                              Expanded(
+                                child: Field(
+                                  onClick: () {
+                                    FocusScope.of(context).unfocus();
+                                    userProvider
+                                        .updateUserInfos({"age": newAge});
+                                    setState(
+                                      () {
+                                        agePress = false;
+                                        user?.age = newAge;
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
                           ],
                         ),
                       ],

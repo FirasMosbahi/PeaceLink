@@ -9,16 +9,16 @@ import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../utilities/mediaQuery.dart';
 
-class CardPaiement extends StatefulWidget {
+class CardPayment extends StatefulWidget {
   String amount;
   Donation donation;
-  CardPaiement({required this.amount, required this.donation});
+  CardPayment({super.key, required this.amount, required this.donation});
 
   @override
-  State<CardPaiement> createState() => _CardPaiementState();
+  State<CardPayment> createState() => _CardPaymentState();
 }
 
-class _CardPaiementState extends State<CardPaiement> {
+class _CardPaymentState extends State<CardPayment> {
   String donationValue = "";
 
   @override
@@ -27,7 +27,6 @@ class _CardPaiementState extends State<CardPaiement> {
     double deviceWidth = MediaQuery.of(context).size.width;
     Mediaquery media =
         Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
-    String DonateVal = "";
     return ScaffoldGradientBackground(
       gradient: const LinearGradient(
           begin: Alignment.topCenter,
@@ -47,7 +46,7 @@ class _CardPaiementState extends State<CardPaiement> {
       appBar: AppBar(
         title: Center(
             child: Text(
-          "Paiement",
+          "Payment",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: "Courgette",
@@ -75,14 +74,17 @@ class _CardPaiementState extends State<CardPaiement> {
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.all(media.getwidht(18)),
+              padding: EdgeInsets.all(
+                media.getwidht(18),
+              ),
               child: Container(
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          bottom: media.getHeight(15),
-                          top: media.getHeight(15)),
+                        bottom: media.getHeight(15),
+                        top: media.getHeight(15),
+                      ),
                       child: TextField(
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -92,7 +94,7 @@ class _CardPaiementState extends State<CardPaiement> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Card number",
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             FontAwesomeIcons.wallet,
                             color: Colors.purple,
                           ),
@@ -104,13 +106,14 @@ class _CardPaiementState extends State<CardPaiement> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          bottom: media.getHeight(15),
-                          top: media.getHeight(15)),
+                        bottom: media.getHeight(15),
+                        top: media.getHeight(15),
+                      ),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Full Name",
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             FontAwesomeIcons.user,
                             color: Colors.purple,
                           ),
@@ -122,8 +125,9 @@ class _CardPaiementState extends State<CardPaiement> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          bottom: media.getHeight(15),
-                          top: media.getHeight(15)),
+                        bottom: media.getHeight(15),
+                        top: media.getHeight(15),
+                      ),
                       child: Row(
                         children: [
                           Expanded(
@@ -135,7 +139,7 @@ class _CardPaiementState extends State<CardPaiement> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "CVV",
-                                prefixIcon: Icon(
+                                prefixIcon: const Icon(
                                   FontAwesomeIcons.creditCard,
                                   color: Colors.purple,
                                 ),
@@ -155,7 +159,7 @@ class _CardPaiementState extends State<CardPaiement> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "MM/YY",
-                                prefixIcon: Icon(
+                                prefixIcon: const Icon(
                                   FontAwesomeIcons.wallet,
                                   color: Colors.purple,
                                 ),
@@ -171,8 +175,9 @@ class _CardPaiementState extends State<CardPaiement> {
                     if (widget.amount == "")
                       Padding(
                         padding: EdgeInsets.only(
-                            bottom: media.getHeight(15),
-                            top: media.getHeight(15)),
+                          bottom: media.getHeight(15),
+                          top: media.getHeight(15),
+                        ),
                         child: TextField(
                           onChanged: (value) => donationValue = value,
                           inputFormatters: [
@@ -181,7 +186,7 @@ class _CardPaiementState extends State<CardPaiement> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Amount",
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               FontAwesomeIcons.sackDollar,
                               color: Colors.purple,
                             ),
@@ -203,8 +208,9 @@ class _CardPaiementState extends State<CardPaiement> {
                       ),
                     Padding(
                       padding: EdgeInsets.only(
-                          bottom: media.getHeight(15),
-                          top: media.getHeight(35)),
+                        bottom: media.getHeight(15),
+                        top: media.getHeight(35),
+                      ),
                       child: GestureDetector(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
@@ -214,15 +220,19 @@ class _CardPaiementState extends State<CardPaiement> {
                                 .donate(
                                     value: double.parse(donationValue),
                                     donation: widget.donation);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyApp(index: 2)));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyApp(index: 2),
+                              ),
+                            );
                           } else {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyApp(index: 0)));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyApp(index: 0),
+                              ),
+                            );
                           }
                         },
                         child: Container(
@@ -251,7 +261,7 @@ class _CardPaiementState extends State<CardPaiement> {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: EdgeInsets.only(
                           bottom: deviceHeight * 0.02,
@@ -262,13 +272,15 @@ class _CardPaiementState extends State<CardPaiement> {
                         child: GestureDetector(
                           onTap: () {
                             FocusScope.of(context).unfocus();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyApp(index: 2)));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyApp(index: 2),
+                              ),
+                            );
                           },
                           child: const Text(
-                            "retour",
+                            "return",
                             style: TextStyle(
                               color: Color.fromRGBO(143, 148, 251, 1),
                               fontFamily: 'Courgette',

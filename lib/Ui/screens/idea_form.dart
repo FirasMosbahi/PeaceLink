@@ -1,32 +1,24 @@
-import 'package:PeaceLink/core/models/donation_model.dart';
-import 'package:PeaceLink/core/view-models/donation_view_model.dart';
+import 'package:PeaceLink/Ui/screens/main_screen.dart';
+import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
-import '../utilities/mediaQuery.dart';
-import 'main_screen.dart';
+class ideaForm extends StatefulWidget {
+  const ideaForm({super.key});
 
-class DonationForm extends StatefulWidget {
   @override
-  State<DonationForm> createState() => _CardPaiementState();
+  State<ideaForm> createState() => _CardIdeaState();
 }
 
-class _CardPaiementState extends State<DonationForm> {
-  String category = "disaster";
+class _CardIdeaState extends State<ideaForm> {
+  String title = "";
   String description = "";
-  String finalValue = "";
-
+  String error = "";
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-    Mediaquery media =
-        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
-
-    var items = ["disaster", "war", "hunger", "poverty"];
     return ScaffoldGradientBackground(
       gradient: const LinearGradient(
           begin: Alignment.topCenter,
@@ -48,23 +40,30 @@ class _CardPaiementState extends State<DonationForm> {
           child: Column(
             children: [
               SizedBox(
-                height: media.getHeight(40),
+                height: deviceHeight * 0.06,
               ),
               Center(
                   child: Text(
-                "Create Urgent Donation",
+                "Create New Idea",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: "Courgette",
-                  fontSize: media.getwidht(35),
+                  fontSize: deviceWidth * 0.09,
                   color: Colors.white,
                 ),
               )),
               SizedBox(
-                height: media.getHeight(130),
+                height: deviceHeight * 0.16,
+              ),
+              Text(
+                error,
+                style: TextStyle(
+                  color: Colors.red[600],
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Container(
-                height: deviceHeight * 0.53,
+                height: deviceHeight * 0.40,
                 width: deviceWidth * 0.85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -74,18 +73,35 @@ class _CardPaiementState extends State<DonationForm> {
                       color: Color.fromRGBO(143, 148, 251, 2),
                       blurRadius: 20.0,
                       offset: Offset(0, 10),
-                    )
+                    ),
                   ],
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(media.getwidht(18)),
+                  padding: EdgeInsets.all(deviceWidth * 0.05),
                   child: Container(
                     child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              bottom: media.getHeight(15),
-                              top: media.getHeight(15)),
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.02),
+                          child: TextField(
+                            minLines: 1,
+                            maxLines: 2,
+                            onChanged: (value) => title = value,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Title",
+                              hintStyle: TextStyle(
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.02),
                           child: TextField(
                             onChanged: (value) => description = value,
                             minLines: 1,
@@ -99,86 +115,40 @@ class _CardPaiementState extends State<DonationForm> {
                             ),
                           ),
                         ),
+                        const Spacer(),
                         Padding(
                           padding: EdgeInsets.only(
-                              bottom: media.getHeight(15),
-                              top: media.getHeight(15)),
-                          child: TextField(
-                            onChanged: (value) => finalValue = value,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "amount needed",
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.sackDollar,
-                                color: Colors.purple,
-                              ),
-                              hintStyle: TextStyle(
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: media.getHeight(15),
-                              top: media.getHeight(15)),
-                          child: DropdownButton(
-                            iconEnabledColor: Colors.purple,
-                            iconDisabledColor: Colors.purple,
-                            iconSize: 30,
-                            isExpanded: true,
-                            value: category,
-                            underline: SizedBox(),
-                            hint: Text(
-                              "Donation Catigory",
-                              style: TextStyle(
-                                color: Colors.grey[400],
-                              ),
-                            ),
-                            items: items.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                category = value ?? "";
-                                print(category);
-                              });
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: media.getHeight(15),
-                              top: media.getHeight(15)),
+                              bottom: deviceHeight * 0.015,
+                              top: deviceHeight * 0.03),
                           child: GestureDetector(
                             onTap: () async {
                               FocusScope.of(context).unfocus();
                               try {
-                                await Provider.of<DonationProvider>(context,
+                                final result = await Provider.of<IdeaProvider>(
+                                        context,
                                         listen: false)
-                                    .addDonation(
-                                        newDonation: Donation(
-                                            category: category,
-                                            description: description,
-                                            finalValue:
-                                                double.parse(finalValue)));
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyApp(index: 2)));
+                                    .addIdea(
+                                        title: title, description: description);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyApp(index: 1),
+                                  ),
+                                );
                               } catch (e) {
-                                print(e.toString());
+                                if (e.toString() ==
+                                    "Exception: Each of your ideas should have an unique value") {
+                                  setState(
+                                    () {
+                                      error = "title should be unique";
+                                    },
+                                  );
+                                }
                               }
                             },
                             child: Container(
-                              height: media.getHeight(50),
-                              width: media.getwidht(300),
+                              height: deviceHeight * 0.05,
+                              width: deviceWidth * 0.8,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(
@@ -195,7 +165,7 @@ class _CardPaiementState extends State<DonationForm> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Courgette",
-                                      fontSize: media.getwidht(20),
+                                      fontSize: deviceWidth * 0.055,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -204,21 +174,23 @@ class _CardPaiementState extends State<DonationForm> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              bottom: media.getHeight(15),
-                              top: media.getHeight(10),
-                              right: media.getwidht(20)),
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.015,
+                              right: deviceWidth * 0.06),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
                                 FocusScope.of(context).unfocus();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyApp(index: 2)));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyApp(index: 1),
+                                  ),
+                                );
                               },
                               child: const Text(
-                                "retour",
+                                "return",
                                 style: TextStyle(
                                   color: Color.fromRGBO(143, 148, 251, 1),
                                   fontFamily: 'Courgette',

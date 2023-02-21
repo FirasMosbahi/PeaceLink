@@ -73,54 +73,60 @@ class _QuotePageState extends State<QuotePage> {
               startIndex: Random().nextInt(100),
               aspectRatio: 1.3,
               widgets: quotes
-                  .map((e) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF1e0059),
-                              Color(0xFf3b246a),
-                              Color(0xFF926b9f),
-                            ],
-                            end: Alignment.bottomCenter,
-                            begin: Alignment.topCenter,
-                            stops: [0, 0.7, 1],
-                          ),
+                  .map(
+                    (e) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color(0xFF1e0059),
+                            Color(0xFf3b246a),
+                            Color(0xFF926b9f),
+                          ],
+                          end: Alignment.bottomCenter,
+                          begin: Alignment.topCenter,
+                          stops: [0, 0.7, 1],
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.all(media.getwidht(12)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    e["author"].toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Courgette',
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: media.getwidht(18)),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(
+                          media.getwidht(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Center(
+                                child: Text(
+                                  e["author"].toString(),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Courgette',
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: media.getwidht(18),
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                flex: 3,
-                                child: Center(
-                                  child: Text(
-                                    e["quote"].toString(),
-                                    style: TextStyle(
-                                        color: Colors.white70,
-                                        fontWeight: FontWeight.w100,
-                                        fontFamily: 'Courgette',
-                                        fontSize: media.getwidht(18)),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Center(
+                                child: Text(
+                                  e["quote"].toString(),
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.w100,
+                                    fontFamily: 'Courgette',
+                                    fontSize: media.getwidht(18),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ))
+                      ),
+                    ),
+                  )
                   .toList(),
             ),
           ),

@@ -1,3 +1,5 @@
+//This is the class of donation which is used as a collection in firebase fireStore
+
 class Donation {
   String id;
   String creator;
@@ -14,6 +16,8 @@ class Donation {
     this.currentValue = 0,
     required this.finalValue,
   });
+  //This factory method allows us to create an instance of donation
+  // from json received from firestore
   factory Donation.fromJson(Map<String, dynamic> json) => Donation(
         id: json["id"],
         creator: json["creator"],
@@ -22,6 +26,8 @@ class Donation {
         currentValue: json['currentValue'],
         finalValue: json['finalValue'],
       );
+  //This method allows us to transfer an instance of donation to a json
+  // that will be stored in firebase
   Map<String, dynamic> toJson() => {
         'id': id,
         'creator': creator,

@@ -9,8 +9,8 @@ import '../utilities/mediaQuery.dart';
 
 class IdeaWidget extends StatefulWidget {
   final Idea idea;
-  final bool ButtonType;
-  const IdeaWidget({Key? key, required this.idea, required this.ButtonType})
+  final bool buttonType;
+  const IdeaWidget({Key? key, required this.idea, required this.buttonType})
       : super(key: key);
 
   @override
@@ -27,26 +27,23 @@ class _IdeaWidgetState extends State<IdeaWidget> {
     return Padding(
       padding: EdgeInsets.all(media.getwidht(16)),
       child: Slidable(
-        startActionPane: widget.ButtonType
+        startActionPane: widget.buttonType
             ? ActionPane(
                 motion: const StretchMotion(),
                 children: [
                   SlidableAction(
                     onPressed: (context) async {
                       try {
-                        print(widget.idea.likes);
                         await Provider.of<IdeaProvider>(context, listen: false)
                             .likeIdea(title: widget.idea.title);
-                      } catch (e) {
-                        print(e.toString());
-                      }
+                      } catch (e) {}
                     },
                     borderRadius: BorderRadius.circular(10),
-                    backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+                    backgroundColor: const Color.fromRGBO(143, 148, 251, 1),
                     icon: FontAwesomeIcons.thumbsUp,
                     foregroundColor: Colors.purple,
                     label: "Support this Idea",
-                  )
+                  ),
                 ],
               )
             : ActionPane(
@@ -55,12 +52,9 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                   SlidableAction(
                     onPressed: (context) async {
                       try {
-                        print(widget.idea.likes);
                         await Provider.of<IdeaProvider>(context, listen: false)
                             .deleteIdea(title: widget.idea.title);
-                      } catch (e) {
-                        print(e.toString());
-                      }
+                      } catch (e) {}
                     },
                     borderRadius: BorderRadius.circular(10),
                     backgroundColor: Colors.red,
@@ -98,29 +92,32 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                     ),
                   ),
                 ),
-                Divider(),
-                Expanded(
-                    child: Align(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Idea Title :",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: media.getwidht(13),
-                            fontFamily: 'Courgette'),
-                      ),
-                      SizedBox(
-                        width: media.getwidht(15),
-                      ),
-                      Text(widget.idea.title),
-                    ],
-                  ),
-                  alignment: Alignment.centerLeft,
-                )),
-                Divider(),
+                const Divider(),
                 Expanded(
                   child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Idea Title :",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: media.getwidht(13),
+                              fontFamily: 'Courgette'),
+                        ),
+                        SizedBox(
+                          width: media.getwidht(15),
+                        ),
+                        Text(widget.idea.title),
+                      ],
+                    ),
+                  ),
+                ),
+                const Divider(),
+                Expanded(
+                  flex: 6,
+                  child: Align(
+                    alignment: Alignment.topLeft,
                     child: Column(
                       children: [
                         Text(
@@ -133,29 +130,28 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                         Text(widget.idea.description),
                       ],
                     ),
-                    alignment: Alignment.topLeft,
                   ),
-                  flex: 6,
                 ),
-                Divider(),
+                const Divider(),
                 Expanded(
-                    child: Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        "supports",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: media.getwidht(13),
-                            fontFamily: 'Courgette'),
-                      ),
-                      SizedBox(
-                        width: media.getwidht(110),
-                      ),
-                      Text(widget.idea.likes.toString()),
-                    ],
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text(
+                          "supports",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: media.getwidht(13),
+                              fontFamily: 'Courgette'),
+                        ),
+                        SizedBox(
+                          width: media.getwidht(110),
+                        ),
+                        Text(widget.idea.likes.toString()),
+                      ],
+                    ),
                   ),
-                ))
+                )
               ],
             ),
           ),

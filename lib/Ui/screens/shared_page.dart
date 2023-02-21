@@ -1,4 +1,4 @@
-import 'package:PeaceLink/Ui/widgets/idesWidget.dart';
+import 'package:PeaceLink/Ui/widgets/ideas_widget.dart';
 import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../utilities/mediaQuery.dart';
-import 'ideaForm.dart';
+import 'idea_form.dart';
 
 class SharedPage extends StatefulWidget {
   const SharedPage({Key? key}) : super(key: key);
@@ -28,27 +28,28 @@ class _SharedPageState extends State<SharedPage> {
     return Consumer<IdeaProvider>(builder: (context, ideaProvider, child) {
       ideaProvider.getIdeas();
       ideaProvider.getMyIdeas();
-      print(ideaProvider.ideas);
       return Stack(
         fit: StackFit.expand,
         children: [
           Positioned(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.only(top: media.getHeight(30)),
+                padding: EdgeInsets.only(
+                  top: media.getHeight(30),
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: isMine
                       ? ideaProvider.myIdeas
                           .map((e) => IdeaWidget(
                                 idea: e,
-                                ButtonType: false,
+                                buttonType: false,
                               ))
                           .toList()
                       : ideaProvider.ideas
                           .map((e) => IdeaWidget(
                                 idea: e,
-                                ButtonType: true,
+                                buttonType: true,
                               ))
                           .toList(),
                 ),
@@ -56,11 +57,13 @@ class _SharedPageState extends State<SharedPage> {
             ),
           ),
           Positioned(
+            bottom: media.getHeight(20),
+            right: media.getwidht(15),
             child: SpeedDial(
               overlayOpacity: 0.2,
               spaceBetweenChildren: 15,
               animatedIcon: AnimatedIcons.menu_close,
-              backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+              backgroundColor: const Color.fromRGBO(143, 148, 251, 1),
               children: [
                 SpeedDialChild(
                   child: Icon(
@@ -70,10 +73,15 @@ class _SharedPageState extends State<SharedPage> {
                   ),
                   label: "Create new Idea",
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ideaForm()));
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ideaForm(),
+                      ),
+                    );
                   },
-                  labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
+                  labelBackgroundColor:
+                      const Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
                     fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
@@ -83,8 +91,6 @@ class _SharedPageState extends State<SharedPage> {
                 ),
                 SpeedDialChild(
                   onTap: () {
-                    print(ideaProvider.myIdeas);
-                    print(1);
                     setState(() {
                       isMine = true;
                     });
@@ -95,7 +101,8 @@ class _SharedPageState extends State<SharedPage> {
                     size: media.getwidht(25),
                   ),
                   label: "Your current ideas",
-                  labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
+                  labelBackgroundColor:
+                      const Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
                     fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
@@ -115,7 +122,8 @@ class _SharedPageState extends State<SharedPage> {
                     size: media.getwidht(25),
                   ),
                   label: "All ideas",
-                  labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
+                  labelBackgroundColor:
+                      const Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
                     fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
@@ -125,8 +133,6 @@ class _SharedPageState extends State<SharedPage> {
                 ),
               ],
             ),
-            bottom: media.getHeight(20),
-            right: media.getwidht(15),
           ),
         ],
       );

@@ -3,15 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
+//This class contains all the logic operations related to the donations
 class DonationProvider extends ChangeNotifier {
   List<Donation> donations = [];
   bool hasLoaded = true;
   bool init = true;
   Future<bool> getDonations() async {
     if (init) {
-      final snapshotsReference =
+      CollectionReference<Map<String, dynamic>> snapshotsReference =
           FirebaseFirestore.instance.collection('donations');
-      final snapshot = await snapshotsReference.get();
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+          await snapshotsReference.get();
       snapshot.docs.forEach((element) {
         if (donations.where((e) => e.id == element.id).isEmpty) {
           donations.add(Donation.fromJson(element.data()));
@@ -28,19 +30,19 @@ class DonationProvider extends ChangeNotifier {
 
   Future<bool> getDonationsByCategory(String category) async {
     init = false;
-    print("start");
     donations = [];
-    final snapshotsReference = FirebaseFirestore.instance
+    Query<Map<String, dynamic>> snapshotsReference = FirebaseFirestore.instance
         .collection('donations')
         .where("category", isEqualTo: category);
-    print(0);
-    final snapshot = await snapshotsReference.get();
-    print(1);
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await snapshotsReference.get();
     snapshot.docs.forEach((element) {
-      print(2);
-      print(element.data());
       if (donations.where((e) => e.id == element.id).isEmpty) {
-        donations.add(Donation.fromJson(element.data()));
+        donations.add(
+          Donation.fromJson(
+            element.data(),
+          ),
+        );
         hasLoaded = false;
       }
       if (!hasLoaded) {
@@ -56,15 +58,10 @@ class DonationProvider extends ChangeNotifier {
     double currentDonations = donation.currentValue;
     DocumentReference doc =
         FirebaseFirestore.instance.collection('donations').doc(donation.id);
-    print("getting doc");
     currentDonations += value;
     await doc.update({"currentValue": currentDonations});
-
-    print("loaded");
-    print("updating doc");
     if (currentDonations >= donation.finalValue) {
       await doc.delete();
-      print("deleting doc");
     }
     donations = [];
     hasLoaded = false;

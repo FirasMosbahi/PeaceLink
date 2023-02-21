@@ -15,69 +15,76 @@ class ThirdSplach extends StatelessWidget {
     Mediaquery media =
         Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Scaffold(
-        body: SafeArea(
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: SplashScreen.navigate(
-              fit: BoxFit.fill,
-              name: 'assets/mixing_animations.riv',
-              next: (context) => const LogIn(),
-              until: () => Future.delayed(
-                const Duration(milliseconds: 5400),
-              ),
-              loopAnimation: "Expert",
-              backgroundColor: const Color(0xFF390A3B),
-            ),
-          ),
-          Positioned(
-            bottom: media.getHeight(50),
-            left: media.getwidht(10),
-            height: media.getHeight(120),
-            width: media.getwidht(400),
-            child: AnimatedTextKit(
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  "You can not only chat with specialist ",
-                  speed: const Duration(milliseconds: 50),
-                  textStyle: TextStyle(
-                      color: Colors.white,
-                      decoration: TextDecoration.none,
-                      fontSize: media.getwidht(22)),
-                  textAlign: TextAlign.center,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SplashScreen.navigate(
+                fit: BoxFit.fill,
+                name: 'assets/mixing_animations.riv',
+                next: (context) => const LogIn(),
+                until: () => Future.delayed(
+                  const Duration(milliseconds: 5400),
                 ),
-                TypewriterAnimatedText(
-                  "but also join anonymous chat",
-                  speed: const Duration(milliseconds: 50),
-                  textStyle: TextStyle(
-                      color: Colors.white,
-                      decoration: TextDecoration.none,
-                      fontSize: media.getwidht(22)),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: deviceHeight * 0.05,
-            right: deviceWidth * 0.1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LogIn()));
-              },
-              child: Text(
-                "skip",
-                style: TextStyle(
-                  fontSize: deviceWidth * 0.05,
-                  color: Color.fromRGBO(143, 148, 251, 1),
-                  fontFamily: 'Courgette',
-                ),
+                loopAnimation: "Expert",
+                backgroundColor: const Color(0xFF390A3B),
               ),
             ),
-          ),
-        ],
+            Positioned(
+              bottom: media.getHeight(50),
+              left: media.getwidht(10),
+              height: media.getHeight(120),
+              width: media.getwidht(400),
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  TypewriterAnimatedText(
+                    "You can not only chat with specialist ",
+                    speed: const Duration(milliseconds: 50),
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                      fontSize: media.getwidht(22),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  TypewriterAnimatedText(
+                    "but also join anonymous chat",
+                    speed: const Duration(milliseconds: 50),
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                      fontSize: media.getwidht(22),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: deviceHeight * 0.05,
+              right: deviceWidth * 0.1,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LogIn(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "skip",
+                  style: TextStyle(
+                    fontSize: deviceWidth * 0.05,
+                    color: const Color.fromRGBO(143, 148, 251, 1),
+                    fontFamily: 'Courgette',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
