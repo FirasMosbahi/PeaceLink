@@ -1,4 +1,4 @@
-import 'package:chat_for_peace/core/models/donation_model.dart';
+import 'package:PeaceLink/core/models/donation_model.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/cardPaiement.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:chat_for_peace/core/models/user-model.dart';
-import 'package:chat_for_peace/core/view-models/user_view_model.dart';
+import 'package:PeaceLink/core/models/user-model.dart';
+import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -331,6 +331,14 @@ class _LogInState extends State<SignUp> {
                                       setState(() {
                                         error =
                                             "The email address is already exist";
+                                      });
+                                    }
+                                    if (e.toString() ==
+                                        "Exception: [firebase_auth/invalid-email] The email address is badly formatted.") {
+                                      setState(() {
+                                        error =
+                                            "The email address is badly formatted";
+                                        print(error);
                                       });
                                     }
 

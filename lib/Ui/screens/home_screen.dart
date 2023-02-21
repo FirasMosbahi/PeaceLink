@@ -1,5 +1,7 @@
-import 'package:chat_for_peace/Ui/widgets/donationWidget.dart';
-import 'package:chat_for_peace/core/view-models/donation_view_model.dart';
+import 'dart:async';
+
+import 'package:PeaceLink/Ui/widgets/donationWidget.dart';
+import 'package:PeaceLink/core/view-models/donation_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +17,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool animate = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      animate = false;
+    });
+
+    Timer(
+        const Duration(milliseconds: 600),
+        () => setState(() {
+              animate = true;
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -72,15 +90,20 @@ class _HomeState extends State<Home> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.all(deviceWidth * 0.035),
-                                child: Text(
-                                  "We make a living by what we get . We make a life by what we give 🥰",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: deviceWidth * 0.04,
-                                      fontFamily: 'Courgette',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[500],
-                                      letterSpacing: 0.2),
+                                child: AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 800),
+                                  opacity: animate ? 1 : 0,
+                                  curve: Curves.easeOutSine,
+                                  child: Text(
+                                    "We make a living by what we get . We make a life by what we give 🥰",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: deviceWidth * 0.04,
+                                        fontFamily: 'Courgette',
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey[500],
+                                        letterSpacing: 0.2),
+                                  ),
                                 ),
                               ),
                               const Spacer(),

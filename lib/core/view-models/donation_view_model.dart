@@ -1,4 +1,4 @@
-import 'package:chat_for_peace/core/models/donation_model.dart';
+import 'package:PeaceLink/core/models/donation_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';

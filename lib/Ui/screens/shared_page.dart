@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/Ui/widgets/idesWidget.dart';
-import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
+import 'package:PeaceLink/Ui/widgets/idesWidget.dart';
+import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -16,6 +17,22 @@ class QuotePage extends StatefulWidget {
 String stringRep = "";
 
 class _QuotePageState extends State<QuotePage> {
+  bool animate = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      animate = false;
+    });
+
+    Timer(
+        const Duration(milliseconds: 600),
+        () => setState(() {
+              animate = true;
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -29,14 +46,19 @@ class _QuotePageState extends State<QuotePage> {
           height: media.getHeight(20),
         ),
         Expanded(
-          child: Text(
-            "Discover the wisdom of the ages with these timeless quotes",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: media.getwidht(22),
-              fontFamily: 'Courgette',
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 1300),
+            opacity: animate ? 1 : 0,
+            curve: Curves.easeOutSine,
+            child: Text(
+              "Discover the wisdom of the ages with these timeless quotes",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: media.getwidht(22),
+                fontFamily: 'Courgette',
+              ),
             ),
           ),
         ),

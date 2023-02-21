@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/Ui/screens/main_screen.dart';
-import 'package:chat_for_peace/core/view-models/chat_view_model.dart';
+import 'package:PeaceLink/Ui/screens/main_screen.dart';
+import 'package:PeaceLink/core/view-models/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';

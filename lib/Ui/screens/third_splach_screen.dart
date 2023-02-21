@@ -58,6 +58,24 @@ class ThirdSplach extends StatelessWidget {
               ],
             ),
           ),
+          Positioned(
+            bottom: deviceHeight * 0.05,
+            right: deviceWidth * 0.1,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LogIn()));
+              },
+              child: Text(
+                "skip",
+                style: TextStyle(
+                  fontSize: deviceWidth * 0.05,
+                  color: Color.fromRGBO(143, 148, 251, 1),
+                  fontFamily: 'Courgette',
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     ));

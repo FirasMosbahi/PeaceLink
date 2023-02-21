@@ -1,5 +1,5 @@
+import 'package:PeaceLink/Ui/screens/shared_page.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:chat_for_peace/Ui/screens/shared_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -87,15 +87,16 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                        left: media.getwidht(5), top: media.getHeight(15)),
-                    child: CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: AssetImage(
-                        "assets/formation-android.jpg",
-                      ),
-                    ),
-                  ),
+                      padding: EdgeInsets.only(
+                          left: media.getwidht(5), top: media.getHeight(15)),
+                      child: ClipOval(
+                        child: Image.asset(
+                          "assets/logo.png",
+                          fit: BoxFit.contain,
+                          height: media.getHeight(65),
+                          width: media.getwidht(15),
+                        ),
+                      )),
                 ),
                 Expanded(
                   flex: 3,

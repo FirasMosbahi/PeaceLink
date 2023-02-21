@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat_for_peace/core/view-models/user_view_model.dart';
+import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
 import '../utilities/mediaQuery.dart';

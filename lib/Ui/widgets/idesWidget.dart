@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/core/models/idea_model.dart';
-import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
+import 'package:PeaceLink/core/models/idea_model.dart';
+import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

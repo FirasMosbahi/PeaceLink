@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/Ui/screens/chat_Page.dart';
-import 'package:chat_for_peace/core/view-models/chat_view_model.dart';
+import 'package:PeaceLink/Ui/screens/chat_Page.dart';
+import 'package:PeaceLink/core/view-models/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
@@ -8,7 +8,8 @@ import '../utilities/mediaQuery.dart';
 import '../widgets/messageWidget.dart';
 
 class ChatRoom extends StatefulWidget {
-  const ChatRoom({Key? key}) : super(key: key);
+  ChatRoom({Key? key}) : super(key: key);
+  TextEditingController tx = TextEditingController();
 
   @override
   State<ChatRoom> createState() => _ChatState();
@@ -43,6 +44,7 @@ class _ChatState extends State<ChatRoom> {
               children: [
                 GestureDetector(
                   onTap: () async {
+                    FocusScope.of(context).unfocus();
                     await chatProvider.endChat();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ChatPage()));
@@ -104,6 +106,7 @@ class _ChatState extends State<ChatRoom> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: TextField(
+                              controller: widget.tx,
                               onChanged: (value) => msgToSend = value,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -123,6 +126,9 @@ class _ChatState extends State<ChatRoom> {
                             } catch (e) {
                               e.toString();
                             }
+                            setState(() {
+                              widget.tx.text = '';
+                            });
                           },
                           child: Container(
                             decoration: BoxDecoration(

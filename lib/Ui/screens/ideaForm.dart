@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/Ui/screens/main_screen.dart';
-import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
+import 'package:PeaceLink/Ui/screens/main_screen.dart';
+import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
@@ -175,6 +175,7 @@ class _CardIdeaState extends State<ideaForm> {
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
+                                FocusScope.of(context).unfocus();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

@@ -1,4 +1,4 @@
-import 'package:chat_for_peace/core/models/user-model.dart';
+import 'package:PeaceLink/core/models/user-model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

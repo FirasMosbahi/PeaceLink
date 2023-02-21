@@ -1,6 +1,6 @@
-import 'package:chat_for_peace/core/view-models/chat_view_model.dart';
-import 'package:chat_for_peace/core/view-models/donation_view_model.dart';
-import 'package:chat_for_peace/core/view-models/idea_view_model.dart';
+import 'package:PeaceLink/core/view-models/chat_view_model.dart';
+import 'package:PeaceLink/core/view-models/donation_view_model.dart';
+import 'package:PeaceLink/core/view-models/idea_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

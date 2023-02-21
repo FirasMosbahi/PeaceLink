@@ -1,6 +1,6 @@
-import 'package:chat_for_peace/Ui/screens/main_screen.dart';
-import 'package:chat_for_peace/core/models/donation_model.dart';
-import 'package:chat_for_peace/core/view-models/donation_view_model.dart';
+import 'package:PeaceLink/Ui/screens/main_screen.dart';
+import 'package:PeaceLink/core/models/donation_model.dart';
+import 'package:PeaceLink/core/view-models/donation_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -261,6 +261,7 @@ class _CardPaiementState extends State<CardPaiement> {
                         alignment: Alignment.center,
                         child: GestureDetector(
                           onTap: () {
+                            FocusScope.of(context).unfocus();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

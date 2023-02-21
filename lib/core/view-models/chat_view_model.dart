@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:chat_for_peace/core/models/chat_model.dart';
-import 'package:chat_for_peace/core/models/user-model.dart';
-import 'package:chat_for_peace/core/view-models/user_view_model.dart';
+import 'package:PeaceLink/core/models/chat_model.dart';
+import 'package:PeaceLink/core/models/user-model.dart';
+import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';

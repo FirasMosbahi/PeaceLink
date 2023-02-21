@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
 import '../utilities/mediaQuery.dart';
+import 'log_in_screen.dart';
 import 'third_splach_screen.dart';
 
 class SecondSplach extends StatelessWidget {
@@ -56,6 +57,24 @@ class SecondSplach extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: deviceHeight * 0.05,
+            right: deviceWidth * 0.1,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LogIn()));
+              },
+              child: Text(
+                "skip",
+                style: TextStyle(
+                  fontSize: deviceWidth * 0.05,
+                  color: Color.fromRGBO(143, 148, 251, 1),
+                  fontFamily: 'Courgette',
+                ),
+              ),
             ),
           ),
         ],

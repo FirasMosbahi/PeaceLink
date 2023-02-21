@@ -1,5 +1,5 @@
-import 'package:chat_for_peace/core/models/idea_model.dart';
-import 'package:chat_for_peace/core/view-models/user_view_model.dart';
+import 'package:PeaceLink/core/models/idea_model.dart';
+import 'package:PeaceLink/core/view-models/user_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
