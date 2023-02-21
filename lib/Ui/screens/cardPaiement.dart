@@ -7,6 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
+import '../utilities/mediaQuery.dart';
+
 class CardPaiement extends StatefulWidget {
   String amount;
   Donation donation;
@@ -23,6 +25,8 @@ class _CardPaiementState extends State<CardPaiement> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     String DonateVal = "";
     return ScaffoldGradientBackground(
       gradient: const LinearGradient(
@@ -47,7 +51,7 @@ class _CardPaiementState extends State<CardPaiement> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: "Courgette",
-            fontSize: 45,
+            fontSize: media.getwidht(45),
           ),
         )),
         backgroundColor: const Color(0xFF1f005c),
@@ -57,7 +61,7 @@ class _CardPaiementState extends State<CardPaiement> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            height: deviceHeight * 0.53,
+            height: deviceHeight * 0.58,
             width: deviceWidth * 0.85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -71,12 +75,14 @@ class _CardPaiementState extends State<CardPaiement> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(media.getwidht(18)),
               child: Container(
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15, top: 15),
+                      padding: EdgeInsets.only(
+                          bottom: media.getHeight(15),
+                          top: media.getHeight(15)),
                       child: TextField(
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -97,7 +103,9 @@ class _CardPaiementState extends State<CardPaiement> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15, top: 15),
+                      padding: EdgeInsets.only(
+                          bottom: media.getHeight(15),
+                          top: media.getHeight(15)),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -113,7 +121,9 @@ class _CardPaiementState extends State<CardPaiement> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15, top: 15),
+                      padding: EdgeInsets.only(
+                          bottom: media.getHeight(15),
+                          top: media.getHeight(15)),
                       child: Row(
                         children: [
                           Expanded(
@@ -160,7 +170,9 @@ class _CardPaiementState extends State<CardPaiement> {
                     ),
                     if (widget.amount == "")
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 15, top: 15),
+                        padding: EdgeInsets.only(
+                            bottom: media.getHeight(15),
+                            top: media.getHeight(15)),
                         child: TextField(
                           onChanged: (value) => donationValue = value,
                           inputFormatters: [
@@ -184,13 +196,15 @@ class _CardPaiementState extends State<CardPaiement> {
                         widget.amount,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: media.getwidht(22),
                             color: Colors.pink,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Corugette'),
                       ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 15, top: 35),
+                      padding: EdgeInsets.only(
+                          bottom: media.getHeight(15),
+                          top: media.getHeight(35)),
                       child: GestureDetector(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
@@ -212,8 +226,8 @@ class _CardPaiementState extends State<CardPaiement> {
                           }
                         },
                         child: Container(
-                          height: 50,
-                          width: 300,
+                          height: media.getHeight(50),
+                          width: media.getwidht(300),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             gradient: const LinearGradient(
@@ -224,14 +238,39 @@ class _CardPaiementState extends State<CardPaiement> {
                               ],
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               "Donate",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: "Courgette",
-                                  fontSize: 20,
+                                  fontSize: media.getwidht(20),
                                   fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          bottom: deviceHeight * 0.02,
+                          top: deviceHeight * 0.015,
+                          right: deviceWidth * 0.06),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyApp(index: 2)));
+                          },
+                          child: const Text(
+                            "retour",
+                            style: TextStyle(
+                              color: Color.fromRGBO(143, 148, 251, 1),
+                              fontFamily: 'Courgette',
                             ),
                           ),
                         ),

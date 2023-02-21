@@ -5,6 +5,7 @@ import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'main_screen.dart';
 
 class Home extends StatefulWidget {
@@ -16,6 +17,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
+
     return Consumer<DonationProvider>(
         builder: (context, donationProvider, child) {
       donationProvider.getDonations();
@@ -35,23 +41,25 @@ class _HomeState extends State<Home> {
                           offset: Offset(0, 10),
                         )
                       ]),
-                  margin: const EdgeInsets.only(top: 35, left: 40, right: 40),
+                  margin: EdgeInsets.only(
+                      top: media.getHeight(35),
+                      left: media.getwidht(40),
+                      right: media.getwidht(40)),
                   child: Row(
                     children: [
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 7),
+                          padding: EdgeInsets.only(left: media.getwidht(7)),
                           child: Container(
-                            height: 60,
-                            width: 70,
+                            height: deviceHeight * 0.08,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: const Color.fromRGBO(143, 148, 251, 0.2),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               FontAwesomeIcons.wallet,
-                              size: 35,
+                              size: deviceWidth * 0.075,
                               color: Color.fromRGBO(143, 148, 251, 1),
                             ),
                           ),
@@ -63,12 +71,12 @@ class _HomeState extends State<Home> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: EdgeInsets.all(deviceWidth * 0.035),
                                 child: Text(
                                   "We make a living by what we get . We make a life by what we give 🥰",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: deviceWidth * 0.04,
                                       fontFamily: 'Courgette',
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey[500],
@@ -85,8 +93,8 @@ class _HomeState extends State<Home> {
                                               MyApp(index: 0)));
                                 },
                                 child: Container(
-                                  height: 50,
-                                  width: 120,
+                                  height: deviceHeight * 0.06,
+                                  width: deviceWidth * 0.3,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     gradient: const LinearGradient(
@@ -108,8 +116,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 20,
+                              SizedBox(
+                                height: deviceHeight * 0.02,
                               ),
                             ],
                           ),
@@ -117,20 +125,24 @@ class _HomeState extends State<Home> {
                       )
                     ],
                   ))),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: deviceHeight * 0.015,
           ),
           Expanded(
             flex: 2,
             child: Container(
-              margin: const EdgeInsets.only(top: 15, left: 40, right: 40),
+              margin: EdgeInsets.only(
+                  top: deviceHeight * 0.015,
+                  left: deviceWidth * 0.09,
+                  right: deviceWidth * 0.09),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Expanded(
+                  Expanded(
                       child: Text(
                     "Urgent Donation",
-                    style: TextStyle(fontSize: 18, color: Colors.pinkAccent),
+                    style: TextStyle(
+                        fontSize: deviceWidth * 0.06, color: Colors.pinkAccent),
                   )),
                   Expanded(
                     flex: 2,
@@ -171,8 +183,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 14,
+                              SizedBox(
+                                width: deviceWidth * 0.05,
                               ),
                               Expanded(
                                 child: GestureDetector(
@@ -206,8 +218,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 14,
+                              SizedBox(
+                                width: deviceWidth * 0.05,
                               ),
                               Expanded(
                                 child: GestureDetector(
@@ -241,8 +253,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 12,
+                              SizedBox(
+                                width: deviceWidth * 0.045,
                               ),
                               Expanded(
                                 child: GestureDetector(
@@ -280,7 +292,8 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          width: deviceWidth * 0.05,
+                          height: deviceHeight * 0.015,
                         ),
                         Expanded(
                           child: GestureDetector(
@@ -317,9 +330,9 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
-                    height: 20,
+                    height: deviceHeight * 0.025,
                   ),
                   Expanded(
                       flex: 7,
@@ -335,8 +348,8 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 50,
+          SizedBox(
+            height: deviceHeight * 0.02,
           ),
         ],
       );

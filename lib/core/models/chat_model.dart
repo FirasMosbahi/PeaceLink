@@ -1,11 +1,9 @@
-import 'package:chat_for_peace/core/models/message_model.dart';
-
 class Chat {
   final String firstUserId;
   String secondUserId;
   final String firestUserCriteria;
   final String secondUserCriteria;
-  List<Message>? messages;
+  List<Map<int, String>>? messages;
   Chat({
     required this.firstUserId,
     this.secondUserId = "",
@@ -23,7 +21,7 @@ class Chat {
         "firstUserId": firstUserId,
         "secondUserId": secondUserId,
         "firstUserCriteria": firestUserCriteria,
-    "secondUserCriteria" : secondUserCriteria,
-        "messages": messages ?? [],
+        "secondUserCriteria": secondUserCriteria,
+        "messages": messages,
       };
 }

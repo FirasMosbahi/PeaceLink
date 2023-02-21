@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
+import '../utilities/mediaQuery.dart';
 import '../widgets/card.dart';
 
 class DontePage extends StatelessWidget {
@@ -9,6 +10,11 @@ class DontePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
+
     const Images = [
       [
         "image1.jpg",
@@ -38,28 +44,28 @@ class DontePage extends StatelessWidget {
     ];
     return Column(
       children: [
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: media.getHeight(20),
         ),
         AnimatedTextKit(animatedTexts: [
           TyperAnimatedText(
             "Our Packs , please select one to donate",
             speed: const Duration(milliseconds: 100),
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 22,
+              fontSize: media.getwidht(22),
               fontFamily: 'Courgette',
             ),
           ),
         ]),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: media.getHeight(10),
         ),
         Center(
           child: Container(
-            width: 350,
-            height: 630,
+            width: media.getwidht(350),
+            height: media.getHeight(630),
             child: CarouselSlider(
               slideTransform: const CubeTransform(),
               unlimitedMode: true,

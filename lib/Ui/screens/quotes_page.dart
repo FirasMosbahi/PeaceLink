@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 
+import '../utilities/mediaQuery.dart';
 import '../utilities/quotes.dart';
 
 class QuotePage extends StatefulWidget {
@@ -17,25 +18,30 @@ String stringRep = "";
 class _QuotePageState extends State<QuotePage> {
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
+
     return Column(
       children: [
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: media.getHeight(20),
         ),
-        const Expanded(
+        Expanded(
           child: Text(
             "Discover the wisdom of the ages with these timeless quotes",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 22,
+              fontSize: media.getwidht(22),
               fontFamily: 'Courgette',
             ),
           ),
         ),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: media.getHeight(10),
         ),
         Expanded(
           flex: 5,
@@ -60,7 +66,7 @@ class _QuotePageState extends State<QuotePage> {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: EdgeInsets.all(media.getwidht(12)),
                           child: Column(
                             children: [
                               Expanded(
@@ -68,11 +74,11 @@ class _QuotePageState extends State<QuotePage> {
                                 child: Center(
                                   child: Text(
                                     e["author"].toString(),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Courgette',
                                         fontWeight: FontWeight.w900,
-                                        fontSize: 18),
+                                        fontSize: media.getwidht(18)),
                                   ),
                                 ),
                               ),
@@ -81,11 +87,11 @@ class _QuotePageState extends State<QuotePage> {
                                 child: Center(
                                   child: Text(
                                     e["quote"].toString(),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         color: Colors.white70,
                                         fontWeight: FontWeight.w100,
                                         fontFamily: 'Courgette',
-                                        fontSize: 18),
+                                        fontSize: media.getwidht(18)),
                                   ),
                                 ),
                               ),

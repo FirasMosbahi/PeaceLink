@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'main_screen.dart';
 
 class DonationForm extends StatefulWidget {
@@ -22,6 +23,9 @@ class _CardPaiementState extends State<DonationForm> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
+
     var items = ["disaster", "war", "hunger", "poverty"];
     return ScaffoldGradientBackground(
       gradient: const LinearGradient(
@@ -44,7 +48,7 @@ class _CardPaiementState extends State<DonationForm> {
           child: Column(
             children: [
               SizedBox(
-                height: 40,
+                height: media.getHeight(40),
               ),
               Center(
                   child: Text(
@@ -52,12 +56,12 @@ class _CardPaiementState extends State<DonationForm> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: "Courgette",
-                  fontSize: 35,
+                  fontSize: media.getwidht(35),
                   color: Colors.white,
                 ),
               )),
               SizedBox(
-                height: 130,
+                height: media.getHeight(130),
               ),
               Container(
                 height: deviceHeight * 0.53,
@@ -74,12 +78,14 @@ class _CardPaiementState extends State<DonationForm> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(media.getwidht(18)),
                   child: Container(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(15)),
                           child: TextField(
                             onChanged: (value) => description = value,
                             minLines: 1,
@@ -94,7 +100,9 @@ class _CardPaiementState extends State<DonationForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(15)),
                           child: TextField(
                             onChanged: (value) => finalValue = value,
                             inputFormatters: [
@@ -114,7 +122,9 @@ class _CardPaiementState extends State<DonationForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(15)),
                           child: DropdownButton(
                             iconEnabledColor: Colors.purple,
                             iconDisabledColor: Colors.purple,
@@ -143,7 +153,9 @@ class _CardPaiementState extends State<DonationForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 35),
+                          padding: EdgeInsets.only(
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(15)),
                           child: GestureDetector(
                             onTap: () async {
                               FocusScope.of(context).unfocus();
@@ -165,8 +177,8 @@ class _CardPaiementState extends State<DonationForm> {
                               }
                             },
                             child: Container(
-                              height: 50,
-                              width: 300,
+                              height: media.getHeight(50),
+                              width: media.getwidht(300),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(
@@ -177,13 +189,13 @@ class _CardPaiementState extends State<DonationForm> {
                                   ],
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "Create",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Courgette",
-                                      fontSize: 20,
+                                      fontSize: media.getwidht(20),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -191,8 +203,10 @@ class _CardPaiementState extends State<DonationForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 15, top: 10, right: 20),
+                          padding: EdgeInsets.only(
+                              bottom: media.getHeight(15),
+                              top: media.getHeight(10),
+                              right: media.getwidht(20)),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(

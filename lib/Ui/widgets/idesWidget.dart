@@ -5,6 +5,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../utilities/mediaQuery.dart';
+
 class IdeaWidget extends StatefulWidget {
   final Idea idea;
   final bool ButtonType;
@@ -18,8 +20,12 @@ class IdeaWidget extends StatefulWidget {
 class _IdeaWidgetState extends State<IdeaWidget> {
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(media.getwidht(16)),
       child: Slidable(
         startActionPane: widget.ButtonType
             ? ActionPane(
@@ -65,7 +71,7 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                 ],
               ),
         child: Container(
-          height: 200,
+          height: media.getHeight(200),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -77,7 +83,7 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                 )
               ]),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(media.getwidht(8)),
             child: Column(
               children: [
                 Expanded(
@@ -87,7 +93,7 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                       widget.idea.owner,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 18,
+                          fontSize: media.getwidht(18),
                           fontFamily: 'Courgette'),
                     ),
                   ),
@@ -101,11 +107,11 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                         "Idea Title :",
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 13,
+                            fontSize: media.getwidht(13),
                             fontFamily: 'Courgette'),
                       ),
                       SizedBox(
-                        width: 15,
+                        width: media.getwidht(15),
                       ),
                       Text(widget.idea.title),
                     ],
@@ -121,7 +127,7 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                           "Idea description",
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 13,
+                              fontSize: media.getwidht(13),
                               fontFamily: 'Courgette'),
                         ),
                         Text(widget.idea.description),
@@ -140,11 +146,11 @@ class _IdeaWidgetState extends State<IdeaWidget> {
                         "supports",
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 13,
+                            fontSize: media.getwidht(13),
                             fontFamily: 'Courgette'),
                       ),
                       SizedBox(
-                        width: 110,
+                        width: media.getwidht(110),
                       ),
                       Text(widget.idea.likes.toString()),
                     ],

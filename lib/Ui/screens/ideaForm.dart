@@ -12,6 +12,7 @@ class ideaForm extends StatefulWidget {
 class _CardIdeaState extends State<ideaForm> {
   String title = "";
   String description = "";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -37,7 +38,7 @@ class _CardIdeaState extends State<ideaForm> {
           child: Column(
             children: [
               SizedBox(
-                height: 40,
+                height: deviceHeight * 0.06,
               ),
               Center(
                   child: Text(
@@ -45,12 +46,19 @@ class _CardIdeaState extends State<ideaForm> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: "Courgette",
-                  fontSize: 35,
+                  fontSize: deviceWidth * 0.09,
                   color: Colors.white,
                 ),
               )),
               SizedBox(
-                height: 130,
+                height: deviceHeight * 0.16,
+              ),
+              Text(
+                error,
+                style: TextStyle(
+                  color: Colors.red[600],
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Container(
                 height: deviceHeight * 0.40,
@@ -67,12 +75,14 @@ class _CardIdeaState extends State<ideaForm> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(deviceWidth * 0.05),
                   child: Container(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.02),
                           child: TextField(
                             minLines: 1,
                             maxLines: 2,
@@ -87,7 +97,9 @@ class _CardIdeaState extends State<ideaForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 15, top: 15),
+                          padding: EdgeInsets.only(
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.02),
                           child: TextField(
                             onChanged: (value) => description = value,
                             minLines: 1,
@@ -103,7 +115,9 @@ class _CardIdeaState extends State<ideaForm> {
                         ),
                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10, top: 35),
+                          padding: EdgeInsets.only(
+                              bottom: deviceHeight * 0.015,
+                              top: deviceHeight * 0.03),
                           child: GestureDetector(
                             onTap: () async {
                               FocusScope.of(context).unfocus();
@@ -118,13 +132,17 @@ class _CardIdeaState extends State<ideaForm> {
                                     MaterialPageRoute(
                                         builder: (context) => MyApp(index: 1)));
                               } catch (e) {
-                                print(e.toString());
-                                //TODO:handle try catch
+                                if (e.toString() ==
+                                    "Exception: Each of your ideas should have an unique value") {
+                                  setState(() {
+                                    error = "title should be unique";
+                                  });
+                                }
                               }
                             },
                             child: Container(
-                              height: 50,
-                              width: 300,
+                              height: deviceHeight * 0.05,
+                              width: deviceWidth * 0.8,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(
@@ -135,13 +153,13 @@ class _CardIdeaState extends State<ideaForm> {
                                   ],
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "Create",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Courgette",
-                                      fontSize: 20,
+                                      fontSize: deviceWidth * 0.055,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -149,8 +167,10 @@ class _CardIdeaState extends State<ideaForm> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 15, top: 10, right: 20),
+                          padding: EdgeInsets.only(
+                              bottom: deviceHeight * 0.02,
+                              top: deviceHeight * 0.015,
+                              right: deviceWidth * 0.06),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(

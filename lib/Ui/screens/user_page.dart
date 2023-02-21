@@ -2,6 +2,7 @@ import 'package:chat_for_peace/core/models/user-model.dart';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
+import '../utilities/mediaQuery.dart';
 import '../widgets/field_change.dart';
 
 class UserPage extends StatefulWidget {
@@ -24,7 +25,6 @@ class _UserPageState extends State<UserPage> {
   int newAge = 0;
   UserProvider userProvider = UserProvider();
   UserModel? user;
-
   Widget changeWidget = const SizedBox();
   void getUser() async {
     UserModel userModel = await userProvider.getCurrentUser();
@@ -44,11 +44,13 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
 
     return Center(
       child: SingleChildScrollView(
         child: Container(
-          height: height,
+          height: media.getHeight(height),
           width: deviceWidth * 0.85,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -67,16 +69,16 @@ class _UserPageState extends State<UserPage> {
                 child: Center(
                   child: Text(
                     user == null ? "Loading..." : user?.name ?? "",
-                    style: const TextStyle(
-                      fontSize: 25,
+                    style: TextStyle(
+                      fontSize: media.getwidht(25),
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Courgette',
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: media.getHeight(40),
               ),
               Expanded(
                 flex: 6,
@@ -87,17 +89,17 @@ class _UserPageState extends State<UserPage> {
                       children: [
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               "Name :",
                               style: TextStyle(
                                 fontFamily: "Courgette",
-                                fontSize: 16,
+                                fontSize: media.getwidht(16),
                                 fontWeight: FontWeight.w600,
                                 color: Colors.purple,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: media.getwidht(10),
                             ),
                             Text(
                               user == null ? "Loading..." : user?.name ?? "",
@@ -116,15 +118,15 @@ class _UserPageState extends State<UserPage> {
                                 });
                               },
                               child: namePress
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.arrow_circle_down_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     )
-                                  : const Icon(
+                                  : Icon(
                                       Icons.arrow_circle_right_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     ),
                             ),
                           ],
@@ -160,22 +162,22 @@ class _UserPageState extends State<UserPage> {
                               ),
                           ],
                         ),
-                        const Divider(
-                          height: 20,
+                        Divider(
+                          height: media.getHeight(20),
                         ),
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               "email :",
                               style: TextStyle(
                                 fontFamily: "Courgette",
-                                fontSize: 18,
+                                fontSize: media.getHeight(18),
                                 fontWeight: FontWeight.w600,
                                 color: Colors.purple,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: media.getwidht(10),
                             ),
                             Text(
                               user == null ? "Loading..." : user?.email ?? "",
@@ -195,15 +197,15 @@ class _UserPageState extends State<UserPage> {
                                 });
                               },
                               child: emailPress
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.arrow_circle_down_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     )
-                                  : const Icon(
+                                  : Icon(
                                       Icons.arrow_circle_right_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     ),
                             ),
                           ],
@@ -235,22 +237,22 @@ class _UserPageState extends State<UserPage> {
                               })),
                           ],
                         ),
-                        const Divider(
-                          height: 20,
+                        Divider(
+                          height: media.getHeight(20),
                         ),
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               "Password :",
                               style: TextStyle(
                                 fontFamily: "Courgette",
-                                fontSize: 16,
+                                fontSize: media.getwidht(16),
                                 fontWeight: FontWeight.w600,
                                 color: Colors.purple,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: media.getwidht(10),
                             ),
                             Text(
                               "************",
@@ -269,15 +271,15 @@ class _UserPageState extends State<UserPage> {
                                 });
                               },
                               child: passPress
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.arrow_circle_down_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     )
-                                  : const Icon(
+                                  : Icon(
                                       Icons.arrow_circle_right_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     ),
                             ),
                           ],
@@ -311,13 +313,13 @@ class _UserPageState extends State<UserPage> {
                                           Icons.remove_red_eye_sharp,
                                           color:
                                               Color.fromRGBO(143, 148, 251, 1),
-                                          size: 20,
+                                          size: media.getwidht(20),
                                         )
                                       : Icon(
                                           Icons.remove_red_eye_outlined,
                                           color:
                                               Color.fromRGBO(143, 148, 251, 1),
-                                          size: 20,
+                                          size: media.getwidht(20),
                                         ),
                                 ),
                               ),
@@ -334,22 +336,22 @@ class _UserPageState extends State<UserPage> {
                                   })),
                           ],
                         ),
-                        const Divider(
-                          height: 20,
+                        Divider(
+                          height: media.getHeight(20),
                         ),
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               "Age :",
                               style: TextStyle(
                                 fontFamily: "Courgette",
-                                fontSize: 16,
+                                fontSize: media.getwidht(16),
                                 fontWeight: FontWeight.w600,
                                 color: Colors.purple,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: media.getwidht(10),
                             ),
                             Text(
                               user == null
@@ -370,15 +372,15 @@ class _UserPageState extends State<UserPage> {
                                 });
                               },
                               child: agePress
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.arrow_circle_down_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     )
-                                  : const Icon(
+                                  : Icon(
                                       Icons.arrow_circle_right_sharp,
                                       color: Color.fromRGBO(143, 148, 251, 1),
-                                      size: 30,
+                                      size: media.getwidht(30),
                                     ),
                             ),
                           ],

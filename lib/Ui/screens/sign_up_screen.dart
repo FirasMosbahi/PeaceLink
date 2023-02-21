@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:chat_for_peace/core/models/user-model.dart';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'log_in_screen.dart';
 
 class SignUp extends StatefulWidget {
@@ -17,6 +19,7 @@ class _LogInState extends State<SignUp> {
   String email = "";
   String name = "";
   String pass = "";
+  String age = "";
   bool isSpec = false;
   bool animate = false;
   bool obsc = true;
@@ -39,6 +42,8 @@ class _LogInState extends State<SignUp> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -46,7 +51,7 @@ class _LogInState extends State<SignUp> {
           child: Column(
             children: [
               Container(
-                height: 330,
+                height: media.getHeight(330),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -56,7 +61,7 @@ class _LogInState extends State<SignUp> {
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 30,
+                      left: media.getwidht(30),
                       width: deviceWidth * 0.2,
                       height: deviceHeight * 0.25,
                       child: AnimatedOpacity(
@@ -78,8 +83,8 @@ class _LogInState extends State<SignUp> {
                       ),
                     ),
                     Positioned(
-                      left: 140,
-                      width: 80,
+                      left: media.getwidht(140),
+                      width: media.getwidht(80),
                       height: deviceHeight * 0.17,
                       child: AnimatedOpacity(
                         duration: const Duration(milliseconds: 2200),
@@ -102,13 +107,13 @@ class _LogInState extends State<SignUp> {
                     ),
                     Positioned(
                       child: Container(
-                        margin: const EdgeInsets.only(top: 60),
-                        child: const Center(
+                        margin: EdgeInsets.only(top: media.getwidht(60)),
+                        child: Center(
                           child: Text(
                             "SignUp",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 40,
+                              fontSize: media.getwidht(40),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -119,16 +124,23 @@ class _LogInState extends State<SignUp> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
+                padding: EdgeInsets.only(
+                    left: media.getwidht(30), right: media.getwidht(30)),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 2200),
                   opacity: animate ? 1 : 0,
                   curve: Curves.easeOutSine,
                   child: Column(
                     children: [
-                      Text(error),
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Colors.red[600],
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.all(media.getwidht(5)),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -142,7 +154,7 @@ class _LogInState extends State<SignUp> {
                         child: Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(media.getwidht(8)),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -162,7 +174,7 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(media.getwidht(8)),
                               child: TextField(
                                 onChanged: (value) => email = value,
                                 decoration: InputDecoration(
@@ -175,7 +187,7 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(media.getwidht(8)),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -211,13 +223,13 @@ class _LogInState extends State<SignUp> {
                                               Icons.remove_red_eye_sharp,
                                               color: Color.fromRGBO(
                                                   143, 148, 251, 1),
-                                              size: 20,
+                                              size: media.getwidht(20),
                                             )
                                           : Icon(
                                               Icons.remove_red_eye_outlined,
                                               color: Color.fromRGBO(
                                                   143, 148, 251, 1),
-                                              size: 20,
+                                              size: media.getwidht(20),
                                             ),
                                     ),
                                   ),
@@ -225,7 +237,7 @@ class _LogInState extends State<SignUp> {
                               ),
                             ),
                             Container(
-                                padding: const EdgeInsets.all(8),
+                                padding: EdgeInsets.all(media.getwidht(8)),
                                 decoration: const BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -241,7 +253,6 @@ class _LogInState extends State<SignUp> {
                                         color: Colors.grey[400],
                                       ),
                                     ),
-                                    const Spacer(),
                                     Checkbox(
                                       activeColor: const Color.fromRGBO(
                                           143, 148, 251, 1),
@@ -252,39 +263,88 @@ class _LogInState extends State<SignUp> {
                                         });
                                       },
                                     ),
-                                    const SizedBox(
-                                      width: 100,
+                                    SizedBox(
+                                      width: media.getwidht(5),
+                                    ),
+                                    SizedBox(
+                                      width: media.getwidht(10),
+                                    ),
+                                    Container(
+                                      width: media.getwidht(100),
+                                      child: TextField(
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                        ],
+                                        onChanged: (value) => age = value,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Age",
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey[400],
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 )),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: media.getHeight(10),
                             ),
                             GestureDetector(
                               onTap: () async {
                                 FocusScope.of(context).unfocus();
-                                UserModel userModel = UserModel(
-                                    name: name,
-                                    email: email,
-                                    age: 21,
-                                    isSpecialist: isSpec);
-                                try {
-                                  await userProvider.registerUser(
-                                      user: userModel, password: pass);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LogIn()));
-                                } catch (e) {
+                                if ((email != "") &&
+                                    (age != "") &&
+                                    (name != "") &&
+                                    (pass != "")) {
+                                  UserModel userModel = UserModel(
+                                      name: name,
+                                      email: email,
+                                      age: int.parse(age),
+                                      isSpecialist: isSpec);
+                                  try {
+                                    await userProvider.registerUser(
+                                        user: userModel, password: pass);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LogIn()));
+                                  } catch (e) {
+                                    error = "";
+                                    if (e.toString() ==
+                                        "Exception: [firebase_auth/weak-password] Password should be at least 6 characters") {
+                                      setState(() {
+                                        error =
+                                            "Password should be at least 6 characters";
+                                      });
+                                    }
+                                    if (e.toString() ==
+                                        "Exception: [firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.") {
+                                      setState(() {
+                                        error =
+                                            "internet is required to connect";
+                                      });
+                                    }
+                                    if (e.toString() ==
+                                        "Exception: [firebase_auth/email-already-in-use] The email address is already in use by another account.") {
+                                      setState(() {
+                                        error =
+                                            "The email address is already exist";
+                                      });
+                                    }
+
+                                    print(e.toString());
+                                  }
+                                } else {
                                   setState(() {
-                                    error = e.toString();
+                                    error = "empty field";
                                   });
-                                  print(e.toString());
                                 }
                               },
                               child: Container(
-                                height: 50,
-                                width: 220,
+                                height: media.getHeight(50),
+                                width: media.getwidht(220),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   gradient: const LinearGradient(
@@ -305,8 +365,8 @@ class _LogInState extends State<SignUp> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
+                            SizedBox(
+                              height: media.getHeight(15),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -316,8 +376,8 @@ class _LogInState extends State<SignUp> {
                                         builder: (context) => const LogIn()));
                               },
                               child: Container(
-                                height: 50,
-                                width: 220,
+                                height: media.getHeight(50),
+                                width: media.getwidht(220),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   gradient: const LinearGradient(
@@ -338,8 +398,8 @@ class _LogInState extends State<SignUp> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
+                            SizedBox(
+                              height: media.getHeight(15),
                             ),
                           ],
                         ),

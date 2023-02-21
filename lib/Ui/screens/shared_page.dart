@@ -5,6 +5,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'ideaForm.dart';
 
 class SharedPage extends StatefulWidget {
@@ -19,6 +20,11 @@ class _SharedPageState extends State<SharedPage> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
+
     return Consumer<IdeaProvider>(builder: (context, ideaProvider, child) {
       ideaProvider.getIdeas();
       ideaProvider.getMyIdeas();
@@ -29,7 +35,7 @@ class _SharedPageState extends State<SharedPage> {
           Positioned(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.only(top: 30),
+                padding: EdgeInsets.only(top: media.getHeight(30)),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: isMine
@@ -60,7 +66,7 @@ class _SharedPageState extends State<SharedPage> {
                   child: Icon(
                     Icons.add,
                     color: Colors.purple,
-                    size: 25,
+                    size: media.getwidht(25),
                   ),
                   label: "Create new Idea",
                   onTap: () {
@@ -69,7 +75,7 @@ class _SharedPageState extends State<SharedPage> {
                   },
                   labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
-                    fontSize: 16,
+                    fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Courgette',
                     color: Colors.purple,
@@ -86,12 +92,12 @@ class _SharedPageState extends State<SharedPage> {
                   child: Icon(
                     Icons.lightbulb,
                     color: Colors.purple,
-                    size: 25,
+                    size: media.getwidht(25),
                   ),
                   label: "Your current ideas",
                   labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
-                    fontSize: 16,
+                    fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Courgette',
                     color: Colors.purple,
@@ -102,21 +108,16 @@ class _SharedPageState extends State<SharedPage> {
                     setState(() {
                       isMine = false;
                     });
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             MyApp(index: 1, appBar: appBar)));
                   },
                   child: Icon(
                     FontAwesomeIcons.arrowRotateRight,
                     color: Colors.purple,
-                    size: 25,
+                    size: media.getwidht(25),
                   ),
                   label: "All ideas",
                   labelBackgroundColor: Color.fromRGBO(143, 148, 251, 0.6),
                   labelStyle: TextStyle(
-                    fontSize: 16,
+                    fontSize: media.getwidht(16),
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Courgette',
                     color: Colors.purple,
@@ -124,8 +125,8 @@ class _SharedPageState extends State<SharedPage> {
                 ),
               ],
             ),
-            bottom: 20,
-            right: 15,
+            bottom: media.getHeight(20),
+            right: media.getwidht(15),
           ),
         ],
       );

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chat_for_peace/core/view-models/user_view_model.dart';
 import 'package:flutter/material.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'main_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -16,6 +17,7 @@ class _LogInState extends State<LogIn> {
   bool animate = false;
   String email = "";
   String pass = "";
+  String error = "";
   UserProvider userProvider = UserProvider();
   @override
   void initState() {
@@ -40,14 +42,15 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           child: Column(
             children: [
               Container(
-                height: 400,
+                height: media.getHeight(400),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -57,7 +60,7 @@ class _LogInState extends State<LogIn> {
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 30,
+                      left: media.getwidht(30),
                       width: deviceWidth * 0.2,
                       height: deviceHeight * 0.25,
                       child: AnimatedOpacity(
@@ -79,8 +82,8 @@ class _LogInState extends State<LogIn> {
                       ),
                     ),
                     Positioned(
-                      left: 140,
-                      width: 80,
+                      left: media.getwidht(140),
+                      width: media.getwidht(80),
                       height: deviceHeight * 0.17,
                       child: AnimatedOpacity(
                         duration: const Duration(milliseconds: 2200),
@@ -103,13 +106,13 @@ class _LogInState extends State<LogIn> {
                     ),
                     Positioned(
                       child: Container(
-                        margin: const EdgeInsets.only(top: 50),
-                        child: const Center(
+                        margin: EdgeInsets.only(top: media.getHeight(40)),
+                        child: Center(
                           child: Text(
                             "LogIn",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 40,
+                              fontSize: media.getwidht(40),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -120,15 +123,22 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(30),
+                padding: EdgeInsets.all(media.getwidht(30)),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 2200),
                   opacity: animate ? 1 : 0,
                   curve: Curves.easeOutSine,
                   child: Column(
                     children: [
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Colors.red[600],
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: EdgeInsets.all(media.getwidht(5)),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -142,7 +152,7 @@ class _LogInState extends State<LogIn> {
                         child: Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(media.getwidht(8)),
                               decoration: const BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
@@ -164,7 +174,7 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(media.getwidht(8)),
                               child: TextField(
                                 obscureText: true,
                                 onChanged: (value) {
@@ -179,8 +189,8 @@ class _LogInState extends State<LogIn> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 30,
+                            SizedBox(
+                              height: media.getHeight(30),
                             ),
                             GestureDetector(
                               onTap: () async {
@@ -198,12 +208,38 @@ class _LogInState extends State<LogIn> {
                                                 MyApp(index: 2)));
                                   }
                                 } catch (e) {
-                                  debugPrint(e.toString());
+                                  print(e.toString());
+                                  if (e.toString() ==
+                                      "Exception: [firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.") {
+                                    setState(() {
+                                      error = "internet is required to connect";
+                                    });
+                                  }
+                                  if (e.toString() ==
+                                      "Exception: [firebase_auth/wrong-password] The password is invalid or the user does not have a password.") {
+                                    setState(() {
+                                      error = "The password is invalid";
+                                    });
+                                  }
+                                  if (e.toString() ==
+                                      "Exception: [firebase_auth/invalid-email] The email address is badly formatted.") {
+                                    setState(() {
+                                      error =
+                                          "The email address is badly formatted";
+                                    });
+                                  }
+                                  if (e.toString() ==
+                                      "Exception: [firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
+                                    setState(() {
+                                      error =
+                                          "There is no user with this email";
+                                    });
+                                  }
                                 }
                               },
                               child: Container(
-                                height: 50,
-                                width: 220,
+                                height: media.getHeight(50),
+                                width: media.getHeight(220),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   gradient: const LinearGradient(
@@ -224,8 +260,8 @@ class _LogInState extends State<LogIn> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
+                            SizedBox(
+                              height: media.getHeight(15),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -235,8 +271,8 @@ class _LogInState extends State<LogIn> {
                                         builder: (context) => const SignUp()));
                               },
                               child: Container(
-                                height: 50,
-                                width: 220,
+                                height: media.getHeight(50),
+                                width: media.getwidht(220),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   gradient: const LinearGradient(
@@ -257,8 +293,8 @@ class _LogInState extends State<LogIn> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 70,
+                            SizedBox(
+                              height: media.getHeight(40),
                             ),
                             const Text(
                               "Forget Password ?",

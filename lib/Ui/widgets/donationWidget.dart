@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/cardPaiement.dart';
 import '../screens/donationForm.dart';
+import '../utilities/mediaQuery.dart';
 
 class DonationWidget extends StatelessWidget {
   final Donation donation;
@@ -10,6 +11,10 @@ class DonationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -44,8 +49,8 @@ class DonationWidget extends StatelessWidget {
                 children: [
                   Text(
                     donation.description,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: media.getwidht(18),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -73,7 +78,7 @@ class DonationWidget extends StatelessWidget {
                             ),
                           )),
                       SizedBox(
-                        width: 10,
+                        width: media.getwidht(10),
                       ),
                       Expanded(
                         flex: 2,
@@ -81,8 +86,8 @@ class DonationWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 3,
+                  SizedBox(
+                    height: media.getHeight(3),
                   ),
                   Text(
                     "category:    ${donation.category}",
@@ -93,8 +98,8 @@ class DonationWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 12,
+          SizedBox(
+            height: media.getHeight(12),
           ),
           Expanded(
             flex: 2,
@@ -110,8 +115,8 @@ class DonationWidget extends StatelessWidget {
                                   amount: "", donation: donation)));
                     },
                     child: Container(
-                      height: 50,
-                      width: 220,
+                      height: media.getHeight(50),
+                      width: media.getwidht(220),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
@@ -134,8 +139,8 @@ class DonationWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
+                SizedBox(
+                  width: media.getwidht(10),
                 ),
                 Expanded(
                   child: GestureDetector(
@@ -146,8 +151,8 @@ class DonationWidget extends StatelessWidget {
                               builder: (context) => DonationForm()));
                     },
                     child: Container(
-                      height: 50,
-                      width: 220,
+                      height: media.getHeight(50),
+                      width: media.getwidht(220),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(10),

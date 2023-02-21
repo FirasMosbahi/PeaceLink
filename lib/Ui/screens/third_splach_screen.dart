@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'log_in_screen.dart';
 
 class ThirdSplach extends StatelessWidget {
@@ -9,6 +10,10 @@ class ThirdSplach extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Scaffold(
         body: SafeArea(
       child: Stack(
@@ -19,35 +24,35 @@ class ThirdSplach extends StatelessWidget {
               name: 'assets/mixing_animations.riv',
               next: (context) => const LogIn(),
               until: () => Future.delayed(
-                const Duration(seconds: 5),
+                const Duration(milliseconds: 5400),
               ),
               loopAnimation: "Expert",
               backgroundColor: const Color(0xFF390A3B),
             ),
           ),
           Positioned(
-            bottom: 50,
-            left: 10,
-            height: 120,
-            width: 400,
+            bottom: media.getHeight(50),
+            left: media.getwidht(10),
+            height: media.getHeight(120),
+            width: media.getwidht(400),
             child: AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  "You can chat with specialist ",
+                  "You can not only chat with specialist ",
                   speed: const Duration(milliseconds: 50),
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
-                      fontSize: 22),
+                      fontSize: media.getwidht(22)),
                   textAlign: TextAlign.center,
                 ),
                 TypewriterAnimatedText(
-                  "You can join anonymous chat",
+                  "but also join anonymous chat",
                   speed: const Duration(milliseconds: 50),
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
-                      fontSize: 22),
+                      fontSize: media.getwidht(22)),
                   textAlign: TextAlign.center,
                 ),
               ],

@@ -2,6 +2,8 @@ import 'package:chat_for_peace/Ui/screens/cardPaiement.dart';
 import 'package:chat_for_peace/core/models/donation_model.dart';
 import 'package:flutter/material.dart';
 
+import '../utilities/mediaQuery.dart';
+
 class CardRe extends StatelessWidget {
   final img;
   final text;
@@ -10,6 +12,10 @@ class CardRe extends StatelessWidget {
       {super.key, required this.img, required this.text, required this.price});
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -36,19 +42,19 @@ class CardRe extends StatelessWidget {
                 children: [
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: media.getwidht(10)),
                     child: Text(
                       text,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Courgette',
-                        fontSize: 16,
+                        fontSize: media.getwidht(16),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: media.getHeight(10),
                   ),
                 ],
               ),
@@ -72,8 +78,8 @@ class CardRe extends StatelessWidget {
                           )));
             },
             child: Container(
-              height: 50,
-              width: 120,
+              height: media.getHeight(50),
+              width: media.getwidht(120),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(10),
@@ -91,13 +97,13 @@ class CardRe extends StatelessWidget {
               child: Center(
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 145,
+                    SizedBox(
+                      width: media.getwidht(145),
                     ),
-                    const Text(
+                    Text(
                       "Donate",
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: media.getwidht(18),
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -106,12 +112,12 @@ class CardRe extends StatelessWidget {
                       price,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 25,
+                        fontSize: media.getwidht(25),
                         color: Colors.grey[800],
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: media.getwidht(10),
                     ),
                   ],
                 ),
@@ -119,8 +125,8 @@ class CardRe extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 25,
+        SizedBox(
+          height: media.getwidht(25),
         )
       ],
     );

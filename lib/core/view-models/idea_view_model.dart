@@ -21,11 +21,19 @@ class IdeaProvider extends ChangeNotifier {
   Future<bool> getIdeas() async {
     final snapshotsReference = FirebaseFirestore.instance.collection('ideas');
     final snapshot = await snapshotsReference.get();
+    int i = 0;
     snapshot.docs.forEach((element) {
-      if (ideas
-          .where((data) => element.data()["title"] == data.title)
-          .isEmpty) {
-        ideas.add(Idea.fromJson(element.data()));
+      try {
+        print(i);
+        i++;
+        if (ideas
+            .where((data) => element.data()!["title"] == data.title)
+            .isEmpty) {
+          print(Idea.fromJson(element.data()));
+          ideas.add(Idea.fromJson(element.data()));
+        }
+      } catch (e) {
+        print(e.toString());
       }
     });
     ideas.sort(compare);

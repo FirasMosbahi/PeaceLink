@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
+import '../utilities/mediaQuery.dart';
 import 'chat_Page.dart';
 import 'donate_page.dart';
 import 'home_screen.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
+
   final screens = [
     const DontePage(),
     const SharedPage(),
@@ -49,8 +51,13 @@ class _MyAppState extends State<MyApp> {
       size: 30,
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    Mediaquery media =
+        Mediaquery(mediaHeight: deviceHeight, mediaWidth: deviceWidth);
     return SafeArea(
       child: ScaffoldGradientBackground(
         gradient: const LinearGradient(
@@ -77,10 +84,11 @@ class _MyAppState extends State<MyApp> {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.ideographic,
               children: [
-                const Expanded(
+                Expanded(
                   flex: 1,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5, top: 15),
+                    padding: EdgeInsets.only(
+                        left: media.getwidht(5), top: media.getHeight(15)),
                     child: CircleAvatar(
                       radius: 30.0,
                       backgroundImage: AssetImage(
@@ -95,10 +103,11 @@ class _MyAppState extends State<MyApp> {
                     child: AnimatedTextKit(
                       animatedTexts: [
                         TyperAnimatedText(
-                          "Hello amine , Welcome 😊",
+                          "Hello , Welcome 😊",
                           speed: const Duration(milliseconds: 130),
-                          textStyle: const TextStyle(
-                              fontSize: 18, color: Colors.white70),
+                          textStyle: TextStyle(
+                              fontSize: media.getwidht(18),
+                              color: Colors.white70),
                         ),
                       ],
                     ),
@@ -107,7 +116,8 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                     flex: 1,
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 5, top: 17),
+                      padding: EdgeInsets.only(
+                          right: media.getwidht(5), top: media.getHeight(17)),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -115,9 +125,9 @@ class _MyAppState extends State<MyApp> {
                               MaterialPageRoute(
                                   builder: (context) => ChatPage()));
                         },
-                        child: const Icon(
+                        child: Icon(
                           FontAwesomeIcons.comments,
-                          size: 35,
+                          size: media.getwidht(35),
                           color: Colors.purple,
                         ),
                       ),
@@ -133,7 +143,7 @@ class _MyAppState extends State<MyApp> {
           child: CurvedNavigationBar(
             key: navigationKey,
             items: items,
-            height: 60,
+            height: media.getHeight(60),
             buttonBackgroundColor: Colors.white,
             index: widget.index,
             backgroundColor: const Color(0x00944545),
